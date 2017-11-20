@@ -15,9 +15,13 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+ion-app {
+  font-family: 'Caveat Brush', cursive !important;
+}
+
 .toolbar-background {
   background-color: map-get($colors, wiple-blue);
-  
+
 }
 .toolbar-title {
   color: gray !important;
