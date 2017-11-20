@@ -24,21 +24,22 @@ ion-app {
   background-color: map-get($colors, wiple-blue);
 
 }
-.toolbar-title {
-  span.title-wiple {
-    font-family: 'Caveat Brush', cursive;
-    color: gray !important;
-    font-weight: bold;
-  }
-}
+// .toolbar-title {
+//   span.title-wiple {
+//     font-family: 'Caveat Brush', cursive;
+//     color: gray !important;
+//     font-weight: bold;
+//   }
+// }
 ion-title {
-  span.title-right {
-    float: right;
-    span.title-right-item {
-      cursor: pointer;
-      margin-left: 15px;
-    }
-  }
+  font-family: 'Caveat Brush', cursive;
+  // span.title-right {
+  //   float: right;
+  //   span.title-right-item {
+  //     cursor: pointer;
+  //     margin-left: 15px;
+  //   }
+  // }
 }
 ion-content.signinup {
   ion-row {

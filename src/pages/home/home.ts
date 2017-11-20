@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { UserProvider } from '../../providers/providers';
 
 import { SigninPage } from '../signin/signin';
@@ -10,12 +10,14 @@ import { SignupPage } from '../signup/signup';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  private backgroundImage: string='url(/assets/imgs/cover-hor.png)';
 
   constructor(
     public navCtrl: NavController,
     public user: UserProvider,
+    public plt: Platform,
   ) {
-
+    this.backgroundImage = 'url(/assets/imgs/cover-' + (plt.isLandscape() ? 'hor' : 'ver') + '.png)';
   }
 
   signout() {
