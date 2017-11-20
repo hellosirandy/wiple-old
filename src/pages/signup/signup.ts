@@ -12,7 +12,8 @@ import { ConnectPage } from '../connect/connect';
 export class SignupPage implements OnInit {
   private signupForm: FormGroup;
   private submitTried: boolean=false;
-
+  private errorMessage: string;
+  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -40,6 +41,8 @@ export class SignupPage implements OnInit {
     if (this.signupForm.valid) {
       this.user.signupWithEmail(email, password, displayName).then(() => {
         this.navCtrl.setRoot(ConnectPage);
+      }).catch(err => {
+        this.errorMessage = err.message;
       });
     }
   }

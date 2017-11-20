@@ -10,9 +10,18 @@
 <ion-content padding class="signinup">
   <ion-row>
     <ion-col col-6 offset-3>
-      <h3>Sign up</h3>
+      <h3>Sign in</h3>
       <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <div class="error-div" *ngIf="errorMessage">
+          <span class="error-message">
+            Incorrect email or password
+          </span>
+        </div>
         <label for="email">Email</label>
+        <span class="form-errors"
+          *ngIf="signinForm.get('email').invalid && submitTried">
+          * Invalid email
+        </span>
         <input type="text" id="email" formControlName="email">
         <label for="password">Password</label>
         <input type="password" id="password" formControlName="password">

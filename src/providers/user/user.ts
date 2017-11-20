@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
 import { User } from '../../models/user';
-import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/Storage';
 
 @Injectable()
@@ -20,6 +19,8 @@ export class UserProvider {
           this.storage.set('user', u);
           resolve();
         });
+      }).catch(err => {
+        reject(err);
       });
     })
   }
@@ -31,6 +32,8 @@ export class UserProvider {
           this.storage.set('user', u);
           resolve();
         });
+      }).catch(err => {
+        reject(err);
       });
     })
     

@@ -11,6 +11,8 @@ import { ConnectPage } from '../connect/connect';
 })
 export class SigninPage implements OnInit {
   private signinForm: FormGroup;
+  private submitTried: boolean=false;
+  private errorMessage: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -30,11 +32,14 @@ export class SigninPage implements OnInit {
   }
 
   onSubmit() {
+    this.submitTried = true;
     if (this.signinForm.valid) {
       const email = this.signinForm.get('email').value;
       const password = this.signinForm.get('password').value;
       this.user.signinWithEmail(email, password).then(() => {
         this.navCtrl.setRoot(ConnectPage);
+      }).catch(err => {
+        this.errorMessage = err.message;
       });
     }
   }

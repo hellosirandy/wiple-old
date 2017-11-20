@@ -18,27 +18,32 @@
     <ion-col col-6 offset-3>
       <h3>Register</h3>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="error-div" *ngIf="errorMessage">
+          <span class="error-message">
+            {{errorMessage}}
+          </span>
+        </div>
         <label for="email">Email</label>
         <span class="form-errors"
-          *ngIf="signupForm.get('email').invalid && (signupForm.get('email').dirty || submitTried)">
+          *ngIf="signupForm.get('email').invalid && submitTried">
           * Invalid email
         </span>
         <input type="text" id="email" formControlName="email">
         <label for="password">Password</label>
         <span class="form-errors"
-          *ngIf="signupForm.get('password').invalid && (signupForm.get('password').dirty || submitTried)">
+          *ngIf="signupForm.get('password').invalid && submitTried">
           * Invalid password
         </span>
         <input type="password" id="password" formControlName="password">
         <label for="confirm-password">Confirm Password</label>
         <span class="form-errors"
-          *ngIf="signupForm.get('confirmPassword').invalid && (signupForm.get('confirmPassword').dirty || submitTried)">
+          *ngIf="signupForm.get('confirmPassword').invalid && submitTried">
           * Incorrect confirm password
         </span>
         <input type="password" id="confirm-password" formControlName="confirmPassword">
         <label for="display-name">Display Name</label>
         <span class="form-errors"
-          *ngIf="signupForm.get('displayName').invalid && (signupForm.get('displayName').dirty || submitTried)">
+          *ngIf="signupForm.get('displayName').invalid && submitTried">
           * Invalid display name
         </span>
         <input type="text" id="display-name" formControlName="displayName">

@@ -65,5 +65,15 @@ ion-content.signinup {
       border-radius: 18px !important;
       text-transform: none;
     }
+
+    div.error-div {
+      padding: 20px;
+      background-color: #ffdbdb;
+      border-radius: 18px;
+      margin-bottom: 16px;
+      span.error-message {
+        color: map-get($colors, danger);
+      }
+    }
   }
 }
