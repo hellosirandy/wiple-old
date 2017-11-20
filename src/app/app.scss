@@ -16,7 +16,8 @@
 // automatically applied to the <body> element in the app.
 
 ion-app {
-  font-family: 'Caveat Brush', cursive !important;
+  // Replace this
+  font-family: 'Lato', sans-serif !important;
 }
 
 .toolbar-background {
@@ -24,8 +25,11 @@ ion-app {
 
 }
 .toolbar-title {
-  color: gray !important;
-  font-weight: bold;
+  span.title-wiple {
+    font-family: 'Caveat Brush', cursive;
+    color: gray !important;
+    font-weight: bold;
+  }
 }
 ion-title {
   span.title-right {
