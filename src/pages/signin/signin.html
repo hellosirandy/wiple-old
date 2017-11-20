@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Wiple</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="signinup">
+  <ion-row>
+    <ion-col col-6 offset-3>
+      <h3>Sign up</h3>
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+        <button ion-button color="wiple-blue" full type="submit">
+          Signin
+        </button>
+      </form>
+      
+      <button ion-button icon-start color="facebook" full (click)="signinWithFacebook()">
+        <ion-icon name="logo-facebook"></ion-icon>
+        Signin with facebook
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

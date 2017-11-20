@@ -1,0 +1,56 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Wiple</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="signinup">
+  <ion-row>
+    <ion-col col-6 offset-3>
+      <h3>Register</h3>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email</label>
+        <span class="form-errors"
+          *ngIf="signupForm.get('email').invalid && (signupForm.get('email').dirty || submitTried)">
+          * Invalid email
+        </span>
+        <input type="text" id="email" formControlName="email">
+        <label for="password">Password</label>
+        <span class="form-errors"
+          *ngIf="signupForm.get('password').invalid && (signupForm.get('password').dirty || submitTried)">
+          * Invalid password
+        </span>
+        <input type="password" id="password" formControlName="password">
+        <label for="confirm-password">Confirm Password</label>
+        <span class="form-errors"
+          *ngIf="signupForm.get('confirmPassword').invalid && (signupForm.get('confirmPassword').dirty || submitTried)">
+          * Incorrect confirm password
+        </span>
+        <input type="password" id="confirm-password" formControlName="confirmPassword">
+        <label for="display-name">Display Name</label>
+        <span class="form-errors"
+          *ngIf="signupForm.get('displayName').invalid && (signupForm.get('displayName').dirty || submitTried)">
+          * Invalid display name
+        </span>
+        <input type="text" id="display-name" formControlName="displayName">
+        <button ion-button color="wiple-blue" full button type="submit">
+          Register for Wiple
+        </button>
+      </form>
+      
+      <button ion-button icon-start color="facebook" full (click)="signinWithFacebook()">
+        <ion-icon name="logo-facebook"></ion-icon>
+        Signin with facebook
+      </button>
+    </ion-col>
+  </ion-row> 
+</ion-content>

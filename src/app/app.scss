@@ -14,3 +14,56 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.toolbar-background {
+  background-color: map-get($colors, wiple-blue);
+  
+}
+.toolbar-title {
+  color: gray !important;
+  font-weight: bold;
+}
+ion-title {
+  span.title-right {
+    float: right;
+    span.title-right-item {
+      cursor: pointer;
+      margin-left: 15px;
+    }
+  }
+}
+ion-content.signinup {
+  ion-row {
+    padding-top: 80px;
+    h3 {
+      font-size: 4rem;
+      text-align: center;
+      color: #888;
+    }
+    input {
+      width: 100%;
+      font-size: 1.6rem;
+      line-height: 2;
+      border-radius: 18px;
+      border: 0.8px solid #B1B1B1;
+      padding-left: 10px;
+      margin-bottom: 16px;
+    }
+
+    label {
+      color: #B1B1B1;
+      font-size: 1.8rem;
+      line-height: 1.6;
+    }
+
+    span.form-errors {
+      color: map-get($colors, danger);
+    }
+
+    button {
+      margin-bottom: 16px !important;
+      border-radius: 18px !important;
+      text-transform: none;
+    }
+  }
+}
