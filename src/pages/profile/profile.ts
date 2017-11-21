@@ -21,7 +21,7 @@ export class ProfilePage {
 
   signout() {
     this.user.signout();
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(HomePage, {signingOut: true}, {animate: true});
   }
 
 }

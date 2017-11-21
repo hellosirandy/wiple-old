@@ -4,6 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { User } from '../../models/user';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class ApiProvider {
@@ -11,10 +12,15 @@ export class ApiProvider {
   constructor(
     public auth: AngularFireAuth,
     public database: AngularFireDatabase,
+    public plt: Platform,
   ) {}
 
   signinWithFacebook() {
-    return this.auth.auth.signInWithPopup( new firebase.auth.FacebookAuthProvider());
+    if (this.plt.is('mobile')) {
+      return this.auth.auth.signInWithRedirect( new firebase.auth.FacebookAuthProvider());
+    } else {
+      return this.auth.auth.signInWithPopup( new firebase.auth.FacebookAuthProvider());
+    }
   }
 
   signupWithEmail(email, password):Promise<any> {

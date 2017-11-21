@@ -59,4 +59,12 @@ export class UserProvider {
     return this.storage.get('user');
   }
 
+  getAuthState() {
+    return this.api.getAuthState();
+  }
+
+  getOrCreateUser() {
+
+  }
+ 
 }
