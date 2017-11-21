@@ -8,9 +8,9 @@
 
 
 <ion-content padding class="signinup">
+  <h3 class="page-title">Sign in</h3>
   <ion-row>
-    <ion-col col-6 offset-3>
-      <h3>Sign in</h3>
+    <ion-col col-12 offset-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3>
       <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
         <div class="error-div" *ngIf="errorMessage">
           <span class="error-message">
@@ -24,13 +24,23 @@
         </span>
         <input type="text" id="email" formControlName="email">
         <label for="password">Password</label>
+        <span class="form-errors"
+          *ngIf="signinForm.get('password').invalid && submitTried">
+          * Invalid password
+        </span>
         <input type="password" id="password" formControlName="password">
-        <button ion-button color="wiple-blue" full type="submit">
+        <button class="round-btn" ion-button color="wiple-blue" full type="submit">
           Signin
         </button>
+        <div class="switch-sign-div">
+          Need an account? <span (click)="goSignup()">Sign up</span>.
+        </div>
+        <div class="switch-or-div" >
+          OR
+        </div>
       </form>
       
-      <button ion-button icon-start color="facebook" full (click)="signinWithFacebook()">
+      <button class="round-btn" ion-button icon-start color="facebook" full (click)="signinWithFacebook()">
         <ion-icon name="logo-facebook"></ion-icon>
         Signin with facebook
       </button>

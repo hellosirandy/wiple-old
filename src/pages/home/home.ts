@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
 import { UserProvider } from '../../providers/providers';
 
 import { SigninPage } from '../signin/signin';
-import { SignupPage } from '../signup/signup';
+import { ConnectPage } from '../connect/connect';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
   private backgroundImage: string='url(/assets/imgs/cover-hor.png)';
 
   constructor(
@@ -20,16 +20,21 @@ export class HomePage {
     this.backgroundImage = 'url(/assets/imgs/cover-' + (plt.isLandscape() ? 'hor' : 'ver') + '.png)';
   }
 
+  ngOnInit() {
+    this.user.getCurrentUser().then(user => {
+      if (user) {
+        this.navCtrl.setRoot(ConnectPage);
+        console.log(user);
+      }
+    })
+  }
+
   signout() {
     this.user.signout();
   }
 
   goSignin() {
     this.navCtrl.push(SigninPage);
-  }
-
-  goSignup() {
-    this.navCtrl.push(SignupPage);
   }
 
 }

@@ -10,6 +10,9 @@ import { HomePage } from '../pages/home/home';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { ConnectPage } from '../pages/connect/connect';
+import { ProfilePage } from '../pages/profile/profile';
+
+import { ComponentsModule } from '../components/components.module';
 
 import { ApiProvider } from '../providers/api/api';
 import { UserProvider } from '../providers/user/user';
@@ -33,7 +36,8 @@ const firebaseConfig = {
     HomePage,
     SigninPage,
     SignupPage,
-    ConnectPage
+    ConnectPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     IonicStorageModule.forRoot(),
+    ComponentsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,7 +54,8 @@ const firebaseConfig = {
     HomePage,
     SigninPage,
     SignupPage,
-    ConnectPage
+    ConnectPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

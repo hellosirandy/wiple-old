@@ -15,7 +15,7 @@ export class UserProvider {
   signupWithEmail(email:string, password:string, displayName:string) {
     return new Promise((resolve, reject) => {
       this.api.signupWithEmail(email, password).then(user => {
-        this.api.getOrCreateUser(new User(user.uid, displayName, user.email)).subscribe(u => {
+        this.api.getOrCreateUser(new User(user.uid, displayName, user.email, '')).subscribe(u => {
           this.storage.set('user', u);
           resolve();
         });
@@ -28,7 +28,7 @@ export class UserProvider {
   signinWithEmail(email, password) {
     return new Promise((resolve, reject) => {
       this.api.signinWithEmail(email, password).then(user => {
-        this.api.getOrCreateUser(new User(user.uid, '', user.email)).subscribe(u => {
+        this.api.getOrCreateUser(new User(user.uid, '', user.email, '')).subscribe(u => {
           this.storage.set('user', u);
           resolve();
         });
@@ -53,6 +53,10 @@ export class UserProvider {
   signout() {
     this.api.signout();
     this.storage.remove('user');
+  }
+
+  getCurrentUser():Promise<any> {
+    return this.storage.get('user');
   }
 
 }

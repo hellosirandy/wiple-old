@@ -14,9 +14,9 @@
 
 
 <ion-content padding class="signinup">
+  <h3 class="page-title">Register</h3>
   <ion-row>
-    <ion-col col-6 offset-3>
-      <h3>Register</h3>
+    <ion-col col-12 offset-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="error-div" *ngIf="errorMessage">
           <span class="error-message">
@@ -47,12 +47,12 @@
           * Invalid display name
         </span>
         <input type="text" id="display-name" formControlName="displayName">
-        <button ion-button color="wiple-blue" full button type="submit">
+        <button class="round-btn" ion-button color="wiple-blue" full button type="submit">
           Register for Wiple
         </button>
       </form>
       
-      <button ion-button icon-start color="facebook" full (click)="signinWithFacebook()">
+      <button class="round-btn" ion-button icon-start color="facebook" full (click)="signinWithFacebook()">
         <ion-icon name="logo-facebook"></ion-icon>
         Signin with facebook
       </button>

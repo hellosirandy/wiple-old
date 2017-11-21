@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/providers';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConnectPage } from '../connect/connect';
+import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -48,6 +49,10 @@ export class SigninPage implements OnInit {
     this.user.signinWithFacebook().then(() => {
       this.navCtrl.setRoot(ConnectPage);
     });
+  }
+  
+  goSignup() {
+    this.navCtrl.push(SignupPage);
   }
 
 }
