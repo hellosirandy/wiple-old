@@ -1,0 +1,25 @@
+page-initial {
+  .scroll-content {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  div.icon-div {
+    width: 30%;
+    margin: auto;
+    img {
+      -webkit-transition: opacity 0.7s ease-in;
+      -moz-transition: opacity 0.7s ease-in;
+      -o-transition: opacity 0.7s ease-in;
+      -ms-transition: opacity 0.7s ease-in;
+      transition: opacity 0.7s ease-in;
+    }
+    ion-spinner {
+      width: 100%;
+    }
+    @media (max-width: $sm-screen) {
+      width: 40%;
+    }
+  }
+  
+}

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-import { HomePage } from '../home/home';
+import { InitialPage } from '../initial/initial';
 
 @Component({
   selector: 'page-profile',
@@ -21,7 +21,7 @@ export class ProfilePage {
 
   signout() {
     this.user.signout();
-    this.navCtrl.setRoot(HomePage, {signingOut: true}, {animate: true});
+    this.navCtrl.setRoot(InitialPage, {signingOut: true}, {animate: true});
   }
 
 }

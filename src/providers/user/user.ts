@@ -63,8 +63,14 @@ export class UserProvider {
     return this.api.getAuthState();
   }
 
-  getOrCreateUser() {
-
+  getOrCreateUser(user) {
+    return new Promise((resolve, reject) => {
+      this.api.getOrCreateUser(new User(user.uid, user.displayName, user.email, user.photoURL)).subscribe(u => {
+        this.storage.set('user', u);
+        resolve();
+      });
+    })
+    
   }
  
 }

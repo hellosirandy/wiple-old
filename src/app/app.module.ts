@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/Storage';
 
 import { MyApp } from './app.component';
+import { InitialPage } from '../pages/initial/initial';
 import { HomePage } from '../pages/home/home';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
@@ -33,6 +34,7 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    InitialPage,
     HomePage,
     SigninPage,
     SignupPage,
@@ -51,6 +53,7 @@ const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    InitialPage,
     HomePage,
     SigninPage,
     SignupPage,
