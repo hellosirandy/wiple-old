@@ -58,10 +58,10 @@ ion-content {
 input[type=text], input[type=password] {
   width: 100%;
   font-size: 1.6rem;
-  line-height: 2;
+  line-height: 1;
   border-radius: 18px;
   border: 0.8px solid #B1B1B1;
-  padding-left: 10px;
+  padding: 10px;
   margin-bottom: 16px;
 }
 
@@ -77,16 +77,12 @@ button.round-btn {
   text-transform: none !important;
 }
 
+span.form-errors {
+  color: map-get($colors, danger);
+}
+
 ion-content.signinup {
   ion-row {
-    
-
-    span.form-errors {
-      color: map-get($colors, danger);
-    }
-
-    
-
     div.error-div {
       padding: 20px;
       background-color: #ffdbdb;

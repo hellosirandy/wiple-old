@@ -15,8 +15,10 @@
         <ion-col col-3>
           <img src="/assets/imgs/heart.svg" alt="">
         </ion-col>
-        <ion-col col-3>
-          <img src="/assets/imgs/lock.svg" alt="">
+        <ion-col col-3 class="middle">
+          <!-- <img [src]="middleImage" alt=""> -->
+          <img src="/assets/imgs/lock.svg" class="lock" [ngStyle]="{'opacity': foundUserPhoto ? 0 : 1}">
+          <img [src]=" foundUserPhoto ? foundUserPhoto : '/assets/imgs/lock.svg'" class="photo" [ngStyle]="{'opacity': foundUserPhoto ? 1 : 0}">
         </ion-col>
         <ion-col col-3>
           <img src="/assets/imgs/heart.svg" alt="">
@@ -27,15 +29,35 @@
   <ion-row>
     <ion-col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4>
       <div class="input-section">
-          <form>
-            <label for="email">Enter His/Her Email</label>
-            <input type="text" id="email">
-            <button ion-button icon-start class="round-btn" full type="submit" color="wiple-blue">
-              <ion-icon name="search"></ion-icon>
-              Search
-            </button>
-          </form>
+        <form *ngIf="inputSection === status.form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <label for="email">Enter His/Her Email</label>
+          <span class="form-errors"
+            *ngIf="searchForm.get('email').invalid && submitTried">
+            * Invalid email
+          </span>
+          <input type="text" id="email" formControlName="email">
+          <button ion-button icon-start class="round-btn" full type="submit" color="wiple-blue">
+            <ion-icon name="search"></ion-icon>
+            Search
+          </button>
+        </form>
+        <div *ngIf="inputSection === status.found" class="submitted-div">
+          <h3>{{foundUserName}}</h3>
+          <button ion-button icon-start class="round-btn" full color="wiple-blue">
+            <ion-icon name="send"></ion-icon>
+            Send Request
+          </button>
+          <button ion-button class="round-btn" full color="light" (click)="handleTryOtherClick()">
+            Try other
+          </button>
         </div>
+        <div *ngIf="inputSection === status.notfound" class="submitted-div">
+          <h3>User not found!</h3>
+          <button ion-button class="round-btn" full color="light" (click)="handleTryOtherClick()">
+            Try other
+          </button>
+        </div>
+      </div>
     </ion-col>
   </ion-row>
 </ion-content>

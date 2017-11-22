@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/providers';
-import { ConnectPage } from '../connect/connect';
+import { InitialPage } from '../initial/initial';
 
 @IonicPage()
 @Component({
@@ -40,7 +40,7 @@ export class SignupPage implements OnInit {
     const displayName = this.signupForm.get('displayName').value;
     if (this.signupForm.valid) {
       this.user.signupWithEmail(email, password, displayName).then(() => {
-        this.navCtrl.setRoot(ConnectPage);
+        this.navCtrl.setRoot(InitialPage);
       }).catch(err => {
         this.errorMessage = err.message;
       });
@@ -49,7 +49,7 @@ export class SignupPage implements OnInit {
 
   signinWithFacebook() {
     this.user.signinWithFacebook().then(() => {
-      this.navCtrl.setRoot(ConnectPage);
+      this.navCtrl.setRoot(InitialPage);
     });
   }
 

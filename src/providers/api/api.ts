@@ -53,7 +53,10 @@ export class ApiProvider {
         }
       })
     })
-    
+  }
+
+  searchUser(email: string) {
+    return this.database.list('/users', ref => ref.orderByChild('email').equalTo(email)).valueChanges()
   }
 
 }

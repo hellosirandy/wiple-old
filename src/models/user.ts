@@ -3,8 +3,8 @@ export class User {
     public uid: string,
     public displayName: string,
     public email: string,
-    public partner: string,
     public photoURL: string='',
+    public partner: string,
     public firstname: string='',
     public lastname: string='',
   ) {

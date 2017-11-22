@@ -1,8 +1,32 @@
 page-connect {
   ion-row {
-    // margin-top: 30px;
     div.input-section {
       margin-top: 30px;
+      div.submitted-div {
+        h3 {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .middle {
+    position: relative;
+    img {
+      position: absolute;
+      left: 0;
+    }
+    img {
+      -webkit-transition: opacity 1s ease-in-out;
+      -moz-transition: opacity 1s ease-in-out;
+      -o-transition: opacity 1s ease-in-out;
+      transition: opacity 1s ease-in-out;
+      &.lock {
+        opacity: 0;
+      }
+      &.photo {
+        border-radius: 50%;
+      }
     }
   }
 }

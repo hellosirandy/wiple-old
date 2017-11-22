@@ -26,28 +26,12 @@ export class UserProvider {
   }
 
   signinWithEmail(email, password) {
-    return new Promise((resolve, reject) => {
-      this.api.signinWithEmail(email, password).then(user => {
-        this.api.getOrCreateUser(new User(user.uid, '', user.email, '')).subscribe(u => {
-          this.storage.set('user', u);
-          resolve();
-        });
-      }).catch(err => {
-        reject(err);
-      });
-    })
+    return this.api.signinWithEmail(email, password);
     
   }
 
   signinWithFacebook() {
-    return new Promise((resolve, reject) => {
-      this.api.signinWithFacebook().then(user => {
-        this.api.getOrCreateUser(new User(user.user.uid, user.user.displayName, user.user.email, user.user.photoURL)).subscribe(u => {
-          this.storage.set('user', u);
-          resolve();
-        });
-      });
-    })
+    return this.api.signinWithFacebook();
   }
 
   signout() {
@@ -66,11 +50,15 @@ export class UserProvider {
   getOrCreateUser(user) {
     return new Promise((resolve, reject) => {
       this.api.getOrCreateUser(new User(user.uid, user.displayName, user.email, user.photoURL)).subscribe(u => {
-        this.storage.set('user', u);
-        resolve();
+        this.storage.set('user', u).then(() => {
+          resolve();
+        });
       });
     })
-    
+  }
+
+  searchUser(email: string) {
+    return this.api.searchUser(email).map(users => users[0]);
   }
  
 }
