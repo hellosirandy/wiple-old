@@ -25,10 +25,14 @@ ion-app {
 .toolbar button {
   color: map-get($colors, wiple-text) !important;
 }
-ion-title .toolbar-title {
+// ion-title .toolbar-title {
+//   font-family: 'Caveat Brush', cursive;
+//   color: map-get($colors, wiple-text) !important;
+  
+// }
+:lang(en) ion-title .toolbar-title {
   font-family: 'Caveat Brush', cursive;
   color: map-get($colors, wiple-text) !important;
-  
 }
 .toolbar-title-ios {
   font-size: 2.6rem;
@@ -43,7 +47,6 @@ ion-content {
     font-size: 6rem;
     text-align: center;
     color: map-get($colors, wiple-text);
-    font-family: 'Caveat Brush', cursive;
   }
   @media (max-width: $sm-screen) {
     h3.page-title {
@@ -52,8 +55,15 @@ ion-content {
       padding-bottom: 10px;
     }
   }
+  :lang(en) h3.page-title {
+    font-family: 'Caveat Brush', cursive;
+  }
+  :lang(zh-Hant) h3.page-title {
+    font-size: 1px;
+  }
   
 }
+
 
 input[type=text], input[type=password] {
   width: 100%;

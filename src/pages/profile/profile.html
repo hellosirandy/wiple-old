@@ -9,4 +9,5 @@
 
 <ion-content padding>
   <button ion-button full color="danger" outline (click)="signout()">Sign out</button>
+  <button *ngIf="currentUser && currentUser.partner" ion-button full color="danger" outline (click)="breakup()">Break up</button>
 </ion-content>

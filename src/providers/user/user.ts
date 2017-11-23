@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
 import { User } from '../../models/user';
+import { Invitation } from '../../models/invitation';
 import { Storage } from '@ionic/Storage';
 
 @Injectable()
@@ -12,53 +13,64 @@ export class UserProvider {
   ) {
   }
 
-  signupWithEmail(email:string, password:string, displayName:string) {
-    return new Promise((resolve, reject) => {
-      this.api.signupWithEmail(email, password).then(user => {
-        this.api.getOrCreateUser(new User(user.uid, displayName, user.email, '')).subscribe(u => {
-          this.storage.set('user', u);
-          resolve();
-        });
-      }).catch(err => {
-        reject(err);
-      });
-    })
+  getAuthState() {
+    return this.api.getAuthState();
   }
 
-  signinWithEmail(email, password) {
+  getOrCreateUser(user) {
+    return this.api.getOrCreateUser(new User(user.uid, user.displayName, user.email, user.photoURL));
+  }
+
+  signout() {
+    return this.api.signout();
+  }
+
+  signinWithEmail(email: string, password: string) {
     return this.api.signinWithEmail(email, password);
-    
+  }
+
+  signupWithEmail(email: string, password: string, displayName: string) {
+    return this.api.signupWithEmail(email, password).then(user => {
+      return user.updateProfile({displayName: displayName});
+    })
   }
 
   signinWithFacebook() {
     return this.api.signinWithFacebook();
   }
 
-  signout() {
-    this.api.signout();
-    this.storage.remove('user');
-  }
-
-  getCurrentUser():Promise<any> {
+  getCurrentUser() {
     return this.storage.get('user');
   }
 
-  getAuthState() {
-    return this.api.getAuthState();
+  getCurrentUserKey() {
+    return this.storage.get('userKey');
   }
 
-  getOrCreateUser(user) {
+  searchUser(type: 'key' | 'email', value: string) {
+    if (type === 'email') {
+      return this.api.searchUserByEmail(value).map(users => users[0]);
+    } else {
+      return this.api.searchUserByKey(value);
+    }
+  }
+
+  getPartner(key: string) {
+    return this.api.getPartner(key);
+  }
+
+  breakup(firstKey: string, secondKey: string) {
+    return this.api.breakup(firstKey, secondKey);
+  }
+
+  refreshUser(userKey: string) {
     return new Promise((resolve, reject) => {
-      this.api.getOrCreateUser(new User(user.uid, user.displayName, user.email, user.photoURL)).subscribe(u => {
-        this.storage.set('user', u).then(() => {
+      const subscription = this.api.refreshUser(userKey).subscribe(user => {
+        subscription.unsubscribe();
+        this.storage.set('user', user).then(_ => {
           resolve();
         });
-      });
-    })
+      })
+    });
   }
-
-  searchUser(email: string) {
-    return this.api.searchUser(email).map(users => users[0]);
-  }
- 
 }

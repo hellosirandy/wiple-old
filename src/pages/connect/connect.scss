@@ -1,11 +1,23 @@
 page-connect {
   ion-row {
     div.input-section {
+      position: relative;
       margin-top: 30px;
       div.submitted-div {
         h3 {
           text-align: center;
         }
+        p.supplement {
+          text-align: center;
+        }
+      }
+      .fade {
+        position: absolute;
+        left: 0;
+        -webkit-transition: opacity 1s ease-in-out;
+        -moz-transition: opacity 1s ease-in-out;
+        -o-transition: opacity 1s ease-in-out;
+        transition: opacity 1s ease-in-out;
       }
     }
   }
@@ -15,17 +27,13 @@ page-connect {
     img {
       position: absolute;
       left: 0;
-    }
-    img {
       -webkit-transition: opacity 1s ease-in-out;
       -moz-transition: opacity 1s ease-in-out;
       -o-transition: opacity 1s ease-in-out;
       transition: opacity 1s ease-in-out;
-      &.lock {
-        opacity: 0;
-      }
       &.photo {
         border-radius: 50%;
+        width: 100%;
       }
     }
   }

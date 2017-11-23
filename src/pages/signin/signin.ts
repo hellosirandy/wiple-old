@@ -46,7 +46,7 @@ export class SigninPage implements OnInit {
   }
   
   signinWithFacebook() {
-    this.user.signinWithFacebook().then(() => {
+    this.user.signinWithFacebook().then(user => {
       this.navCtrl.setRoot(InitialPage);
     });
   }

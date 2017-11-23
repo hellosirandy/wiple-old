@@ -12,6 +12,7 @@ import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { ConnectPage } from '../pages/connect/connect';
 import { ProfilePage } from '../pages/profile/profile';
+import { MainAppPage } from '../pages/main-app/main-app';
 
 import { ComponentsModule } from '../components/components.module';
 
@@ -21,6 +22,7 @@ import { UserProvider } from '../providers/user/user';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { ConnectionProvider } from '../providers/connection/connection';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZKpuq_JyzecKn1tEP8EnwoqRSX02R-fA",
@@ -39,7 +41,8 @@ const firebaseConfig = {
     SigninPage,
     SignupPage,
     ConnectPage,
-    ProfilePage
+    ProfilePage,
+    MainAppPage,
   ],
   imports: [
     BrowserModule,
@@ -58,14 +61,16 @@ const firebaseConfig = {
     SigninPage,
     SignupPage,
     ConnectPage,
-    ProfilePage
+    ProfilePage,
+    MainAppPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
-    UserProvider
+    UserProvider,
+    ConnectionProvider
   ]
 })
 export class AppModule {}

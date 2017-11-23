@@ -3,7 +3,6 @@ import { Platform, NavController, NavParams, ToastController } from 'ionic-angul
 import { UserProvider } from '../../providers/providers';
 
 import { SigninPage } from '../signin/signin';
-import { ConnectPage } from '../connect/connect';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,7 +12,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HomePage {
   private backgroundImage: string='url(/assets/imgs/cover-hor.png)';
-  private authSubscribe: Subscription;
 
   constructor(
     public navCtrl: NavController,
@@ -26,45 +24,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    // if (this.plt.is('mobile')) {
-    //   if (!this.navParams.get('signingOut')) {
-    //     let toast = this.toastCtrl.create({
-    //       message: 'Checking authentication ...',
-    //       position: 'top'
-    //     });
-    //     toast.present();
-    //     this.authSubscribe = this.user.getAuthState().subscribe(user => {
-    //       let toastText;
-    //       if (user) {
-    //         this.navCtrl.setRoot(ConnectPage, {}, {
-    //           animate: true,
-    //         });
-    //         toastText = 'You are now signed in.';
-    //       } else {
-    //         toastText = 'Please sign in or sign up first.';
-    //       }
-    //       toast.setMessage(toastText);
-    //       setTimeout(() => {
-    //         toast.dismiss();
-    //       }, 2000);
-    //     });
-    //   }
-      
-    // } else {
-    //   this.user.getCurrentUser().then(user => {
-    //     if (user) {
-    //       this.navCtrl.setRoot(ConnectPage, {}, {animate: true});
-    //     }
-    //   });
-    // }
-    
   }
-
-  // ionViewWillLeave() {
-  //   if (this.plt.is('mobile')) {
-  //     this.authSubscribe.unsubscribe();
-  //   }
-  // }
 
   signout() {
     this.user.signout();

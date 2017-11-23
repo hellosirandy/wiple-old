@@ -6,8 +6,8 @@
 
 
 <ion-content padding>
-  <h3 class="page-title">
-    Get Connection With Your Love!
+  <h3 class="page-title" lang="zh-Hant">
+    {{pageTitle}}
   </h3>
   <ion-row>
     <ion-col col-12 offset-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3>
@@ -17,8 +17,8 @@
         </ion-col>
         <ion-col col-3 class="middle">
           <!-- <img [src]="middleImage" alt=""> -->
-          <img src="/assets/imgs/lock.svg" class="lock" [ngStyle]="{'opacity': foundUserPhoto ? 0 : 1}">
-          <img [src]=" foundUserPhoto ? foundUserPhoto : '/assets/imgs/lock.svg'" class="photo" [ngStyle]="{'opacity': foundUserPhoto ? 1 : 0}">
+          <img src="/assets/imgs/lock.svg" class="lock" [ngStyle]="{'opacity': foundUser ? 0 : 1}">
+          <img [src]=" foundUser ? foundUser.photoURL : '/assets/imgs/lock.svg'" class="photo" [ngStyle]="{'opacity': foundUser ? 1 : 0}">
         </ion-col>
         <ion-col col-3>
           <img src="/assets/imgs/heart.svg" alt="">
@@ -42,19 +42,40 @@
           </button>
         </form>
         <div *ngIf="inputSection === status.found" class="submitted-div">
-          <h3>{{foundUserName}}</h3>
-          <button ion-button icon-start class="round-btn" full color="wiple-blue">
+          <h3>{{foundUser.displayName}}</h3>
+          <button class="round-btn" 
+            *ngIf="currentUser.email !== foundUser.email" 
+            ion-button icon-start full 
+            color="wiple-blue"
+            (click)="handleSendClick()"
+          >
             <ion-icon name="send"></ion-icon>
             Send Request
           </button>
+          <p *ngIf="currentUser.email === foundUser.email" class="supplement">Say hello to yourself.</p>
           <button ion-button class="round-btn" full color="light" (click)="handleTryOtherClick()">
             Try other
           </button>
         </div>
         <div *ngIf="inputSection === status.notfound" class="submitted-div">
-          <h3>User not found!</h3>
+          <h3>User not found.</h3>
           <button ion-button class="round-btn" full color="light" (click)="handleTryOtherClick()">
             Try other
+          </button>
+        </div>
+        <div *ngIf="inputSection === status.sent" class="submitted-div">
+          <h3>Request has been sent</h3>
+          <button ion-button class="round-btn" full color="light" (click)="cancelInvitation()">
+            Cancel request
+          </button>
+        </div>
+        <div *ngIf="inputSection === status.agree" class="submitted-div">
+          <h3>{{inviter ? inviter.displayName: ''}} sent a request to you</h3>
+          <button ion-button class="round-btn" full color="wiple-blue" (click)="acceptInvitation()">
+            Accept request
+          </button>
+          <button ion-button class="round-btn" full color="danger" (click)="declineInvitation()">
+            Decline request
           </button>
         </div>
       </div>
