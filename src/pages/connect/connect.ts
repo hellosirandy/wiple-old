@@ -12,7 +12,6 @@ import { Invitation } from '../../models/invitation';
   templateUrl: 'connect.html',
 })
 export class ConnectPage implements OnInit {
-  private pageTitle: string='Get Connection With Your Love!';
   private searchForm: FormGroup;
   private submitTried: boolean=false;
   private boyImage: string='/assets/imgs/boy.svg';

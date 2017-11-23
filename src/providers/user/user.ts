@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
 import { User } from '../../models/user';
-import { Invitation } from '../../models/invitation';
 import { Storage } from '@ionic/Storage';
 
 @Injectable()

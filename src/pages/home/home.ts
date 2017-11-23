@@ -4,7 +4,6 @@ import { UserProvider } from '../../providers/providers';
 
 import { SigninPage } from '../signin/signin';
 
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'page-home',
