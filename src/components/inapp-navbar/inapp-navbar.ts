@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { MenuController, NavController } from 'ionic-angular';
 import { ProfilePage } from '../../pages/profile/profile';
 
 @Component({
@@ -9,12 +9,17 @@ import { ProfilePage } from '../../pages/profile/profile';
 export class InappNavbarComponent {
   
   constructor(
+    public menuCtrl: MenuController,
     public navCtrl: NavController,
   ) {
   }
 
   handleProfileClick() {
     this.navCtrl.push(ProfilePage);
+  }
+
+  handleMenuClick() {
+    this.menuCtrl.open();
   }
 
 }
