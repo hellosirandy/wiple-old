@@ -13,6 +13,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { ConnectPage } from '../pages/connect/connect';
 import { ProfilePage } from '../pages/profile/profile';
 import { MainAppPage } from '../pages/main-app/main-app';
+import { UserPopoverPage } from '../pages/user-popover/user-popover';
 
 import { ComponentsModule } from '../components/components.module';
 
@@ -43,6 +44,7 @@ const firebaseConfig = {
     ConnectPage,
     ProfilePage,
     MainAppPage,
+    UserPopoverPage
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ const firebaseConfig = {
     ConnectPage,
     ProfilePage,
     MainAppPage,
+    UserPopoverPage
   ],
   providers: [
     StatusBar,

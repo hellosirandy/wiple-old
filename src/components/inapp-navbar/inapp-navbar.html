@@ -1,11 +1,15 @@
-<ion-navbar>
-  <button ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
+<ion-navbar >
   <ion-title>Wiple</ion-title>
-  <!-- <ion-buttons end>
-    <button ion-button icon-only (click)="handleProfileClick()">
+  <ion-buttons *ngIf="!mobile" end>
+    <button ion-button icon-only>
+      <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
+    </button>
+    <button ion-button icon-only>
+      <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+    </button>
+    <button ion-button icon-only (click)="handleProfileClick($event)">
       <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
     </button>
-  </ion-buttons> -->
+    
+  </ion-buttons>
 </ion-navbar>
