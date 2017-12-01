@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Events, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
 import { ConnectPage } from '../connect/connect';
@@ -13,6 +13,7 @@ import { MainAppPage } from '../main-app/main-app';
 export class InitialPage {
 
   constructor(
+    public events: Events,
     public navCtrl: NavController, 
     public navParams: NavParams,
     public user: UserProvider,
@@ -23,12 +24,12 @@ export class InitialPage {
     const subscription = this.user.getAuthState().subscribe(user => {
       if (user) {
         this.user.getOrCreateUser(user).then((u) => {
+          this.events.publish('user:login');
           if (u.partner) {
             this.navCtrl.setRoot(MainAppPage);
           } else {
             this.navCtrl.setRoot(ConnectPage);
           }
-          
         });
       } else {
         this.navCtrl.setRoot(HomePage);

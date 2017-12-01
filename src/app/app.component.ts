@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Events, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,9 +13,10 @@ import { UserProvider } from '../providers/user/user';
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = InitialPage;
-  partnerKey: string;
+  private partner;
 
   constructor(
+    public events: Events,
     platform: Platform, 
     public user: UserProvider,
     statusBar: StatusBar, 
@@ -30,11 +31,11 @@ export class MyApp implements OnInit {
   }
 
   ngOnInit() {
-    this.user.getCurrentUserKey().then(userKey => {
-      this.user.getPartner(userKey).subscribe((partnerKey: string) => {
-        this.partnerKey = partnerKey;
-        console.log(partnerKey);
-        
+    this.events.subscribe('user:login', () => {
+      this.user.getPartner().then(obs => {
+        obs.subscribe(partner => {
+          this.partner = partner;
+        });
       });
     });
   }

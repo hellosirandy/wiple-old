@@ -40,8 +40,7 @@ export class ProfilePage {
   }
 
   breakup() {
-    this.user.breakup(this.currentUserKey, this.currentUser.partner).then(_ => {
-    })
+    this.user.breakup().then(_ => {});
   }
 
 }

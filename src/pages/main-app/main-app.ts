@@ -19,18 +19,20 @@ export class MainAppPage {
   }
 
   ionViewDidLoad() {
-    this.user.getCurrentUserKey().then(userKey => {
-      this.partnerSubscription = this.user.getPartner(userKey).subscribe(partner => {
-        if (this.partner && !partner) {
+    this.user.getPartner().then(obs => {
+      this.partnerSubscription = obs.subscribe(partner => {
+        this.partner = partner;
+        if (partner) {
+          
+        } else {
           this.navCtrl.setRoot(InitialPage, {}, {animate: true});
         }
-        this.partner = partner;
       });
-    });
+    })
   }
 
   ionViewWillUnload() {
-    this.partnerSubscription.unsubscribe()
+    this.partnerSubscription.unsubscribe();
   }
 
 }

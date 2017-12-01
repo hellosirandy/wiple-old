@@ -4,6 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
+import { Invitation } from '../../models/invitation';
 
 @Injectable()
 export class ApiProvider {
@@ -63,59 +64,47 @@ export class ApiProvider {
     }
   }
 
-  getInvitations(key: string) {
-    const obj = this.database.list(`/users/${key}/invitations`).snapshotChanges();
-    return obj;
+  getPartner(userKey: string) {
+    return this.database.object(`/users/${userKey}/partner`).valueChanges();
   }
 
-  getPartner(key: string) {
-    const obj = this.database.object(`/users/${key}/partner`).valueChanges();
-    return obj;
+  getInvitations(userKey: string, type:'inviter'|'invitee') {
+    return this.database.list('/invitations', ref => ref.orderByChild(type).equalTo(userKey)).snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
   searchUserByEmail(email: string) {
-    return this.database.list('/users', ref => ref.orderByChild('email').equalTo(email)).snapshotChanges();
+    return this.database.list('/users', ref => ref.orderByChild('email').equalTo(email)).snapshotChanges().map(users => users[0]);
   }
 
-  searchUserByKey(key: string) {
-    return this.database.object(`/users/${key}`).snapshotChanges();
+  searchUserByKey(userKey: string) {
+    return this.database.object(`/users/${userKey}`).snapshotChanges();
   }
 
-  createInvitation(userKey: string, invitation) {
-    return this.database.list(`/users/${userKey}/invitations`).push(invitation);
+  checkSingle(userKey: string) {
+    return this.database.object(`/users/${userKey}/partner`).valueChanges();
   }
 
-  removeInvitation(inviter: string, invitee: string) {
-    return new Promise((resolve, reject) => {
-      const subscription = this.database.list(`/users/${inviter}/invitations`, ref => ref.orderByChild('invitee').equalTo(invitee)).snapshotChanges().subscribe(invs => {
-        const key = invs[0].key;
-        subscription.unsubscribe();
-        this.database.list(`/users/${inviter}/invitations`).remove(key).then(_ => {
-          const subscription = this.database.list(`/users/${invitee}/invitations`, ref => ref.orderByChild('inviter').equalTo(inviter)).snapshotChanges().subscribe(invs => {
-            subscription.unsubscribe();
-            const key = invs[0].key;
-            this.database.list(`/users/${invitee}/invitations`).remove(key).then(_ => {
-              resolve();
-            })
-          })
-        });
-      })
+  sendInvitation(inviter: string, invitee: string) {
+    const inv = new Invitation(inviter, invitee);
+    return this.database.list('/invitations').push(inv);
+  }
+
+  removeInvitation(invKey: string) {
+    const ref = this.database.list('/invitations');
+    return ref.remove(invKey);
+  }
+
+  acceptInvitation(first: string, second: string) {
+    return this.database.object(`/users/${first}`).update({partner: second}).then(_ => {
+      return this.database.object(`/users/${second}`).update({partner: first});
     });
   }
 
-  acceptInvitation(firstKey: string, secondKey: string) {
-    return this.database.object(`/users/${firstKey}`).update({partner: secondKey}).then(_ => {
-      return this.database.object(`/users/${secondKey}`).update({partner: firstKey})
-    })
-  }
-
-  breakup(firstKey: string, secondKey: string) {
-    return this.database.object(`/users/${firstKey}/partner`).remove().then(_1 => {
-      return this.database.object(`/users/${secondKey}/partner`).remove();
+  breakup(first: string, second: string) {
+    return this.database.object(`/users/${first}/partner`).remove().then(_ => {
+      return this.database.object(`/users/${second}/partner`).remove();
     });
-  }
-
-  refreshUser(userKey: string) {
-    return this.database.object(`/users/${userKey}`).valueChanges();
   }
 }
