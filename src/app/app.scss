@@ -116,3 +116,22 @@ ion-content.signinup {
     }
   }
 }
+
+ion-menu {
+  div.scroll-content {
+    background-color: map-get($colors, wiple-light-pink);
+    
+  }
+  .item {
+    background-color: map-get($colors, wiple-light-pink) !important;
+    ion-icon {
+      font-size: inherit !important;
+      width: 20px;
+    }
+  }
+  ion-footer {
+    .item-inner {
+      border-bottom: none !important;
+    }
+  }
+}

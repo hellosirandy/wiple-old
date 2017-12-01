@@ -1,6 +1,6 @@
 <ion-header>
 
-  <inapp-navbar></inapp-navbar>
+  <inapp-navbar [partner]="false"></inapp-navbar>
 
 </ion-header>
 
@@ -16,7 +16,6 @@
           <img src="/assets/imgs/heart.svg" alt="">
         </ion-col>
         <ion-col col-3 class="middle">
-          <!-- <img [src]="middleImage" alt=""> -->
           <img src="/assets/imgs/lock.svg" class="lock" [ngStyle]="{'opacity': foundUser ? 0 : 1}">
           <img [src]=" foundUser ? foundUser.photoURL : '/assets/imgs/lock.svg'" class="photo" [ngStyle]="{'opacity': foundUser ? 1 : 0}">
         </ion-col>

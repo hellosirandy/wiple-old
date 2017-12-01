@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController, Platform, PopoverController } from 'ionic-angular';
 import { UserPopoverPage } from '../../pages/user-popover/user-popover';
 
@@ -7,6 +7,7 @@ import { UserPopoverPage } from '../../pages/user-popover/user-popover';
   templateUrl: 'inapp-navbar.html'
 })
 export class InappNavbarComponent {
+  @Input() partner: boolean=false;
   private mobile: boolean=false;
   
   constructor(

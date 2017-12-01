@@ -33,5 +33,4 @@ export class ConnectionProvider {
   acceptInvitation(firstKey: string, secondKey: string) {
     return this.api.acceptInvitation(firstKey, secondKey);
   }
-
 }

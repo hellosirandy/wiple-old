@@ -1,21 +1,24 @@
-<ion-navbar #mycontent>
-  <button ion-button menuToggle>
+<ion-navbar>
+  <button ion-button menuToggle *ngIf="mobile">
     <ion-icon name="menu"></ion-icon>
   </button>
   <ion-title>Wiple</ion-title>
   <ion-buttons *ngIf="!mobile" end>
-    <button ion-button icon-only>
-      <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
-    </button>
-    <button ion-button icon-only>
-      <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
-    </button>
+    <span *ngIf="partner">
+      <button ion-button icon-only>
+        <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+      </button>
+    </span>
     <button ion-button icon-only (click)="handleProfileClick($event)">
       <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
     </button>
-    
+  </ion-buttons>
+  <ion-buttons *ngIf="mobile && partner" end>
+    <button ion-button icon-only>
+      <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+    </button>
   </ion-buttons>
 </ion-navbar>
-<ion-menu type="overlay" [content]="mycontent" persistent="true">
-  <sidebar></sidebar>
-</ion-menu>

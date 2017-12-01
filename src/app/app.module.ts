@@ -14,6 +14,7 @@ import { ConnectPage } from '../pages/connect/connect';
 import { ProfilePage } from '../pages/profile/profile';
 import { MainAppPage } from '../pages/main-app/main-app';
 import { UserPopoverPage } from '../pages/user-popover/user-popover';
+import { DebtsPage } from '../pages/debts/debts';
 
 import { ComponentsModule } from '../components/components.module';
 
@@ -44,7 +45,8 @@ const firebaseConfig = {
     ConnectPage,
     ProfilePage,
     MainAppPage,
-    UserPopoverPage
+    UserPopoverPage,
+    DebtsPage,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ const firebaseConfig = {
     ConnectPage,
     ProfilePage,
     MainAppPage,
-    UserPopoverPage
+    UserPopoverPage,
+    DebtsPage,
   ],
   providers: [
     StatusBar,

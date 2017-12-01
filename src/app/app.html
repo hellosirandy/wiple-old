@@ -1,3 +1,23 @@
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-list>
+      <button ion-item icon-start (click)="handleProfileClick()" menuClose>
+        <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
+        Profile
+      </button>
+      <button *ngIf="partnerKey" ion-item icon-start (click)="handleDebtsClick()" menuClose>
+        <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
+        Debts
+      </button>
+      
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <button ion-item icon-start (click)="handleSignoutClick()" menuClose>
+      <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
+      Sign out
+    </button>
+  </ion-footer>
+</ion-menu>
 
-
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav [root]="rootPage" #mycontent></ion-nav>
