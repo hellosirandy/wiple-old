@@ -25,11 +25,6 @@ ion-app {
 .toolbar button {
   color: map-get($colors, wiple-text) !important;
 }
-// ion-title .toolbar-title {
-//   font-family: 'Caveat Brush', cursive;
-//   color: map-get($colors, wiple-text) !important;
-  
-// }
 :lang(en) ion-title .toolbar-title {
   font-family: 'Caveat Brush', cursive;
   color: map-get($colors, wiple-text) !important;

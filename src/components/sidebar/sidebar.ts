@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { UserProvider } from '../../providers/user/user';
+import { InitialPage } from '../../pages/initial/initial';
+import { ProfilePage } from '../../pages/profile/profile';
 
-/**
- * Generated class for the SidebarComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'sidebar',
   templateUrl: 'sidebar.html'
 })
 export class SidebarComponent {
+  @Output() profileClick = new EventEmitter<void>();
 
-  text: string;
+  constructor(
+    public user: UserProvider,
+  ) {
 
-  constructor() {
-    console.log('Hello SidebarComponent Component');
-    this.text = 'Hello World';
+  }
+
+  handleProfileClick() {
+    console.log('profile');
+    
+  }
+
+  handleDebtsClick() {
+
+  }
+
+  handleSignoutClick() {
+    // console.log('signout');
+    // this.user.signout().then(() => {
+    //   this.navCtrl.setRoot(InitialPage, {}, {animate: true});
+    // });
   }
 
 }

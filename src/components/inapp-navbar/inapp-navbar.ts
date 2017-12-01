@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, NavController, Platform, PopoverController } from 'ionic-angular';
+import { NavController, Platform, PopoverController } from 'ionic-angular';
 import { UserPopoverPage } from '../../pages/user-popover/user-popover';
 
 @Component({
@@ -10,7 +10,6 @@ export class InappNavbarComponent {
   private mobile: boolean=false;
   
   constructor(
-    public menuCtrl: MenuController,
     public navCtrl: NavController,
     platform: Platform,
     public popoverCtrl: PopoverController,
@@ -23,10 +22,6 @@ export class InappNavbarComponent {
     popover.present({
       ev: event
     });
-  }
-
-  handleMenuClick() {
-    this.menuCtrl.open();
   }
 
 }

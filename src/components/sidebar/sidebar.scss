@@ -1,3 +1,13 @@
 sidebar {
-
+  div.scroll-content {
+    background-color: map-get($colors, wiple-light-pink);
+  }
+  .item {
+    background-color: inherit !important;
+    ion-icon {
+      font-size: inherit !important;
+      width: 20px;
+      text-align: center;
+    }
+  }
 }

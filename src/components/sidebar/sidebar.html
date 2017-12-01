@@ -1,17 +1,19 @@
-<ion-menu [content]="content" id="menu1">
-  <ion-header>
-    <ion-toolbar color="secondary">
-      <ion-title>Menu 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <ion-list>
-      <button ion-item menuClose="menu1" detail-none>
-        Close Menu 1
-      </button>
-    </ion-list>
-  </ion-content>
-
-</ion-menu>
-<ion-nav [root]="root" #content swipeBackEnabled="false"></ion-nav>
+<ion-content>
+  <ion-list>
+    <button ion-item icon-start (click)="handleProfileClick()">
+      <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
+      Profile
+    </button>
+    <button ion-item icon-start (click)="handleDebtsClick()">
+      <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
+      Debts
+    </button>
+    
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-item icon-start (click)="handleSignoutClick()">
+    <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
+    Sign out
+  </button>
+</ion-footer>

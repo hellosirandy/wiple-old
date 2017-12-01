@@ -1,4 +1,7 @@
-<ion-navbar >
+<ion-navbar #mycontent>
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
   <ion-title>Wiple</ion-title>
   <ion-buttons *ngIf="!mobile" end>
     <button ion-button icon-only>
@@ -13,3 +16,6 @@
     
   </ion-buttons>
 </ion-navbar>
+<ion-menu type="overlay" [content]="mycontent" persistent="true">
+  <sidebar></sidebar>
+</ion-menu>
