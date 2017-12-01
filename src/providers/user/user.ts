@@ -46,30 +46,31 @@ export class UserProvider {
     return this.storage.get('userKey');
   }
 
-  searchUser(type: 'key' | 'email', value: string) {
+  getPartner() {
+    return this.storage.get('userKey').then(userKey => {
+      return this.api.getPartner(userKey);
+    });
+  }
+
+  searchUser(type: 'email'|'key', value: string) {
     if (type === 'email') {
-      return this.api.searchUserByEmail(value).map(users => users[0]);
-    } else {
+      return this.api.searchUserByEmail(value);
+    } else if (type === 'key') {
       return this.api.searchUserByKey(value);
     }
   }
 
-  getPartner(key: string) {
-    return this.api.getPartner(key);
+  checkSingle(userKey) {
+    return this.api.checkSingle(userKey);
   }
 
-  breakup(firstKey: string, secondKey: string) {
-    return this.api.breakup(firstKey, secondKey);
-  }
-
-  refreshUser(userKey: string) {
-    return new Promise((resolve, reject) => {
-      const subscription = this.api.refreshUser(userKey).subscribe(user => {
-        subscription.unsubscribe();
-        this.storage.set('user', user).then(_ => {
-          resolve();
-        });
-      })
+  breakup() {
+    let user;
+    return this.storage.get('user').then(u => {
+      user = u;
+      return this.storage.get('userKey')
+    }).then(userKey => {
+      return this.api.breakup(userKey, user.partner);
     });
   }
 }

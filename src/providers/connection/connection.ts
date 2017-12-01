@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
-import { Invitation } from '../../models/invitation';
+import { Storage } from '@ionic/Storage';
 
 @Injectable()
 export class ConnectionProvider {
 
   constructor(
     public api: ApiProvider,
+    public storage: Storage,
   ) {
 
   }
 
-  searchUser() {
-
-  }
-
-  sendInvitation(inviter: string, invitee: string) {
-    const invitation = new Invitation(inviter, invitee, 'pending');
-    return this.api.createInvitation(invitee, invitation).then(() => {
-      return this.api.createInvitation(inviter, invitation);
+  getInvitations(type:'inviter'|'invitee') {
+    return this.storage.get('userKey').then(userKey => {
+      return this.api.getInvitations(userKey, type);
     });
   }
 
-  getInvitations(userKey: string) {
-    return this.api.getInvitations(userKey);
+  sendInvitation(invitee: string) {
+    return this.storage.get('userKey').then(userKey => {
+      return this.api.sendInvitation(userKey, invitee);
+    });
   }
 
-  removeInvitation(inviter: string, invitee: string) {
-    return this.api.removeInvitation(inviter, invitee);
+  removeInvitation(invKey: string) {
+    return this.api.removeInvitation(invKey);
   }
 
-  acceptInvitation(firstKey: string, secondKey: string) {
-    return this.api.acceptInvitation(firstKey, secondKey);
+  acceptInvitation(partner: string) {
+    return this.storage.get('userKey').then(userKey => {
+      return this.api.acceptInvitation(userKey, partner);
+    });
   }
 }

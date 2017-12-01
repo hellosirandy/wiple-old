@@ -3,29 +3,33 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/user/user';
 import { ConnectionProvider } from '../../providers/connection/connection';
-import { User } from '../../models/user';
-import { MainAppPage } from '../main-app/main-app';
 import { Invitation } from '../../models/invitation';
+import { InitialPage } from '../initial/initial';
 
 @Component({
   selector: 'page-connect',
   templateUrl: 'connect.html',
 })
 export class ConnectPage implements OnInit {
+  private displayType = {search: 'search', found: 'found', notfound: 'notfound', sent: 'sent', received: 'received'}
+  private display: string=this.displayType.search;
+
   private searchForm: FormGroup;
   private submitTried: boolean=false;
-  private boyImage: string='/assets/imgs/boy.svg';
-  private foundUser: User;
+
+
+  private foundUser;
   private foundUserKey: string;
-  private currentUser: User;
-  private status: any={ form: 'form', found: 'found', notfound: 'notfound', sent: 'sent', agree: 'agree' };
-  private inputSection: string;
-  private currentUserKey: string;
-  private invitationSubscription;
-  private partnerSubscription;
-  private inviter: User;
-  private currentInvitation: Invitation;
-  private currentInvitationKey: string;
+  private currentUser;
+  private boyImage: string='/assets/imgs/boy.svg';
+
+  private sentInv: Invitation[]=[];
+  private receivedInv: Invitation[]=[];
+  private invitations: any[]=[];
+
+  private sentSub;
+  private receivedSub;
+  private partnerSub;
 
   constructor(
     public connection: ConnectionProvider,
@@ -36,46 +40,52 @@ export class ConnectPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    this.user.getCurrentUser().then(user => {
-      this.currentUser = user;
-      return this.user.getCurrentUserKey()
-    }).then(userKey => {
-      this.currentUserKey = userKey;
-      this.invitationSubscription = this.connection.getInvitations(userKey).subscribe((invitations: any) => {
-        if (invitations && invitations.length > 0) {
-          const inv = <Invitation>invitations[0].payload.val();
-          this.currentInvitation = inv;
-          this.currentInvitationKey = invitations[0].key;
-          if (inv.invitee === this.currentUserKey) {
-            this.searchUser('key', inv.inviter);
-            this.inputSection = this.status.agree;
-          } else if (inv.inviter === this.currentUserKey) {
-            this.searchUser('key', inv.invitee);
-            this.inputSection = this.status.sent;
-          }
-          const subscription = this.user.searchUser('key', inv.inviter).subscribe(inviter => {
-            this.inviter = <User>inviter.payload.val();
-            subscription.unsubscribe();
-          });
-        } else {
-          this.handleTryOtherClick();
-        }
-        
-      });
-      this.partnerSubscription = this.user.getPartner(userKey).subscribe(partner => {
+    this.user.getPartner().then(obs => {
+      this.partnerSub = obs.subscribe(partner => {
         if (partner) {
-          this.user.refreshUser(this.currentUserKey).then(_ => {
-            this.navCtrl.setRoot(MainAppPage, {}, {animate: true})
-          })
+          this.navCtrl.setRoot(InitialPage, {}, {animate: true});
+        } else {
+          this.user.getCurrentUser().then(user => {
+            this.currentUser = user; 
+          });
+          this.connection.getInvitations('inviter').then(obs => {
+            this.sentSub = obs.subscribe((inv: Invitation[]) => {
+              this.sentInv = inv;
+              this.updateInvs();
+            });
+            return this.connection.getInvitations('invitee')
+          }).then(obs => {
+            this.receivedSub = obs.subscribe((inv: Invitation[]) => {
+              this.receivedInv = inv;
+              this.updateInvs();
+            });
+          });
         }
       })
-    });
-
+    })
+    
+  }
+  
+  ionViewWillLeave() {
+    this.sentSub.unsubscribe();
+    this.receivedSub.unsubscribe();
+    this.partnerSub.unsubscribe();
   }
 
-  ionViewWillLeave() {
-    this.invitationSubscription.unsubscribe();
-    this.partnerSubscription.unsubscribe();
+  updateInvs() {
+    const prevInvs: Invitation[]=this.invitations;
+    this.invitations = this.sentInv.concat(this.receivedInv);
+    if (this.invitations.length > 0) {
+      if (prevInvs[0] !== this.invitations[0]) {
+        if (this.sentInv.length > 0) {
+          this.searchUser('key', this.invitations[0].invitee, this.displayType.sent);
+        } else {
+          this.searchUser('key', this.invitations[0].inviter, this.displayType.received);
+        }
+      }
+    } else {
+      this.handleTryOtherClick();
+    }
   }
 
   ngOnInit() {
@@ -87,52 +97,42 @@ export class ConnectPage implements OnInit {
   onSubmit() {
     this.submitTried = true;
     if (this.searchForm.valid) {
-      const email = this.searchForm.get('email').value;
-      this.searchUser('email', email);
+      this.searchUser('email', this.searchForm.get('email').value, this.displayType.found);
     }
   }
 
-  searchUser(type: 'key' | 'email', value: string) {
-    const subscription = this.user.searchUser(type, value).subscribe(user => {
+  searchUser(type: 'key' | 'email', value: string, display: string) {
+    const sub = this.user.searchUser(type, value).subscribe((user: any) => {
       if (user) {
-        this.foundUser = <User>user.payload.val();
+        this.display = display;
+        this.foundUser = user.payload.val();
         this.foundUserKey = user.key;
-        this.foundUser.photoURL = this.foundUser.photoURL ? this.foundUser.photoURL : this.boyImage;
-        if (type === 'email') {
-          this.inputSection = this.status.found;
-        } 
       } else {
-        this.inputSection = this.status.notfound;
+        this.display = this.displayType.notfound;
       }
-      this.submitTried = false;
-      this.searchForm.reset();
-      subscription.unsubscribe();
-    })
+      
+      sub.unsubscribe();
+    });
   }
   
   handleTryOtherClick() {
-    this.inputSection = this.status.form;
     this.foundUser = null;
+    this.searchForm.reset();
+    this.submitTried = false;
+    this.display = this.displayType.search;
   }
 
   handleSendClick() {
-    this.connection.sendInvitation(this.currentUserKey, this.foundUserKey).then(_ => {
-
-    });
+    this.connection.sendInvitation(this.foundUserKey).then(_ => {});
   }
 
-  declineInvitation() {
-    this.connection.removeInvitation(this.foundUserKey, this.currentUserKey).then(_ => {
-    })
-  }
-
-  cancelInvitation() {
-    this.connection.removeInvitation(this.currentUserKey, this.foundUserKey).then(_ => {
-    })
+  removeInvitation() {
+    this.connection.removeInvitation(this.invitations[0].key).then(_ => {});
   }
 
   acceptInvitation() {
-    this.connection.acceptInvitation(this.currentUserKey, this.foundUserKey).then(_ => {
-    });
+    this.connection.acceptInvitation(this.invitations[0].inviter).then(_ => {
+      return this.removeInvitation();
+    }).then(_ => {});
   }
 }
