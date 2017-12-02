@@ -31,10 +31,6 @@ page-connect {
       -moz-transition: opacity 1s ease-in-out;
       -o-transition: opacity 1s ease-in-out;
       transition: opacity 1s ease-in-out;
-      &.photo {
-        border-radius: 50%;
-        width: 100%;
-      }
     }
   }
 }

@@ -15,6 +15,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { MainAppPage } from '../pages/main-app/main-app';
 import { UserPopoverPage } from '../pages/user-popover/user-popover';
 import { DebtsPage } from '../pages/debts/debts';
+import { NewExpensePage } from '../pages/new-expense/new-expense';
 
 import { ComponentsModule } from '../components/components.module';
 
@@ -25,6 +26,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ConnectionProvider } from '../providers/connection/connection';
+import { TimeProvider } from '../providers/time/time';
+import { CoupleProvider } from '../providers/couple/couple';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZKpuq_JyzecKn1tEP8EnwoqRSX02R-fA",
@@ -47,6 +50,7 @@ const firebaseConfig = {
     MainAppPage,
     UserPopoverPage,
     DebtsPage,
+    NewExpensePage
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,7 @@ const firebaseConfig = {
     MainAppPage,
     UserPopoverPage,
     DebtsPage,
+    NewExpensePage
   ],
   providers: [
     StatusBar,
@@ -76,7 +81,9 @@ const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
     UserProvider,
-    ConnectionProvider
+    ConnectionProvider,
+    TimeProvider,
+    CoupleProvider
   ]
 })
 export class AppModule {}

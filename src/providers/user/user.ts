@@ -39,17 +39,17 @@ export class UserProvider {
   }
 
   getCurrentUser() {
-    return this.storage.get('user');
+    return this.storage.get('userKey').then(userKey => {
+      return this.api.getUser(userKey);
+    });
   }
 
   getCurrentUserKey() {
     return this.storage.get('userKey');
   }
 
-  getPartner() {
-    return this.storage.get('userKey').then(userKey => {
-      return this.api.getPartner(userKey);
-    });
+  getPartner(partnerKey) {
+    return this.api.getPartner(partnerKey);
   }
 
   searchUser(type: 'email'|'key', value: string) {
@@ -72,5 +72,19 @@ export class UserProvider {
     }).then(userKey => {
       return this.api.breakup(userKey, user.partner);
     });
+  }
+
+  getProfilePic(user: User) {
+    if (user) {
+      if (user.photoURL) {
+        return user.photoURL;
+      } else if (user.gender && user.gender === 'female') {
+        return '/assets/imgs/girl.svg';
+      } else {
+        return '/assets/imgs/boy.svg';
+      }
+    } else {
+      return '/assets/imgs/boy.svg';
+    }
   }
 }

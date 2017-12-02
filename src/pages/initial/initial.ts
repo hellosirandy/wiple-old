@@ -25,7 +25,7 @@ export class InitialPage {
       if (user) {
         this.user.getOrCreateUser(user).then((u) => {
           this.events.publish('user:login');
-          if (u.partner) {
+          if (u.couple) {
             this.navCtrl.setRoot(MainAppPage);
           } else {
             this.navCtrl.setRoot(ConnectPage);

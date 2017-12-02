@@ -1,0 +1,35 @@
+statistics {
+  color: map-get($colors, stats-text);
+  div.content {
+    h3.title {
+      text-align: center;
+    }
+    p.subtitle {
+      text-align: center;
+    }
+    div.segment {
+      width: 100%;
+      border-top: solid 1px #c4c4c4;
+      border-bottom: solid 1px #c4c4c4;
+      div.buttons {
+        width: 70%;
+        margin: auto;
+        display: flex;
+        button {
+          color: map-get($colors, stats-text);
+          padding: 0;
+          width: 34%;
+          height: 30px;
+          font-size: 1.5rem;
+          transition: background-color 0.2s ease;
+          &.selected {
+            background-color: map-get($colors, button-select);
+          }
+          &:hover {
+            background-color: map-get($colors, button-hover);
+          }
+        }
+      }
+    }
+  }
+}

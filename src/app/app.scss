@@ -60,7 +60,7 @@ ion-content {
 }
 
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=number] {
   width: 100%;
   font-size: 1.6rem;
   line-height: 1;
@@ -68,6 +68,10 @@ input[type=text], input[type=password] {
   border: 0.8px solid #B1B1B1;
   padding: 10px;
   margin-bottom: 16px;
+  padding-left: 20px;
+  &::-webkit-input-placeholder {
+    color: #d8d7d7;
+  }
 }
 
 label {
@@ -134,4 +138,9 @@ ion-menu {
       border-bottom: none !important;
     }
   }
+}
+
+img.photo {
+  border-radius: 50%;
+  width: 100%;
 }

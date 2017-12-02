@@ -7,13 +7,15 @@ import { InitialPage } from '../pages/initial/initial';
 import { ProfilePage } from '../pages/profile/profile';
 import { DebtsPage } from '../pages/debts/debts';
 import { UserProvider } from '../providers/user/user';
+import { User } from '../models/user';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = InitialPage;
-  private partner;
+  private currentUser: User;
+  private coupleKey: string;
 
   constructor(
     public events: Events,
@@ -32,10 +34,11 @@ export class MyApp implements OnInit {
 
   ngOnInit() {
     this.events.subscribe('user:login', () => {
-      this.user.getPartner().then(obs => {
-        obs.subscribe(partner => {
-          this.partner = partner;
-        });
+      this.user.getCurrentUser().then(obs => {
+        obs.subscribe(cu => {
+          this.currentUser = cu;
+          this.coupleKey = cu.couple;
+        })
       });
     });
   }

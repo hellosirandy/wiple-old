@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
 import { Invitation } from '../../models/invitation';
+import { Couple } from '../../models/couple';
 
 @Injectable()
 export class ApiProvider {
@@ -24,17 +25,13 @@ export class ApiProvider {
     return new Promise((resolve, reject) => {
       const subscription = this.database.list('/users', ref => ref.orderByChild('uid').equalTo(user.uid)).snapshotChanges().subscribe(users => {
         if (users.length > 0) {
-          this.storage.set('user', users[0].payload.val()).then(() => {
-            return this.storage.set('userKey', users[0].key);
-          }).then(() => {
+          this.storage.set('userKey', users[0].key).then(() => {
             resolve(users[0].payload.val());
           })
         } else {
           const ref = this.database.list('/users').push(user)
           ref.then(() => {
-            this.storage.set('user', user).then(() => {
-              return this.storage.set('userKey', ref.key);
-            }).then(() => {
+            this.storage.set('userKey', ref.key).then(() => {
               resolve(user);
             })
           });
@@ -42,6 +39,12 @@ export class ApiProvider {
         subscription.unsubscribe();
       });
     })
+  }
+
+  getUser(userKey) {
+    return this.database.object(`/users/${userKey}`).snapshotChanges().map(change => {
+      return {key: change.payload.key, ...change.payload.val()}
+    });
   }
 
   signout() {
@@ -64,8 +67,8 @@ export class ApiProvider {
     }
   }
 
-  getPartner(userKey: string) {
-    return this.database.object(`/users/${userKey}/partner`).valueChanges();
+  getPartner(partnerKey: string) {
+    return this.database.object(`/users/${partnerKey}`).valueChanges();
   }
 
   getInvitations(userKey: string, type:'inviter'|'invitee') {
@@ -97,8 +100,11 @@ export class ApiProvider {
   }
 
   acceptInvitation(first: string, second: string) {
-    return this.database.object(`/users/${first}`).update({partner: second}).then(_ => {
-      return this.database.object(`/users/${second}`).update({partner: first});
+    const couple = this.database.list('/couples').push(new Couple(first, second));
+    return couple.then(_ => {
+      return this.database.object(`/users/${first}`).update({couple: couple.key})
+    }).then(_ => {
+      return this.database.object(`/users/${second}`).update({couple: couple.key});
     });
   }
 
@@ -106,5 +112,9 @@ export class ApiProvider {
     return this.database.object(`/users/${first}/partner`).remove().then(_ => {
       return this.database.object(`/users/${second}/partner`).remove();
     });
+  }
+
+  getCouple(coupleKey) {
+    return this.database.object(`/couples/${coupleKey}`).valueChanges();
   }
 }

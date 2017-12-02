@@ -1,8 +1,18 @@
 <ion-header>
 
-  <inapp-navbar [partner]="true"></inapp-navbar>
+  <inapp-navbar [couple]="currentUser ? currentUser.couple : null"></inapp-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-row justify-content-around>
+    <ion-col col-2>
+      <user-column [user]="currentUser"></user-column>
+    </ion-col>
+    <ion-col col-5>
+      <statistics></statistics>
+    </ion-col>
+    <ion-col col-2>
+      <user-column [user]="partner"></user-column>
+    </ion-col>
+  </ion-row>
 </ion-content>

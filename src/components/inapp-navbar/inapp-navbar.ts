@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { NavController, Platform, PopoverController } from 'ionic-angular';
 import { UserPopoverPage } from '../../pages/user-popover/user-popover';
+import { NewExpensePage } from '../../pages/new-expense/new-expense';
 
 @Component({
   selector: 'inapp-navbar',
   templateUrl: 'inapp-navbar.html'
 })
 export class InappNavbarComponent {
-  @Input() partner: boolean=false;
+  @Input() couple: boolean=false;
   private mobile: boolean=false;
   
   constructor(
@@ -23,6 +24,10 @@ export class InappNavbarComponent {
     popover.present({
       ev: event
     });
+  }
+
+  handleNewExpenseClick() {
+    this.navCtrl.push(NewExpensePage, {coupleKey: this.couple});
   }
 
 }

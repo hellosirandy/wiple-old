@@ -1,0 +1,101 @@
+<ion-header>
+
+  <inapp-navbar></inapp-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="content">
+    <h3 class="title">New Expense</h3>
+    <hr>
+    <div *ngIf="phase === 1">
+      <radio-button [selected]="together" (click)="together = true">Together</radio-button>
+      <radio-button [selected]="!together" (click)=" together = false">Personal</radio-button>
+      <br><br>
+      <p class="day-time">{{time.getCurrentTime('day')}}</p>
+      <category-icon [button]="true" [category]="'food'" 
+        [selected]="expenseCategory === 'food'" 
+        (click)="expenseCategory='food'"
+      ></category-icon>
+      <category-icon [button]="true" [category]="'entertainment'" 
+        [selected]="expenseCategory === 'entertainment'" 
+        (click)="expenseCategory='entertainment'"
+        >
+      </category-icon>
+      <category-icon [button]="true" [category]="'transit'" 
+        [selected]="expenseCategory === 'transit'" 
+        (click)="expenseCategory='transit'">
+      </category-icon>
+      <category-icon [button]="true" [category]="'merchandise'" 
+        [selected]="expenseCategory === 'merchandise'" 
+        (click)="expenseCategory='merchandise'">
+      </category-icon>
+      <br><br>
+      <form [formGroup]="desForm" (ngSubmit)="onSubmit()">
+        <span class="form-errors"
+          *ngIf="desForm.get('description').invalid && submitTried">
+          * Description is required
+        </span>
+        <input type="text" placeholder="Description" formControlName="description">
+        <button class="round-btn" ion-button color="wiple-blue" full>
+          Continue
+        </button>
+      </form>
+    </div>
+    <div class="phase-2" *ngIf="phase === 2">
+      <form [formGroup]="amountForm" (ngSubmit)="amountSubmit()">
+        <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='same'" type="button">
+          Same Amount Each
+        </button>
+        <div *ngIf="amountType === 'same'">
+          <input type="number" placeholder="Total amount" formControlName="same-amount">
+        </div>
+        <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='diff'" type="button">
+          Different Amount
+        </button>
+        <div *ngIf="amountType === 'diff'">
+          <ion-row>
+            <ion-col col-3>
+              <img [src]="user.getProfilePic(firstUser)" alt="">
+            </ion-col>
+            <ion-col col-9>
+              <input type="number" placeholder="Amount" formControlName="amount-1">
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>
+              <img [src]="user.getProfilePic(secondUser)" alt="">
+            </ion-col>
+            <ion-col col-9>
+              <input type="number" placeholder="Amount" formControlName="amount-2">
+            </ion-col>
+          </ion-row>
+        </div>
+        <button *ngIf="amountType" class="round-btn" ion-button color="wiple-blue" full type="submit">
+          Continue
+        </button>
+      </form>
+    </div>  
+    <div class="phase-3" *ngIf="phase === 3">
+      <button class="round-btn" ion-button [color]="getPhase3ButtonColor('allpay')" full (click)="payType='allpay'">
+        All paid
+      </button>
+      <button class="round-btn" ion-button [color]="getPhase3ButtonColor('firstpay')" full (click)="payType='firstpay'">
+        {{firstUser ? firstUser.displayName+' paid first' : ''}}
+      </button>
+      <button class="round-btn" ion-button [color]="getPhase3ButtonColor('firsttreat')" full (click)="payType='firsttreat'">
+        {{firstUser ? firstUser.displayName+' treated' : ''}}
+      </button>
+      <button class="round-btn" ion-button [color]="getPhase3ButtonColor('secondpay')" full (click)="payType='secondpay'">
+        {{secondUser ? secondUser.displayName+' paid first' : ''}}
+      </button>
+      <button class="round-btn" ion-button [color]="getPhase3ButtonColor('secondtreat')" full (click)="payType='secondtreat'">
+        {{secondUser ? secondUser.displayName+' treated' : ''}}
+      </button>
+      <button class="round-btn confirm-btn" ion-button color="wiple-blue" full>
+        Confirm
+      </button>
+    </div>  
+  </div>
+</ion-content>

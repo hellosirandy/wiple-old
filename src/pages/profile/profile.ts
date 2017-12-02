@@ -10,7 +10,7 @@ import { User } from '../../models/user';
 })
 export class ProfilePage {
   private currentUser: User;
-  private currentUserKey: string;
+  private currentUserSub;
 
   constructor(
     public navCtrl: NavController, 
@@ -20,17 +20,15 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    this.user.getCurrentUser().then(user => {
-      this.currentUser = user;
-      return this.user.getCurrentUserKey();
-    }).then(userKey => {
-      this.currentUserKey = userKey;
-      
+    this.user.getCurrentUser().then(obs => {
+      this.currentUserSub = obs.subscribe(cu => {
+        this.currentUser = cu;
+      });
     });
   }
 
   ionViewWillLeave() {
-
+    this.currentUserSub.unsubscribe();
   }
 
   signout() {

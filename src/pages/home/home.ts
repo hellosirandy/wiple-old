@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, NavController, NavParams, ToastController } from 'ionic-angular';
-import { UserProvider } from '../../providers/providers';
+import { UserProvider } from '../../providers/user/user';
 
 import { SigninPage } from '../signin/signin';
 

@@ -1,0 +1,27 @@
+category-icon {
+  div.category-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 15px;
+    // border: solid 3px #414141;
+    &.food {
+      background-color: map-get($colors, food);
+    }
+    &.entertainment {
+      background-color: map-get($colors, entertainment);
+    }
+    &.merchandise {
+      background-color: map-get($colors, merchandise);
+    }
+    &.transit {
+      background-color: map-get($colors, transit);
+    }
+    &.button {
+      cursor: pointer;
+    }
+    &.selected {
+      border: solid 3px #414141;
+    }
+    display: inline-block;
+  }
+}

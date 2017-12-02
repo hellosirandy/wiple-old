@@ -1,0 +1,27 @@
+radio-button {
+  div.radio {
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    display: flex;
+    margin-right: 10px;
+    div.box {
+      margin-top: 2.5px;
+      height: 25px;
+      width: 25px;
+      border: solid 2px map-get($colors, stats-text);
+      border-radius: 7.5px;
+      &.selected {
+        background-color: map-get($colors, wiple-blue);
+      }
+    }
+    h3 {
+      line-height: 30px;
+      margin-left: 10px;
+      font-size: 20px;
+      margin: 0 10px;
+      color: map-get($colors, stats-text);
+      
+    }
+  }
+}

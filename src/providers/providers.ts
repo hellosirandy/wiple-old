@@ -1,9 +1,13 @@
 import { ApiProvider } from './api/api';
-import { UserProvider } from './user/user';
 import { ConnectionProvider } from './connection/connection';
+import { CoupleProvider } from './couple/couple';
+import { TimeProvider } from './time/time';
+import { UserProvider } from './user/user';
 
 export {
   ApiProvider,
-  UserProvider,
-  ConnectionProvider
-};
+  ConnectionProvider,
+  CoupleProvider,
+  TimeProvider,
+  UserProvider
+}

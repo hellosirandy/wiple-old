@@ -29,7 +29,7 @@ export class ConnectPage implements OnInit {
 
   private sentSub;
   private receivedSub;
-  private partnerSub;
+  private currentUserSub;
 
   constructor(
     public connection: ConnectionProvider,
@@ -40,14 +40,12 @@ export class ConnectPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    this.user.getPartner().then(obs => {
-      this.partnerSub = obs.subscribe(partner => {
-        if (partner) {
+    this.user.getCurrentUser().then(obs => {
+      this.currentUserSub = obs.subscribe(cu => {
+        this.currentUser = cu;
+        if (cu.partner) {
           this.navCtrl.setRoot(InitialPage, {}, {animate: true});
         } else {
-          this.user.getCurrentUser().then(user => {
-            this.currentUser = user; 
-          });
           this.connection.getInvitations('inviter').then(obs => {
             this.sentSub = obs.subscribe((inv: Invitation[]) => {
               this.sentInv = inv;
@@ -61,15 +59,14 @@ export class ConnectPage implements OnInit {
             });
           });
         }
-      })
-    })
-    
+      });
+    });
   }
   
   ionViewWillLeave() {
     this.sentSub.unsubscribe();
     this.receivedSub.unsubscribe();
-    this.partnerSub.unsubscribe();
+    this.currentUserSub.unsubscribe();
   }
 
   updateInvs() {
