@@ -17,7 +17,7 @@
         </ion-col>
         <ion-col col-3 class="middle">
           <img src="/assets/imgs/lock.svg" class="lock" [ngStyle]="{'opacity': foundUser ? 0 : 1}">
-          <img [src]=" foundUser ? (foundUser.photoURL ? foundUser.photoURL : boyImage) : '/assets/imgs/lock.svg'" class="photo" [ngStyle]="{'opacity': foundUser ? 1 : 0}">
+          <img [src]=" foundUser ? user.getProfilePic(foundUser) : '/assets/imgs/lock.svg'" class="photo" [ngStyle]="{'opacity': foundUser ? 1 : 0}">
         </ion-col>
         <ion-col col-3>
           <img src="/assets/imgs/heart.svg" alt="">

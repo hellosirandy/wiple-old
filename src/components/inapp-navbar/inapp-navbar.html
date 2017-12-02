@@ -17,7 +17,7 @@
     </button>
   </ion-buttons>
   <ion-buttons *ngIf="mobile && couple" end>
-    <button ion-button icon-only>
+    <button ion-button icon-only (click)="handleNewExpenseClick()">
       <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
     </button>
   </ion-buttons>

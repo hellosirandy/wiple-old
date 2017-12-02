@@ -7,15 +7,7 @@ import { IonicStorageModule } from '@ionic/Storage';
 
 import { MyApp } from './app.component';
 import { InitialPage } from '../pages/initial/initial';
-import { HomePage } from '../pages/home/home';
-import { SigninPage } from '../pages/signin/signin';
-import { SignupPage } from '../pages/signup/signup';
-import { ConnectPage } from '../pages/connect/connect';
-import { ProfilePage } from '../pages/profile/profile';
-import { MainAppPage } from '../pages/main-app/main-app';
-import { UserPopoverPage } from '../pages/user-popover/user-popover';
-import { DebtsPage } from '../pages/debts/debts';
-import { NewExpensePage } from '../pages/new-expense/new-expense';
+import { PagesModule } from '../pages/pages.module';
 
 import { ComponentsModule } from '../components/components.module';
 
@@ -41,16 +33,7 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    InitialPage,
-    HomePage,
-    SigninPage,
-    SignupPage,
-    ConnectPage,
-    ProfilePage,
-    MainAppPage,
-    UserPopoverPage,
-    DebtsPage,
-    NewExpensePage
+    InitialPage
   ],
   imports: [
     BrowserModule,
@@ -60,20 +43,12 @@ const firebaseConfig = {
     AngularFireDatabaseModule,
     IonicStorageModule.forRoot(),
     ComponentsModule,
+    PagesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    InitialPage,
-    HomePage,
-    SigninPage,
-    SignupPage,
-    ConnectPage,
-    ProfilePage,
-    MainAppPage,
-    UserPopoverPage,
-    DebtsPage,
-    NewExpensePage
+    InitialPage
   ],
   providers: [
     StatusBar,

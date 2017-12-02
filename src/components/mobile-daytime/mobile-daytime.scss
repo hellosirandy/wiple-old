@@ -1,0 +1,18 @@
+mobile-daytime {
+  div.mobile-daytime {
+    border-bottom: solid 1px map-get($colors, button-hover);
+    ion-col.select {
+      border-right: solid 1px map-get($colors, button-hover);
+    }
+    ion-select {
+      max-width: none;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    h3.display-time {
+      text-align: center;
+      margin: 5px 0;
+      font-size: inherit;
+    }
+  }
+}

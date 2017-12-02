@@ -8,30 +8,34 @@
 <ion-content padding>
   <div class="content">
     <h3 class="title">New Expense</h3>
-    <hr>
+    <hr *ngIf="!mobile">
+    <div *ngIf="mobile">
+      <br><br><br>
+    </div>
     <div *ngIf="phase === 1">
       <radio-button [selected]="together" (click)="together = true">Together</radio-button>
       <radio-button [selected]="!together" (click)=" together = false">Personal</radio-button>
       <br><br>
       <p class="day-time">{{time.getCurrentTime('day')}}</p>
+      <category-icon [button]="true" [category]="'entertainment'" 
+        [selected]="expenseCategory === 'entertainment'" 
+        (click)="expenseCategory='entertainment'">
+      </category-icon>
       <category-icon [button]="true" [category]="'food'" 
         [selected]="expenseCategory === 'food'" 
         (click)="expenseCategory='food'"
       ></category-icon>
-      <category-icon [button]="true" [category]="'entertainment'" 
-        [selected]="expenseCategory === 'entertainment'" 
-        (click)="expenseCategory='entertainment'"
-        >
-      </category-icon>
       <category-icon [button]="true" [category]="'transit'" 
         [selected]="expenseCategory === 'transit'" 
         (click)="expenseCategory='transit'">
       </category-icon>
-      <category-icon [button]="true" [category]="'merchandise'" 
-        [selected]="expenseCategory === 'merchandise'" 
-        (click)="expenseCategory='merchandise'">
+      <category-icon [button]="true" [category]="'shopping'" 
+        [selected]="expenseCategory === 'shopping'" 
+        (click)="expenseCategory='shopping'">
       </category-icon>
-      <br><br>
+      <br>
+      <p class="category">category: {{expenseCategory}}</p>
+      <br>
       <form [formGroup]="desForm" (ngSubmit)="onSubmit()">
         <span class="form-errors"
           *ngIf="desForm.get('description').invalid && submitTried">
@@ -72,9 +76,15 @@
             </ion-col>
           </ion-row>
         </div>
-        <button *ngIf="amountType" class="round-btn" ion-button color="wiple-blue" full type="submit">
-          Continue
-        </button>
+        <div *ngIf="amountType" class="bottom-buttons">
+          <button class="round-btn" ion-button color="light" type="button" (click)="handleBackClick()">
+            Back
+          </button>
+          <button class="round-btn" ion-button color="wiple-blue" type="submit">
+            Continue
+          </button>
+        </div>
+        
       </form>
     </div>  
     <div class="phase-3" *ngIf="phase === 3">
@@ -93,9 +103,14 @@
       <button class="round-btn" ion-button [color]="getPhase3ButtonColor('secondtreat')" full (click)="payType='secondtreat'">
         {{secondUser ? secondUser.displayName+' treated' : ''}}
       </button>
-      <button class="round-btn confirm-btn" ion-button color="wiple-blue" full>
-        Confirm
-      </button>
+      <div class="bottom-buttons">
+        <button class="round-btn" ion-button color="light" type="button" (click)="handleBackClick()">
+          Back
+        </button>
+        <button class="round-btn confirm-btn" ion-button color="wiple-blue" full (click)="saveExpense()">
+          Confirm
+        </button>
+      </div>
     </div>  
   </div>
 </ion-content>

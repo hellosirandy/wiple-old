@@ -3,16 +3,28 @@
   <inapp-navbar [couple]="currentUser ? currentUser.couple : null"></inapp-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-row justify-content-around>
-    <ion-col col-2>
-      <user-column [user]="currentUser"></user-column>
-    </ion-col>
-    <ion-col col-5>
-      <statistics></statistics>
-    </ion-col>
-    <ion-col col-2>
-      <user-column [user]="partner"></user-column>
-    </ion-col>
-  </ion-row>
+<ion-content>
+  <div *ngIf="!mobile">
+    <ion-row justify-content-around>
+      <ion-col col-2>
+        <user-column [user]="currentUser"></user-column>
+      </ion-col>
+      <ion-col col-5>
+        <statistics [timeInterval]="timeInterval" (switchTimeInterval)="timeInterval = $event"></statistics>
+      </ion-col>
+      <ion-col col-2>
+        <user-column [user]="partner"></user-column>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="mobile">
+    <mobile-daytime [timeInterval]="timeInterval" (switchTimeInterval)="timeInterval = $event"></mobile-daytime>
+    <mobile-switch-bar 
+      [firstUser]="currentUser" 
+      [secondUser]="partner" 
+      [select]="mobileSelect"
+      (switchMobileSelect)="mobileSelect = $event">
+    </mobile-switch-bar>
+  </div>
+  
 </ion-content>

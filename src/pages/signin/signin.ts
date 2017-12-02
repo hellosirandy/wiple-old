@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignupPage } from '../signup/signup';
 import { InitialPage } from '../initial/initial';
 
-@IonicPage()
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',

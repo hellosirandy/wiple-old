@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoupleProvider, UserProvider, TimeProvider } from '../../providers/providers';
 
@@ -8,8 +8,8 @@ import { CoupleProvider, UserProvider, TimeProvider } from '../../providers/prov
   templateUrl: 'new-expense.html',
 })
 export class NewExpensePage implements OnInit {
-  private together: boolean=true;
-  private expenseCategory: 'food'|'entertainment'|'merchandise'|'transit'='food';
+  public together: boolean=true;
+  public expenseCategory: 'food'|'entertainment'|'shopping'|'transit'='entertainment';
 
   private desForm: FormGroup;
   private amountForm: FormGroup;
@@ -30,15 +30,19 @@ export class NewExpensePage implements OnInit {
 
   private amountType: ''|'same'|'diff'='';
   private payType: 'allpay'|'firstpay'|'firsttreat'|'secondpay'|'secondtreat'='allpay';
+  private mobile: boolean=false;
 
   constructor(
     public couple: CoupleProvider,
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public plt: Platform,
     public time: TimeProvider,
     public user: UserProvider,
+    public viewCtrl: ViewController,
   ) {
     this.coupleKey = navParams.get('coupleKey');
+    this.mobile = plt.is('mobile');
   }
 
   ionViewDidLoad() {
@@ -53,6 +57,9 @@ export class NewExpensePage implements OnInit {
         sub2.unsubscribe();
       });
     });
+    if (this.plt.is('ios')) {
+      this.viewCtrl.setBackButtonText('Cancel');
+    }
   }
 
   ionViewWillUnload() {
@@ -92,6 +99,14 @@ export class NewExpensePage implements OnInit {
 
   getPhase3ButtonColor(payType) {
     return payType === this.payType ? 'wiple-pink' : 'wiple-light-pink';
+  }
+
+  saveExpense() {
+    this.navCtrl.pop();
+  }
+
+  handleBackClick() {
+    this.phase--;
   }
 
 }

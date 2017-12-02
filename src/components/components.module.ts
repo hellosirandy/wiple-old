@@ -5,6 +5,8 @@ import { UserColumnComponent } from './user-column/user-column';
 import { StatisticsComponent } from './statistics/statistics';
 import { RadioButtonComponent } from './radio-button/radio-button';
 import { CategoryIconComponent } from './category-icon/category-icon';
+import { MobileDaytimeComponent } from './mobile-daytime/mobile-daytime';
+import { MobileSwitchBarComponent } from './mobile-switch-bar/mobile-switch-bar';
 
 @NgModule({
 	declarations: [
@@ -13,6 +15,8 @@ import { CategoryIconComponent } from './category-icon/category-icon';
     StatisticsComponent,
     RadioButtonComponent,
     CategoryIconComponent,
+    MobileDaytimeComponent,
+    MobileSwitchBarComponent,
 	],
 	imports: [
 		IonicPageModule.forChild(InappNavbarComponent),
@@ -24,6 +28,8 @@ import { CategoryIconComponent } from './category-icon/category-icon';
     StatisticsComponent,
     RadioButtonComponent,
     CategoryIconComponent,
+    MobileDaytimeComponent,
+    MobileSwitchBarComponent,
 	]
 })
 export class ComponentsModule {}

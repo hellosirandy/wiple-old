@@ -1,0 +1,21 @@
+mobile-switch-bar {
+  div.mobile-switch-bar {
+    color: map-get($colors, stats-text);
+    
+    ion-col {
+      border-bottom: solid 2px map-get($colors, button-hover);
+      img {
+        width: 80%;
+        margin-left: 10%;
+      }
+      h3.expense {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
+      &.selected {
+        border-bottom: solid 3px map-get($colors, wiple-pink);
+      }
+    }
+  }
+}

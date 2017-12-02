@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { UserProvider } from '../../providers/user/user';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { InitialPage } from '../initial/initial';
 import { User } from '../../models/user';
-import { CoupleProvider } from '../../providers/couple/couple';
+import { CoupleProvider, UserProvider } from '../../providers/providers';
 
 @Component({
   selector: 'page-main-app',
@@ -16,13 +15,19 @@ export class MainAppPage {
   private cp;
   private partner: User;
   private currentUser: User;
+  private mobile: boolean;
+  public mobileSelect: 'first'|'second'|'expense'='expense';
+
+  public timeInterval: 'year'|'month'|'day'='year';
 
   constructor(
     public couple: CoupleProvider,
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public plt: Platform,
     public user: UserProvider,
   ) {
+    this.mobile = plt.is('mobile');
   }
 
   ionViewDidLoad() {

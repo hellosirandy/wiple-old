@@ -1,0 +1,15 @@
+<div class="mobile-daytime">
+  <ion-row>
+    <ion-col col-4 class="select">
+      <ion-select [(ngModel)]="timeInterval" (ionChange)="switchType(timeInterval)">
+        <ion-option [value]="'year'">Year</ion-option>
+        <ion-option [value]="'month'">Month</ion-option>
+        <ion-option [value]="'day'">Day</ion-option>
+      </ion-select>
+    </ion-col>
+    <ion-col col-8>
+      <h3 class="display-time">{{time.getCurrentTime(timeInterval)}}</h3>
+    </ion-col>
+  </ion-row>
+  
+</div>

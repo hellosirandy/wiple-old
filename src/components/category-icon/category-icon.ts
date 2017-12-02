@@ -23,4 +23,9 @@ export class CategoryIconComponent{
     return classes;
   }
 
+  getImage() {
+    const img= `/assets/imgs/${this.category}.svg`;
+    return img;
+  }
+
 }

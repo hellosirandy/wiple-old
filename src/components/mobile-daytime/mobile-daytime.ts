@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TimeProvider } from '../../providers/providers';
+
 @Component({
-  selector: 'statistics',
-  templateUrl: 'statistics.html'
+  selector: 'mobile-daytime',
+  templateUrl: 'mobile-daytime.html'
 })
-export class StatisticsComponent {
+export class MobileDaytimeComponent {
   @Input() timeInterval: string='year';
   @Output() switchTimeInterval = new EventEmitter<'year'|'month'|'day'>();
 
@@ -15,6 +16,8 @@ export class StatisticsComponent {
   }
 
   switchType(type: 'year'|'month'|'day') {
+    console.log(type);
+    
     this.switchTimeInterval.emit(type);
   }
 

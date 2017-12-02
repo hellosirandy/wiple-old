@@ -21,7 +21,6 @@ export class ConnectPage implements OnInit {
   private foundUser;
   private foundUserKey: string;
   private currentUser;
-  private boyImage: string='/assets/imgs/boy.svg';
 
   private sentInv: Invitation[]=[];
   private receivedInv: Invitation[]=[];

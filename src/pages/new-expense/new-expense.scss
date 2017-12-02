@@ -2,12 +2,14 @@ page-new-expense {
   div.content {
     color: map-get($colors, stats-text);
     width: 70%;
+    @media (max-width: $sm-screen) {
+      width: 100%;
+    }
     max-width: 600px;
     margin: auto;
     padding-top: 40px;
     h3.title {
       text-align: center;
-      
     }
     hr {
       border-color: map-get($colors, stats-text);
@@ -22,8 +24,17 @@ page-new-expense {
     
     div.phase-2 {
       width: 50%;
+      @media (max-width: $sm-screen) {
+        width: 100%;
+      }
       margin: auto;
       padding-top: 30px;
+      div.bottom-buttons {
+        display: flex;
+        button {
+          width: 50%;
+        }
+      }
       button.round-btn {
         margin-bottom: 30px !important;
       }
@@ -40,9 +51,18 @@ page-new-expense {
     }
     div.phase-3 {
       width: 50%;
+      @media (max-width: $sm-screen) {
+        width: 100%;
+      }
       margin: auto;
       padding-top: 30px;
-      button.confirm-btn {
+      div.bottom-buttons {
+        display: flex;
+        button {
+          width: 50%;
+        }
+      }
+      button.round-btn {
         margin-top: 30px;
       }
     }
