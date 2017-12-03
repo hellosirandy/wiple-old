@@ -7,6 +7,7 @@
       <button (click)="switchType('month')" [ngClass]="{'selected': timeInterval === 'month'}">Month</button>
       <button (click)="switchType('day')" [ngClass]="{'selected': timeInterval === 'day'}">Day</button>
     </div>
-    
   </div>
+  <h3 class="total">Total: <span class="animation" [ngStyle]="{'opacity': amountCaculated}">{{totalAmount}}</span></h3>
+  <hr>
 </div>

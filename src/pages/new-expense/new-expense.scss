@@ -21,8 +21,13 @@ page-new-expense {
     category-icon {
       margin-right: 10px;
     }
+
+    div.phase-1 {
+      transition: opacity 1s ease;
+    }
     
     div.phase-2 {
+      transition: opacity 1s ease;
       width: 50%;
       @media (max-width: $sm-screen) {
         width: 100%;
@@ -40,16 +45,18 @@ page-new-expense {
       }
       ion-col {
         position: relative;
-        input {
+        ion-input {
           position: absolute;
           top: 50%; 
           left: 50%;
           transform: translate(-50%,-50%);
           margin-bottom: 0;
+          // -webkit-transform: translate3d(0,0,0);
         }
       }
     }
     div.phase-3 {
+      transition: opacity 0.2s ease;
       width: 50%;
       @media (max-width: $sm-screen) {
         width: 100%;
@@ -57,13 +64,14 @@ page-new-expense {
       margin: auto;
       padding-top: 30px;
       div.bottom-buttons {
+        margin-top: 30px;
         display: flex;
         button {
           width: 50%;
         }
       }
       button.round-btn {
-        margin-top: 30px;
+        margin-bottom: 30px;
       }
     }
   }

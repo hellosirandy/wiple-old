@@ -10,7 +10,11 @@
         <user-column [user]="currentUser"></user-column>
       </ion-col>
       <ion-col col-5>
-        <statistics [timeInterval]="timeInterval" (switchTimeInterval)="timeInterval = $event"></statistics>
+        <statistics 
+        [timeInterval]="timeInterval" 
+        (switchTimeInterval)="switchTimeInterval($event)"
+        [expenses]="expenses">
+      </statistics>
       </ion-col>
       <ion-col col-2>
         <user-column [user]="partner"></user-column>
@@ -18,12 +22,13 @@
     </ion-row>
   </div>
   <div *ngIf="mobile">
-    <mobile-daytime [timeInterval]="timeInterval" (switchTimeInterval)="timeInterval = $event"></mobile-daytime>
+    <mobile-daytime [timeInterval]="timeInterval" (switchTimeInterval)="switchTimeInterval($event)"></mobile-daytime>
     <mobile-switch-bar 
       [firstUser]="currentUser" 
       [secondUser]="partner" 
       [select]="mobileSelect"
-      (switchMobileSelect)="mobileSelect = $event">
+      (switchMobileSelect)="mobileSelect = $event"
+      [expenses]="expenses">
     </mobile-switch-bar>
   </div>
   

@@ -64,13 +64,13 @@ export class UserProvider {
     return this.api.checkSingle(userKey);
   }
 
-  breakup() {
+  breakup(coupleKey: string) {
     let user;
     return this.storage.get('user').then(u => {
       user = u;
       return this.storage.get('userKey')
     }).then(userKey => {
-      return this.api.breakup(userKey, user.partner);
+      return this.api.breakup(coupleKey);
     });
   }
 

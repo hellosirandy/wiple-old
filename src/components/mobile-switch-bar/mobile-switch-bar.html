@@ -4,7 +4,7 @@
       <img [src]="user.getProfilePic(firstUser)" alt="">
     </ion-col>
     <ion-col col-8 [ngClass]="{'selected': select === 'expense'}" (click)="switchMobileSelect('expense')">
-      <h3 class="expense">$12345</h3>
+      <h3 class="expense" [ngStyle]="{'opacity': amountCaculated}">${{totalAmount}}</h3>
     </ion-col>
     <ion-col col-2 [ngClass]="{'selected': select === 'second'}" (click)="switchMobileSelect('second')">
       <img [src]="user.getProfilePic(secondUser)" alt="">

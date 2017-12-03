@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { NavController, NavParams, Platform, LoadingController, ViewController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CoupleProvider, UserProvider, TimeProvider } from '../../providers/providers';
+import { CoupleProvider, ExpenseProvider, UserProvider, TimeProvider } from '../../providers/providers';
+import { Expense } from '../../models/models';
 
 @Component({
   selector: 'page-new-expense',
@@ -31,13 +32,16 @@ export class NewExpensePage implements OnInit {
   private amountType: ''|'same'|'diff'='';
   private payType: 'allpay'|'firstpay'|'firsttreat'|'secondpay'|'secondtreat'='allpay';
   private mobile: boolean=false;
+  private opacity: 0|1=1;
 
   constructor(
     public couple: CoupleProvider,
+    public expense: ExpenseProvider,
     public navCtrl: NavController, 
     public navParams: NavParams,
     public plt: Platform,
     public time: TimeProvider,
+    public loadingCtrl: LoadingController,
     public user: UserProvider,
     public viewCtrl: ViewController,
   ) {
@@ -77,11 +81,12 @@ export class NewExpensePage implements OnInit {
     })
   }
 
-  onSubmit() {
+  desSubmit() {
     this.submitTried = true;
     if (this.desForm.valid) {
       this.description = this.desForm.get('description').value;
       this.phase = 2;
+      this.setAnimation();
     }
   }
 
@@ -94,6 +99,7 @@ export class NewExpensePage implements OnInit {
       this.firstExpense = this.amountForm.get('amount-1').value;
       this.secondExpense = this.amountForm.get('amount-2').value;
     }
+    this.setAnimation();
     this.phase = 3;
   }
 
@@ -102,11 +108,35 @@ export class NewExpensePage implements OnInit {
   }
 
   saveExpense() {
-    this.navCtrl.pop();
+    const newExpense = new Expense(
+      this.together, 
+      this.expenseCategory,
+      this.description, 
+      this.firstExpense, 
+      this.secondExpense,
+      this.payType,
+      (new Date).getTime()
+    );
+    const loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Saving expense...'
+    });
+    loading.present();
+    this.expense.newExpense(this.coupleKey, newExpense).then(_ => {
+      loading.dismiss();
+      this.navCtrl.pop();
+    });
   }
 
   handleBackClick() {
     this.phase--;
+  }
+
+  setAnimation() {
+    this.opacity = 0;
+    setTimeout(() => {
+      this.opacity = 1;
+    }, 100);
   }
 
 }

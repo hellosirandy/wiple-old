@@ -42,7 +42,7 @@ export class ConnectPage implements OnInit {
     this.user.getCurrentUser().then(obs => {
       this.currentUserSub = obs.subscribe(cu => {
         this.currentUser = cu;
-        if (cu.partner) {
+        if (cu.couple) {
           this.navCtrl.setRoot(InitialPage, {}, {animate: true});
         } else {
           this.connection.getInvitations('inviter').then(obs => {

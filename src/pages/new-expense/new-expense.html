@@ -12,7 +12,7 @@
     <div *ngIf="mobile">
       <br><br><br>
     </div>
-    <div *ngIf="phase === 1">
+    <div *ngIf="phase === 1" class="phase-1" [ngStyle]="{'opacity': opacity}">
       <radio-button [selected]="together" (click)="together = true">Together</radio-button>
       <radio-button [selected]="!together" (click)=" together = false">Personal</radio-button>
       <br><br>
@@ -36,24 +36,26 @@
       <br>
       <p class="category">category: {{expenseCategory}}</p>
       <br>
-      <form [formGroup]="desForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="desForm" (ngSubmit)="desSubmit()">
         <span class="form-errors"
           *ngIf="desForm.get('description').invalid && submitTried">
           * Description is required
         </span>
-        <input type="text" placeholder="Description" formControlName="description">
+        <!-- <input type="text" placeholder="Description" formControlName="description"> -->
+        <ion-input placeholder="Description" formControlName="description"></ion-input>
         <button class="round-btn" ion-button color="wiple-blue" full>
           Continue
         </button>
       </form>
     </div>
-    <div class="phase-2" *ngIf="phase === 2">
+    <div class="phase-2" *ngIf="phase === 2" [ngStyle]="{'opacity': opacity}">
       <form [formGroup]="amountForm" (ngSubmit)="amountSubmit()">
         <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='same'" type="button">
           Same Amount Each
         </button>
         <div *ngIf="amountType === 'same'">
-          <input type="number" placeholder="Total amount" formControlName="same-amount">
+          <ion-input placeholder="Total amount" formControlName="same-amount" type="number"></ion-input>
+          <!-- <input type="number" placeholder="Total amount" formControlName="same-amount"> -->
         </div>
         <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='diff'" type="button">
           Different Amount
@@ -64,7 +66,8 @@
               <img [src]="user.getProfilePic(firstUser)" alt="">
             </ion-col>
             <ion-col col-9>
-              <input type="number" placeholder="Amount" formControlName="amount-1">
+              <ion-input placeholder="Amount" formControlName="amount-1" type="number"></ion-input>
+              <!-- <input type="number" placeholder="Amount" formControlName="amount-1"> -->
             </ion-col>
           </ion-row>
           <ion-row>
@@ -72,7 +75,8 @@
               <img [src]="user.getProfilePic(secondUser)" alt="">
             </ion-col>
             <ion-col col-9>
-              <input type="number" placeholder="Amount" formControlName="amount-2">
+              <ion-input placeholder="Amount" formControlName="amount-2" type="number"></ion-input>
+              <!-- <input type="number" placeholder="Amount" formControlName="amount-2"> -->
             </ion-col>
           </ion-row>
         </div>
@@ -87,7 +91,7 @@
         
       </form>
     </div>  
-    <div class="phase-3" *ngIf="phase === 3">
+    <div class="phase-3" *ngIf="phase === 3" [ngStyle]="{'opacity': opacity}">
       <button class="round-btn" ion-button [color]="getPhase3ButtonColor('allpay')" full (click)="payType='allpay'">
         All paid
       </button>

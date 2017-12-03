@@ -38,7 +38,7 @@ export class ProfilePage {
   }
 
   breakup() {
-    this.user.breakup().then(_ => {});
+    this.user.breakup(this.currentUser.couple).then(_ => {});
   }
 
 }

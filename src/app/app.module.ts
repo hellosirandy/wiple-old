@@ -20,6 +20,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ConnectionProvider } from '../providers/connection/connection';
 import { TimeProvider } from '../providers/time/time';
 import { CoupleProvider } from '../providers/couple/couple';
+import { ExpenseProvider } from '../providers/expense/expense';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZKpuq_JyzecKn1tEP8EnwoqRSX02R-fA",
@@ -58,7 +59,8 @@ const firebaseConfig = {
     UserProvider,
     ConnectionProvider,
     TimeProvider,
-    CoupleProvider
+    CoupleProvider,
+    ExpenseProvider
   ]
 })
 export class AppModule {}

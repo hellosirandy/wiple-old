@@ -28,25 +28,29 @@
           *ngIf="signupForm.get('email').invalid && submitTried">
           * Invalid email
         </span>
-        <input type="text" id="email" formControlName="email">
+        <!-- <input type="text" id="email" formControlName="email"> -->
+        <ion-input id="email" formControlName="email"></ion-input>
         <label for="password">Password</label>
         <span class="form-errors"
           *ngIf="signupForm.get('password').invalid && submitTried">
           * Invalid password
         </span>
-        <input type="password" id="password" formControlName="password">
+        <!-- <input type="password" id="password" formControlName="password"> -->
+        <ion-input id="password" formControlName="password" type="password"></ion-input>
         <label for="confirm-password">Confirm Password</label>
         <span class="form-errors"
           *ngIf="signupForm.get('confirmPassword').invalid && submitTried">
           * Incorrect confirm password
         </span>
-        <input type="password" id="confirm-password" formControlName="confirmPassword">
+        <!-- <input type="password" id="confirm-password" formControlName="confirmPassword"> -->
+        <ion-input id="confirm-password" formControlName="confirmPassword" type="password"></ion-input>
         <label for="display-name">Display Name</label>
         <span class="form-errors"
           *ngIf="signupForm.get('displayName').invalid && submitTried">
           * Invalid display name
         </span>
-        <input type="text" id="display-name" formControlName="displayName">
+        <!-- <input type="text" id="display-name" formControlName="displayName"> -->
+        <ion-input id="display-name" formControlName="displayName"></ion-input>
         <button class="round-btn" ion-button color="wiple-blue" full button type="submit">
           Register for Wiple
         </button>

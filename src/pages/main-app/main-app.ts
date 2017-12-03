@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { InitialPage } from '../initial/initial';
-import { User } from '../../models/user';
-import { CoupleProvider, UserProvider } from '../../providers/providers';
+import { Expense, User } from '../../models/models';
+import { CoupleProvider, ExpenseProvider, UserProvider } from '../../providers/providers';
 
 @Component({
   selector: 'page-main-app',
@@ -19,9 +19,13 @@ export class MainAppPage {
   public mobileSelect: 'first'|'second'|'expense'='expense';
 
   public timeInterval: 'year'|'month'|'day'='year';
+  
+  private expenses: Expense[]=[];
+  private expenseSub;
 
   constructor(
     public couple: CoupleProvider,
+    public expense: ExpenseProvider,
     public navCtrl: NavController, 
     public navParams: NavParams,
     public plt: Platform,
@@ -42,6 +46,7 @@ export class MainAppPage {
               this.partner = partner;
               sub.unsubscribe();
             });
+            this.switchTimeInterval(this.timeInterval);
           });
           
         } else {
@@ -49,11 +54,22 @@ export class MainAppPage {
         }
       });
     });
+    
   }
 
   ionViewWillUnload() {
     this.coupleSub.unsubscribe();
     this.currentUserSub.unsubscribe();
+  }
+
+  switchTimeInterval(timeInterval: 'year'|'month'|'day') {
+    if (this.expenseSub) {
+      this.expenseSub.unsubscribe();
+    }
+    this.timeInterval = timeInterval;
+    this.expenseSub = this.expense.getExpense(this.currentUser.couple, timeInterval).subscribe((expenses: any) => {
+      this.expenses = expenses;
+    });
   }
 
 }

@@ -11,5 +11,5 @@
 <ion-content padding>
   <h3>{{currentUser ? currentUser.displayName : ''}}</h3>
   <button ion-button full color="danger" outline (click)="signout()">Sign out</button>
-  <button *ngIf="currentUser && currentUser.partner" ion-button full color="danger" outline (click)="breakup()">Break up</button>
+  <button *ngIf="currentUser && currentUser.couple" ion-button full color="danger" outline (click)="breakup()">Break up</button>
 </ion-content>

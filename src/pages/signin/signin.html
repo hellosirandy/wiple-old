@@ -22,13 +22,13 @@
           *ngIf="signinForm.get('email').invalid && submitTried">
           * Invalid email
         </span>
-        <input type="text" id="email" formControlName="email">
+        <ion-input id="email" formControlName="email" autofocus></ion-input>
         <label for="password">Password</label>
         <span class="form-errors"
           *ngIf="signinForm.get('password').invalid && submitTried">
           * Invalid password
         </span>
-        <input type="password" id="password" formControlName="password">
+        <ion-input id="password" type="password" formControlName="password"></ion-input>
         <button class="round-btn" ion-button color="wiple-blue" full type="submit">
           Signin
         </button>

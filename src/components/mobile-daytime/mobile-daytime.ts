@@ -16,8 +16,6 @@ export class MobileDaytimeComponent {
   }
 
   switchType(type: 'year'|'month'|'day') {
-    console.log(type);
-    
     this.switchTimeInterval.emit(type);
   }
 

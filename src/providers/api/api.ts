@@ -4,8 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Platform } from 'ionic-angular';
 import { Storage } from '@ionic/Storage';
-import { Invitation } from '../../models/invitation';
-import { Couple } from '../../models/couple';
+import { Couple, Expense, Invitation } from '../../models/models';
 
 @Injectable()
 export class ApiProvider {
@@ -108,13 +107,31 @@ export class ApiProvider {
     });
   }
 
-  breakup(first: string, second: string) {
-    return this.database.object(`/users/${first}/partner`).remove().then(_ => {
-      return this.database.object(`/users/${second}/partner`).remove();
+  breakup(coupleKey: string) {
+    return new Promise((resolve, reject) => {
+      const sub = this.getCouple(coupleKey).subscribe((cp: any) => {
+        sub.unsubscribe();
+        this.database.object(`/users/${cp.first}/couple`).remove().then(_ => {
+          return this.database.object(`/users/${cp.second}/couple`).remove()
+        }).then(_ => {
+          resolve();
+        });
+      });
     });
   }
 
   getCouple(coupleKey) {
     return this.database.object(`/couples/${coupleKey}`).valueChanges();
+  }
+
+  newExpense(coupleKey: string, expense: Expense) {
+    return this.database.list(`/expenses/${coupleKey}`).push(expense);
+  }
+
+  getExpense(coupleKey: string, start: number, end: number) {
+    return this.database.list(
+      `/expenses/${coupleKey}`, 
+      ref=>ref.orderByChild('dateTime').startAt(start).endAt(end)
+    ).valueChanges();
   }
 }
