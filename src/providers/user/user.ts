@@ -17,7 +17,7 @@ export class UserProvider {
   }
 
   getOrCreateUser(user) {
-    return this.api.getOrCreateUser(new User(user.uid, user.displayName, user.email, user.photoURL));
+    return this.api.getOrCreateUser(new User(user.uid, user.displayName, user.email, user.photoURL, user.providerData[0]));
   }
 
   signout() {
@@ -74,9 +74,14 @@ export class UserProvider {
     });
   }
 
-  getProfilePic(user: User) {
+  getProfilePic(user: User, size: any=null) {
     if (user) {
       if (user.photoURL) {
+        if (size === 'large') {
+          if (user.providerData && user.providerData.providerId === 'facebook.com') {
+            return "https://graph.facebook.com/" + user.providerData.uid + "/picture?type=large";
+          }
+        } 
         return user.photoURL;
       } else if (user.gender && user.gender === 'female') {
         return '/assets/imgs/girl.svg';

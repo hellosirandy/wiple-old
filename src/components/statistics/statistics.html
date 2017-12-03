@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" #content>
   <h3 class="title">Expense</h3>
   <p class="subtitle">{{time.getCurrentTime(timeInterval)}}</p>
   <div class="segment">
@@ -8,6 +8,11 @@
       <button (click)="switchType('day')" [ngClass]="{'selected': timeInterval === 'day'}">Day</button>
     </div>
   </div>
-  <h3 class="total">Total: <span class="animation" [ngStyle]="{'opacity': amountCaculated}">{{totalAmount}}</span></h3>
+  <h3 class="total">Total: <span class="animation" [ngStyle]="{'opacity': amountCaculated}">$ {{totalAmount}}</span></h3>
   <hr>
+  <div class="expenses" #expensesArea [ngStyle]="{'maxHeight': expensesAreaHeight+'px'}">
+    <expense-item *ngFor="let e of expenses"
+      [expense]="e">
+    </expense-item>
+  </div>
 </div>

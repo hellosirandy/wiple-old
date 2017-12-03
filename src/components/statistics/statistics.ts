@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ExpenseProvider, TimeProvider } from '../../providers/providers';
 import { Expense } from '../../models/models';
 @Component({
@@ -6,11 +6,14 @@ import { Expense } from '../../models/models';
   templateUrl: 'statistics.html'
 })
 export class StatisticsComponent implements OnChanges {
+  @ViewChild('expensesArea') expensesArea: ElementRef;
+  @ViewChild('content') content: ElementRef;
   @Input() timeInterval: string='year';
   @Input() expenses: Expense[]=[];
   @Output() switchTimeInterval = new EventEmitter<'year'|'month'|'day'>();
   private totalAmount: number=0;
   public amountCaculated: 0|1=1;
+  private expensesAreaHeight: number=window.innerHeight;
 
   constructor(
     public expense: ExpenseProvider,
@@ -28,6 +31,9 @@ export class StatisticsComponent implements OnChanges {
           this.amountCaculated = 1;
         }, 100);
       }
+      this.expensesAreaHeight = window.innerHeight - this.expensesArea.nativeElement.getBoundingClientRect().top-4;
+      console.log(this.expensesArea.nativeElement.getBoundingClientRect().top);
+            
     }
   }
 

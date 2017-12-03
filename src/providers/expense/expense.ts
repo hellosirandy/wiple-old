@@ -30,4 +30,8 @@ export class ExpenseProvider {
     }, 0);
   }
 
+  getAmount(expense: Expense) {
+    return expense.firstExpense + expense.secondExpense;
+  }
+
 }

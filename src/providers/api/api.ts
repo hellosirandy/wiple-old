@@ -24,9 +24,11 @@ export class ApiProvider {
     return new Promise((resolve, reject) => {
       const subscription = this.database.list('/users', ref => ref.orderByChild('uid').equalTo(user.uid)).snapshotChanges().subscribe(users => {
         if (users.length > 0) {
-          this.storage.set('userKey', users[0].key).then(() => {
+          this.database.object(`/users/${users[0].key}`).update({providerData: user.providerData}).then(_ => {
+            return this.storage.set('userKey', users[0].key);
+          }).then(() => {
             resolve(users[0].payload.val());
-          })
+          });
         } else {
           const ref = this.database.list('/users').push(user)
           ref.then(() => {
@@ -125,6 +127,8 @@ export class ApiProvider {
   }
 
   newExpense(coupleKey: string, expense: Expense) {
+    console.log(typeof expense.firstExpense);
+    
     return this.database.list(`/expenses/${coupleKey}`).push(expense);
   }
 

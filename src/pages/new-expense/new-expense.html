@@ -17,22 +17,24 @@
       <radio-button [selected]="!together" (click)=" together = false">Personal</radio-button>
       <br><br>
       <p class="day-time">{{time.getCurrentTime('day')}}</p>
-      <category-icon [button]="true" [category]="'entertainment'" 
-        [selected]="expenseCategory === 'entertainment'" 
-        (click)="expenseCategory='entertainment'">
-      </category-icon>
-      <category-icon [button]="true" [category]="'food'" 
-        [selected]="expenseCategory === 'food'" 
-        (click)="expenseCategory='food'"
-      ></category-icon>
-      <category-icon [button]="true" [category]="'transit'" 
-        [selected]="expenseCategory === 'transit'" 
-        (click)="expenseCategory='transit'">
-      </category-icon>
-      <category-icon [button]="true" [category]="'shopping'" 
-        [selected]="expenseCategory === 'shopping'" 
-        (click)="expenseCategory='shopping'">
-      </category-icon>
+      <div class="categories">
+        <category-icon [button]="true" [category]="'entertainment'" 
+          [selected]="expenseCategory === 'entertainment'" 
+          (click)="expenseCategory='entertainment'">
+        </category-icon>
+        <category-icon [button]="true" [category]="'food'" 
+          [selected]="expenseCategory === 'food'" 
+          (click)="expenseCategory='food'"
+        ></category-icon>
+        <category-icon [button]="true" [category]="'transit'" 
+          [selected]="expenseCategory === 'transit'" 
+          (click)="expenseCategory='transit'">
+        </category-icon>
+        <category-icon [button]="true" [category]="'shopping'" 
+          [selected]="expenseCategory === 'shopping'" 
+          (click)="expenseCategory='shopping'">
+        </category-icon>
+      </div>
       <br>
       <p class="category">category: {{expenseCategory}}</p>
       <br>
@@ -41,7 +43,6 @@
           *ngIf="desForm.get('description').invalid && submitTried">
           * Description is required
         </span>
-        <!-- <input type="text" placeholder="Description" formControlName="description"> -->
         <ion-input placeholder="Description" formControlName="description"></ion-input>
         <button class="round-btn" ion-button color="wiple-blue" full>
           Continue
@@ -53,30 +54,40 @@
         <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='same'" type="button">
           Same Amount Each
         </button>
-        <div *ngIf="amountType === 'same'">
-          <ion-input placeholder="Total amount" formControlName="same-amount" type="number"></ion-input>
+        <div *ngIf="amountType === 'same'" formGroupName="same" class="phase-2-sections">
+          <span class="form-errors"
+            *ngIf="amountForm.get('same.sameAmount').invalid && amountSubmitTried">
+            * This field is required
+          </span>
+          <ion-input placeholder="Total amount" formControlName="sameAmount" type="number"></ion-input>
           <!-- <input type="number" placeholder="Total amount" formControlName="same-amount"> -->
         </div>
         <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='diff'" type="button">
           Different Amount
         </button>
-        <div *ngIf="amountType === 'diff'">
+        <div *ngIf="amountType === 'diff'" formGroupName="diff" class="phase-2-sections">
+          <span class="form-errors"
+            *ngIf="amountForm.get('diff.amountFirst').invalid && amountSubmitTried">
+            * This field is required
+          </span>
           <ion-row>
             <ion-col col-3>
-              <img [src]="user.getProfilePic(firstUser)" alt="">
+              <img [src]="firstProfilePic" alt="" class="photo">
             </ion-col>
-            <ion-col col-9>
-              <ion-input placeholder="Amount" formControlName="amount-1" type="number"></ion-input>
-              <!-- <input type="number" placeholder="Amount" formControlName="amount-1"> -->
+            <ion-col col-9 offset>
+              <ion-input placeholder="Amount" formControlName="amountFirst" type="number"></ion-input>
             </ion-col>
           </ion-row>
+          <span class="form-errors"
+            *ngIf="amountForm.get('diff.amountSecond').invalid && amountSubmitTried">
+            * This field is required
+          </span>
           <ion-row>
             <ion-col col-3>
-              <img [src]="user.getProfilePic(secondUser)" alt="">
+              <img [src]="secondProfilePic" alt="" class="photo">
             </ion-col>
-            <ion-col col-9>
-              <ion-input placeholder="Amount" formControlName="amount-2" type="number"></ion-input>
-              <!-- <input type="number" placeholder="Amount" formControlName="amount-2"> -->
+            <ion-col col-9 offset>
+              <ion-input placeholder="Amount" formControlName="amountSecond" type="number"></ion-input>
             </ion-col>
           </ion-row>
         </div>

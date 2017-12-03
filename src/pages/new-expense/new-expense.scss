@@ -1,5 +1,8 @@
 page-new-expense {
   div.content {
+    div.categories {
+      margin-bottom: 10px;
+    }
     color: map-get($colors, stats-text);
     width: 70%;
     @media (max-width: $sm-screen) {
@@ -34,6 +37,9 @@ page-new-expense {
       }
       margin: auto;
       padding-top: 30px;
+      div.phase-2-sections {
+        margin-bottom: 30px;
+      }
       div.bottom-buttons {
         display: flex;
         button {
@@ -45,18 +51,21 @@ page-new-expense {
       }
       ion-col {
         position: relative;
+        img {
+          width: 70%;
+          margin-left: 15%;
+        }
         ion-input {
           position: absolute;
           top: 50%; 
           left: 50%;
           transform: translate(-50%,-50%);
           margin-bottom: 0;
-          // -webkit-transform: translate3d(0,0,0);
         }
       }
     }
     div.phase-3 {
-      transition: opacity 0.2s ease;
+      transition: opacity 1s ease;
       width: 50%;
       @media (max-width: $sm-screen) {
         width: 100%;

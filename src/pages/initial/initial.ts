@@ -23,7 +23,7 @@ export class InitialPage {
   ionViewDidLoad() {
     const subscription = this.user.getAuthState().subscribe(user => {
       if (user) {
-        this.user.getOrCreateUser(user).then((u) => {
+        this.user.getOrCreateUser(user.toJSON()).then((u) => {
           this.events.publish('user:login');
           if (u.couple) {
             this.navCtrl.setRoot(MainAppPage);

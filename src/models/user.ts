@@ -4,6 +4,7 @@ export class User {
     public displayName: string,
     public email: string,
     public photoURL: string,
+    public providerData: any,
     public couple: string='',
     public firstname: string='',
     public lastname: string='',

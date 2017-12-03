@@ -7,6 +7,8 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class UserColumnComponent implements OnChanges {
   @Input('user') columnUser;
+
+  private profilePic: string='';
   constructor(
     public user: UserProvider
   ) {
@@ -14,12 +16,9 @@ export class UserColumnComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
-  }
-
-  getProfilePic() {
-    const pic = this.user.getProfilePic(this.columnUser);
-    return pic;
+    if (changes.columnUser && changes.columnUser.currentValue !== changes.columnUser.previousValue) {
+      this.profilePic = this.user.getProfilePic(changes.columnUser.currentValue, 'large');
+    }
   }
 
 }

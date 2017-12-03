@@ -1,0 +1,10 @@
+<div class="expense-item" [ngStyle]="{'opacity': opacity}">
+  <category-icon
+    [button]="false"
+    [selected]="false"
+    [category]="exp.category"
+    >
+  </category-icon>
+  <span class="description">{{exp.description}}</span>
+  <span class="amount">$ {{expense.getAmount(exp)}}</span>
+</div>

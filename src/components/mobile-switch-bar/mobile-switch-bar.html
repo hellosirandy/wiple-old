@@ -1,13 +1,13 @@
 <div class="mobile-switch-bar">
   <ion-row>
     <ion-col col-2 [ngClass]="{'selected': select === 'first'}" (click)="switchMobileSelect('first')">
-      <img [src]="user.getProfilePic(firstUser)" alt="">
+      <img [src]="firstProfilePic" alt="" class="photo">
     </ion-col>
     <ion-col col-8 [ngClass]="{'selected': select === 'expense'}" (click)="switchMobileSelect('expense')">
       <h3 class="expense" [ngStyle]="{'opacity': amountCaculated}">${{totalAmount}}</h3>
     </ion-col>
     <ion-col col-2 [ngClass]="{'selected': select === 'second'}" (click)="switchMobileSelect('second')">
-      <img [src]="user.getProfilePic(secondUser)" alt="">
+      <img [src]="secondProfilePic" alt="" class="photo">
     </ion-col>
   </ion-row>
 </div>

@@ -16,6 +16,7 @@ mobile-switch-bar {
       }
       &.selected {
         border-bottom: solid 3px map-get($colors, wiple-pink);
+        transition: border-bottom-color 0.3s ease;
       }
     }
   }

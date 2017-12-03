@@ -1,0 +1,16 @@
+expense-item {
+  div.expense-item {
+    margin: 10px 0;
+    transition: opacity 1s ease;
+    span {
+      line-height: 50px;
+      font-size: 2rem;
+      &.description {
+        margin-left: 10px;
+      }
+      &.amount {
+        float: right;
+      }
+    }
+  }
+}

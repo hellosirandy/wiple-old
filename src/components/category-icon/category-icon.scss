@@ -2,6 +2,7 @@ category-icon {
   div.category-icon {
     width: 45px;
     height: 45px;
+    margin: 2.5px;
     border-radius: 15px;
     // border: solid 3px #414141;
     &.food {
@@ -22,6 +23,7 @@ category-icon {
     &.selected {
       border: solid 3px #414141;
     }
-    display: inline-block;
+    float: left;
+    // display: inline-block;
   }
 }

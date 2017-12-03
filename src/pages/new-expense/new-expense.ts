@@ -26,6 +26,8 @@ export class NewExpensePage implements OnInit {
 
   private firstUser;
   private secondUser;
+  private firstProfilePic;
+  private secondProfilePic;
   private firstExpense: number=0;
   private secondExpense: number=0;
 
@@ -33,6 +35,7 @@ export class NewExpensePage implements OnInit {
   private payType: 'allpay'|'firstpay'|'firsttreat'|'secondpay'|'secondtreat'='allpay';
   private mobile: boolean=false;
   private opacity: 0|1=1;
+  private amountSubmitTried: boolean=false;
 
   constructor(
     public couple: CoupleProvider,
@@ -75,9 +78,13 @@ export class NewExpensePage implements OnInit {
       'description': new FormControl(null, Validators.required)
     });
     this.amountForm = new FormGroup({
-      'same-amount': new FormControl(0),
-      'amount-1': new FormControl(0),
-      'amount-2': new FormControl(0)
+      'same': new FormGroup({
+        'sameAmount': new FormControl(null, Validators.required),
+      }),
+      'diff': new FormGroup({
+        'amountFirst': new FormControl(null, Validators.required),
+        'amountSecond': new FormControl(null, Validators.required)
+      })
     })
   }
 
@@ -87,20 +94,25 @@ export class NewExpensePage implements OnInit {
       this.description = this.desForm.get('description').value;
       this.phase = 2;
       this.setAnimation();
+      this.firstProfilePic = this.user.getProfilePic(this.firstUser);
+      this.secondProfilePic = this.user.getProfilePic(this.secondUser);
     }
   }
 
   amountSubmit() {
-    if (this.amountType === 'same') {
-      const amount = this.amountForm.get('same-amount').value;
+    this.amountSubmitTried = true;
+    if (this.amountType === 'same' && this.amountForm.get('same').valid) {
+      const amount = Number(this.amountForm.get('same.sameAmount').value);
       this.firstExpense = amount / 2;
       this.secondExpense = amount / 2;
-    } else {
-      this.firstExpense = this.amountForm.get('amount-1').value;
-      this.secondExpense = this.amountForm.get('amount-2').value;
+      this.setAnimation();
+      this.phase = 3;
+    } else if (this.amountType === 'diff' && this.amountForm.get('diff').valid) {
+      this.firstExpense = Number(this.amountForm.get('diff.amountFirst').value);
+      this.secondExpense = Number(this.amountForm.get('diff.amountSecond').value);
+      this.setAnimation();
+      this.phase = 3;
     }
-    this.setAnimation();
-    this.phase = 3;
   }
 
   getPhase3ButtonColor(payType) {

@@ -12,6 +12,8 @@ export class MobileSwitchBarComponent implements OnChanges {
   @Input() select: 'first'|'second'|'expense'='expense';
   @Input() expenses: Expense[]=[];
   @Output('switchMobileSelect') switch = new EventEmitter<'first'|'second'|'expense'>();
+  private firstProfilePic: string='';
+  private secondProfilePic: string='';
 
   private totalAmount: number=0;
   public amountCaculated: 0|1=1;
@@ -33,6 +35,13 @@ export class MobileSwitchBarComponent implements OnChanges {
         }, 100);
       }
     }
+    if (changes.firstUser && changes.firstUser.currentValue !== changes.firstUser.previousValue) {
+      this.firstProfilePic = this.user.getProfilePic(changes.firstUser.currentValue);
+    }
+    if (changes.secondUser && changes.secondUser.currentValue !== changes.secondUser.previousValue) {
+      this.secondProfilePic = this.user.getProfilePic(changes.secondUser.currentValue);
+    }
+    
   }
 
   switchMobileSelect(select: 'first'|'second'|'expense') {
