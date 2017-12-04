@@ -33,7 +33,7 @@ import { ComponentsModule } from '../components/components.module';
     IonicPageModule.forChild(UserPopoverPage),
     IonicPageModule.forChild(DebtsPage),
     IonicPageModule.forChild(NewExpensePage),
-		ComponentsModule,
+    ComponentsModule,
 	],
 	exports: [
     HomePage,

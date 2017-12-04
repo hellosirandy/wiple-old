@@ -1,3 +1,8 @@
-<expense-item *ngFor="let e of expenses"
-[expense]="e">
-</expense-item>
+<div *ngIf="timeInterval === 'day'">
+  <expense-item *ngFor="let e of expenses"
+    [expense]="e">
+  </expense-item>
+</div>
+<div *ngIf="timeInterval !== 'day'" #parent>
+  <chart [options]="chartOption" type="chart"></chart>
+</div>

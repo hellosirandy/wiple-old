@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/Storage';
 
+import { ChartModule } from 'angular2-highcharts';
+import * as highcharts from 'highcharts';
+
 import { MyApp } from './app.component';
 import { InitialPage } from '../pages/initial/initial';
 import { PagesModule } from '../pages/pages.module';
@@ -39,6 +42,7 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    ChartModule.forRoot(highcharts),
     AngularFireModule.initializeApp(firebaseConfig, 'wiple'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Expense } from '../../models/models';
+import { Expense, ExpenseCategoryColos, Pie } from '../../models/models';
 import { ApiProvider } from '../api/api';
 import * as moment from 'moment';
 
@@ -32,6 +32,19 @@ export class ExpenseProvider {
 
   getAmount(expense: Expense) {
     return expense.firstExpense + expense.secondExpense;
+  }
+
+  compileStats(expenses: Expense[]) {
+    let categories:any={};
+    for (let exp of expenses) {
+      const amount = this.getAmount(exp);
+      if (categories[exp.category]) {
+        categories[exp.category].y += amount;
+      } else {
+        categories[exp.category] = new Pie(exp.category, amount, ExpenseCategoryColos[exp.category]);
+      }
+    }
+    return Object.keys(categories).map(key => categories[key]);
   }
 
 }
