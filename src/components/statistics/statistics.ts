@@ -32,8 +32,6 @@ export class StatisticsComponent implements OnChanges {
         }, 100);
       }
       this.expensesAreaHeight = window.innerHeight - this.expensesArea.nativeElement.getBoundingClientRect().top-5;
-      console.log(this.expensesArea.nativeElement.getBoundingClientRect().top);
-            
     }
   }
 

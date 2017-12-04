@@ -1,0 +1,20 @@
+edit-expense-phase-one {
+  div.phase-1 {
+    transition: opacity 1s ease;
+    p.day-time {
+      font-size: 1.8rem;
+    }
+    div.categories {
+      margin-bottom: 10px;
+      display: inline-block;
+      width: 100%;
+    }
+    h3.category {
+      font-size: 1.8rem;
+      text-transform: capitalize;
+      span {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

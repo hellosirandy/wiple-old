@@ -1,0 +1,50 @@
+<div class="phase-2" [ngStyle]="{'opacity': opacity}">
+  <form [formGroup]="amountForm" (ngSubmit)="onSubmit()">
+    <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='same'" type="button" full>
+      Same Amount Each
+    </button>
+    <div *ngIf="amountType === 'same'" formGroupName="same" class="phase-2-sections">
+      <span class="form-errors"
+        *ngIf="amountForm.get('same.amount').invalid && submitTried">
+        * This field is required
+      </span>
+      <ion-input placeholder="Total amount" formControlName="amount" type="number"></ion-input>
+    </div>
+    <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='diff'" type="button">
+      Different Amount
+    </button>
+    <div *ngIf="amountType === 'diff'" formGroupName="diff" class="phase-2-sections">
+      <span class="form-errors"
+        *ngIf="amountForm.get('diff.amount-first').invalid && SubmitTried">
+        * This field is required
+      </span>
+      <ion-row>
+        <ion-col col-3>
+          <img [src]="firstProfilePic" alt="" class="photo">
+        </ion-col>
+        <ion-col col-9 offset>
+          <ion-input placeholder="Amount" formControlName="amount-first" type="number"></ion-input>
+        </ion-col>
+      </ion-row>
+      <span class="form-errors"
+        *ngIf="amountForm.get('diff.amount-second').invalid && SubmitTried">
+        * This field is required
+      </span>
+      <ion-row>
+        <ion-col col-3>
+          <img [src]="secondProfilePic" alt="" class="photo">
+        </ion-col>
+        <ion-col col-9 offset>
+          <ion-input placeholder="Amount" formControlName="amount-second" type="number"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+    <button class="round-btn" ion-button color="light" type="button" (click)="handleBackClick()" full>
+      Back
+    </button>
+    <button *ngIf="amountType" class="round-btn" ion-button color="wiple-blue" type="submit" full>
+      Continue
+    </button>
+  </form>
+  
+</div>

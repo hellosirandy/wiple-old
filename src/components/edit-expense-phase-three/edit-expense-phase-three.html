@@ -1,0 +1,16 @@
+<!-- Generated template for the EditExpensePhaseThreeComponent component -->
+<div class="phase-3" [ngStyle]="{'opacity': opacity}">
+  <ion-item>
+    <!-- <ion-label>Pay type</ion-label> -->
+    <ion-select [(ngModel)]="toppings">
+      <ion-option>All paid</ion-option>
+      <ion-option>Treat</ion-option>
+      <ion-option>Paid first</ion-option>
+      <ion-option>Custum</ion-option>
+    </ion-select>
+  </ion-item>
+  
+  <button class="round-btn" ion-button color="light" type="button" (click)="handleBackClick()" full>
+    Back
+  </button>
+</div>

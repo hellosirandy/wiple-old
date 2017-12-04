@@ -1,0 +1,32 @@
+<ion-header>
+  <inapp-navbar></inapp-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="content">
+    <h3 class="title">New Expense</h3>
+    <hr *ngIf="!mobile">
+    <div class="phases">
+      <edit-expense-phase-one *ngIf="phase === 1"
+        [expenseCategory]="expenseCategory"
+        [description]="description"
+        (desSubmit)="desSubmit($event)"
+        >
+      </edit-expense-phase-one>
+      <edit-expense-phase-two *ngIf="phase === 2"
+        [amountType]="amountType"
+        [firstProfilePic]="firstProfilePic"
+        [secondProfilePic]="secondProfilePic"
+        [firstExpense]="firstExpense"
+        [secondExpense]="secondExpense"
+        (amountSubmit)="amountSubmit($event)"
+        (goBack)="goBack()">
+      </edit-expense-phase-two>
+      <edit-expense-phase-three *ngIf="phase === 3"
+        (goBack)="goBack()">
+      </edit-expense-phase-three>
+    </div>
+    
+  </div>
+</ion-content>

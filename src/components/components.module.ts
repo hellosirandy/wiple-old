@@ -10,6 +10,9 @@ import { MobileSwitchBarComponent } from './mobile-switch-bar/mobile-switch-bar'
 import { ExpenseItemComponent } from './expense-item/expense-item';
 import { MobileIntegrateStatsComponent } from './mobile-integrate-stats/mobile-integrate-stats';
 import { ChartModule } from 'angular2-highcharts';
+import { EditExpensePhaseOneComponent } from './edit-expense-phase-one/edit-expense-phase-one';
+import { EditExpensePhaseTwoComponent } from './edit-expense-phase-two/edit-expense-phase-two';
+import { EditExpensePhaseThreeComponent } from './edit-expense-phase-three/edit-expense-phase-three';
 
 @NgModule({
 	declarations: [
@@ -22,6 +25,9 @@ import { ChartModule } from 'angular2-highcharts';
         MobileSwitchBarComponent,
         ExpenseItemComponent,
         MobileIntegrateStatsComponent,
+    EditExpensePhaseOneComponent,
+    EditExpensePhaseTwoComponent,
+    EditExpensePhaseThreeComponent,
 	],
 	imports: [
         IonicPageModule.forChild(InappNavbarComponent),
@@ -37,6 +43,9 @@ import { ChartModule } from 'angular2-highcharts';
         MobileSwitchBarComponent,
         ExpenseItemComponent,
         MobileIntegrateStatsComponent,
+    EditExpensePhaseOneComponent,
+    EditExpensePhaseTwoComponent,
+    EditExpensePhaseThreeComponent,
 	]
 })
 export class ComponentsModule {}
