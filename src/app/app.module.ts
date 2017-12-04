@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/Storage';
 
 import { ChartModule } from 'angular2-highcharts';
-import * as highcharts from 'highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 
 import { MyApp } from './app.component';
 import { InitialPage } from '../pages/initial/initial';
@@ -34,6 +34,16 @@ const firebaseConfig = {
   messagingSenderId: "539587021284"
 }
 
+declare var require: any;
+
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const dd = require('highcharts/modules/drilldown');
+  dd(hc);
+
+  return hc;
+}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -42,7 +52,7 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    ChartModule.forRoot(highcharts),
+    ChartModule,
     AngularFireModule.initializeApp(firebaseConfig, 'wiple'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
@@ -64,7 +74,11 @@ const firebaseConfig = {
     ConnectionProvider,
     TimeProvider,
     CoupleProvider,
-    ExpenseProvider
+    ExpenseProvider,
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
   ]
 })
 export class AppModule {}
