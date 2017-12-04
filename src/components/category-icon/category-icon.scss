@@ -2,20 +2,42 @@ category-icon {
   div.category-icon {
     width: 45px;
     height: 45px;
-    margin: 2.5px;
     border-radius: 15px;
-    // border: solid 3px #414141;
+    &.mobile {
+      width: 35px;
+      height: 35px;
+      border-radius: 12px;
+    }
+    margin: 2.5px;
     &.food {
-      background-color: map-get($colors, food);
+      background-color: map-get($category-colors, food);
     }
     &.entertainment {
-      background-color: map-get($colors, entertainment);
+      background-color: map-get($category-colors, entertainment);
     }
     &.shopping {
-      background-color: map-get($colors, shopping);
+      background-color: map-get($category-colors, shopping);
     }
     &.transit {
-      background-color: map-get($colors, transit);
+      background-color: map-get($category-colors, transit);
+    }
+    &.else {
+      background-color: map-get($category-colors, else);
+    }
+    &.love {
+      background-color: map-get($category-colors, love);
+    }
+    &.life {
+      background-color: map-get($category-colors, life);
+    }
+    &.coffee {
+      background-color: map-get($category-colors, coffee);
+    }
+    &.rent {
+      background-color: map-get($category-colors, rent);
+    }
+    &.gift {
+      background-color: map-get($category-colors, gift);
     }
     &.button {
       cursor: pointer;

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ExpenseProvider, UserProvider } from '../../providers/providers';
-import { Expense } from '../../models/models';
+import { Expense, MobileStatsDisplay } from '../../models/models';
 
 @Component({
   selector: 'mobile-switch-bar',
@@ -9,9 +9,9 @@ import { Expense } from '../../models/models';
 export class MobileSwitchBarComponent implements OnChanges {
   @Input() firstUser;
   @Input() secondUser;
-  @Input() select: 'first'|'second'|'expense'='expense';
+  @Input() select: MobileStatsDisplay='integrate';
   @Input() expenses: Expense[]=[];
-  @Output('switchMobileSelect') switch = new EventEmitter<'first'|'second'|'expense'>();
+  @Output('switchMobileSelect') switch = new EventEmitter<MobileStatsDisplay>();
   private firstProfilePic: string='';
   private secondProfilePic: string='';
 
@@ -44,7 +44,7 @@ export class MobileSwitchBarComponent implements OnChanges {
     
   }
 
-  switchMobileSelect(select: 'first'|'second'|'expense') {
+  switchMobileSelect(select: MobileStatsDisplay) {
     if (this.select !== select) {
       this.switch.emit(select);
     }

@@ -18,26 +18,14 @@
       <br><br>
       <p class="day-time">{{time.getCurrentTime('day')}}</p>
       <div class="categories">
-        <category-icon [button]="true" [category]="'entertainment'" 
-          [selected]="expenseCategory === 'entertainment'" 
-          (click)="expenseCategory='entertainment'">
-        </category-icon>
-        <category-icon [button]="true" [category]="'food'" 
-          [selected]="expenseCategory === 'food'" 
-          (click)="expenseCategory='food'"
-        ></category-icon>
-        <category-icon [button]="true" [category]="'transit'" 
-          [selected]="expenseCategory === 'transit'" 
-          (click)="expenseCategory='transit'">
-        </category-icon>
-        <category-icon [button]="true" [category]="'shopping'" 
-          [selected]="expenseCategory === 'shopping'" 
-          (click)="expenseCategory='shopping'">
+        <category-icon *ngFor="let et of expenseTypes"
+          [button]="true" [category]="et"
+          [selected]="expenseCategory === et"
+          (click)="expenseCategory = et"
+          >
         </category-icon>
       </div>
-      <br>
-      <p class="category">category: {{expenseCategory}}</p>
-      <br>
+      <h3 class="category">category: <span>{{expenseCategory}}</span></h3>
       <form [formGroup]="desForm" (ngSubmit)="desSubmit()">
         <span class="form-errors"
           *ngIf="desForm.get('description').invalid && submitTried">

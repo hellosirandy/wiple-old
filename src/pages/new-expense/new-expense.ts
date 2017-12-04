@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, Platform, LoadingController, ViewController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoupleProvider, ExpenseProvider, UserProvider, TimeProvider } from '../../providers/providers';
-import { Expense } from '../../models/models';
+import { Expense, ExpenseCategory, PayType } from '../../models/models';
 
 @Component({
   selector: 'page-new-expense',
@@ -10,7 +10,7 @@ import { Expense } from '../../models/models';
 })
 export class NewExpensePage implements OnInit {
   public together: boolean=true;
-  public expenseCategory: 'food'|'entertainment'|'shopping'|'transit'='entertainment';
+  public expenseCategory: ExpenseCategory='else';
 
   private desForm: FormGroup;
   private amountForm: FormGroup;
@@ -32,10 +32,12 @@ export class NewExpensePage implements OnInit {
   private secondExpense: number=0;
 
   private amountType: ''|'same'|'diff'='';
-  private payType: 'allpay'|'firstpay'|'firsttreat'|'secondpay'|'secondtreat'='allpay';
+  private payType: PayType='allpay';
   private mobile: boolean=false;
   private opacity: 0|1=1;
   private amountSubmitTried: boolean=false;
+  public expenseTypes: ExpenseCategory[]=['food', 'entertainment', 'transit', 'shopping', 
+    'love', 'life', 'rent', 'gift', 'coffee', 'else'];
 
   constructor(
     public couple: CoupleProvider,

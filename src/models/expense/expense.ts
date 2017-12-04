@@ -1,7 +1,9 @@
+import { ExpenseCategory } from '../models';
+
 export class Expense {
   constructor(
     public together: boolean,
-    public category: 'entertainment'|'food'|'transit'|'shopping',
+    public category: ExpenseCategory,
     public description: string,
     public firstExpense: number,
     public secondExpense: number,

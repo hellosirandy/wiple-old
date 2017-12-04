@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { InitialPage } from '../initial/initial';
-import { Expense, User } from '../../models/models';
+import { Expense, MobileStatsDisplay, TimeInterval, User } from '../../models/models';
 import { CoupleProvider, ExpenseProvider, UserProvider } from '../../providers/providers';
 
 @Component({
@@ -16,9 +16,9 @@ export class MainAppPage {
   private partner: User;
   private currentUser: User;
   private mobile: boolean;
-  public mobileSelect: 'first'|'second'|'expense'='expense';
+  public mobileSelect: MobileStatsDisplay='integrate';
 
-  public timeInterval: 'year'|'month'|'day'='year';
+  public timeInterval: TimeInterval='year';
   
   private expenses: Expense[]=[];
   private expenseSub;
@@ -62,7 +62,7 @@ export class MainAppPage {
     this.currentUserSub.unsubscribe();
   }
 
-  switchTimeInterval(timeInterval: 'year'|'month'|'day') {
+  switchTimeInterval(timeInterval: TimeInterval) {
     if (this.expenseSub) {
       this.expenseSub.unsubscribe();
     }

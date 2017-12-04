@@ -5,6 +5,6 @@
     [category]="exp.category"
     >
   </category-icon>
-  <span class="description">{{exp.description}}</span>
-  <span class="amount">$ {{expense.getAmount(exp)}}</span>
+  <span class="description" [ngClass]="{'mobile': mobile}">{{exp.description}}</span>
+  <span class="amount" [ngClass]="{'mobile': mobile}">$ {{expense.getAmount(exp)}}</span>
 </div>

@@ -30,6 +30,11 @@
       (switchMobileSelect)="mobileSelect = $event"
       [expenses]="expenses">
     </mobile-switch-bar>
+    <div class="mobile-stats-content">
+      <mobile-integrate-stats *ngIf="mobileSelect==='integrate'"
+        [expenses]="expenses">
+      </mobile-integrate-stats>
+    </div>
   </div>
   
 </ion-content>

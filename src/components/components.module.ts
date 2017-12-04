@@ -8,6 +8,7 @@ import { CategoryIconComponent } from './category-icon/category-icon';
 import { MobileDaytimeComponent } from './mobile-daytime/mobile-daytime';
 import { MobileSwitchBarComponent } from './mobile-switch-bar/mobile-switch-bar';
 import { ExpenseItemComponent } from './expense-item/expense-item';
+import { MobileIntegrateStatsComponent } from './mobile-integrate-stats/mobile-integrate-stats';
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import { ExpenseItemComponent } from './expense-item/expense-item';
     MobileDaytimeComponent,
     MobileSwitchBarComponent,
     ExpenseItemComponent,
+    MobileIntegrateStatsComponent,
 	],
 	imports: [
 		IonicPageModule.forChild(InappNavbarComponent),
@@ -33,6 +35,7 @@ import { ExpenseItemComponent } from './expense-item/expense-item';
     MobileDaytimeComponent,
     MobileSwitchBarComponent,
     ExpenseItemComponent,
+    MobileIntegrateStatsComponent,
 	]
 })
 export class ComponentsModule {}
