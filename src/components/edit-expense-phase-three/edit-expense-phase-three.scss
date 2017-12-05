@@ -1,9 +1,11 @@
 edit-expense-phase-three {
   div.phase-3 {
-    transition: opacity 1s ease;
+    transition: opacity 0.5s linear;
     ion-select {
       margin: auto;
-      
+    }
+    div.exit-buttons {
+      margin-top: 30px;
     }
   }
 }

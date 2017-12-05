@@ -1,5 +1,11 @@
 edit-expense-phase-one {
   div.phase-1 {
+    input[_ngcontent-c0] {
+      margin-bottom: 20px;
+    }
+    .ngx-datepicker-calendar-container {
+      z-index: 100;
+    }
     transition: opacity 1s ease;
     p.day-time {
       font-size: 1.8rem;

@@ -9,8 +9,9 @@
     <hr *ngIf="!mobile">
     <div class="phases">
       <edit-expense-phase-one *ngIf="phase === 1"
-        [expenseCategory]="expenseCategory"
-        [description]="description"
+        [expenseCategory]="currentExpense.category"
+        [description]="currentExpense.description"
+        [dateTime]="currentExpense.dateTime"
         (desSubmit)="desSubmit($event)"
         >
       </edit-expense-phase-one>
@@ -18,8 +19,8 @@
         [amountType]="amountType"
         [firstProfilePic]="firstProfilePic"
         [secondProfilePic]="secondProfilePic"
-        [firstExpense]="firstExpense"
-        [secondExpense]="secondExpense"
+        [firstExpense]="currentExpense.firstExpense"
+        [secondExpense]="currentExpense.secondExpense"
         (amountSubmit)="amountSubmit($event)"
         (goBack)="goBack()">
       </edit-expense-phase-two>

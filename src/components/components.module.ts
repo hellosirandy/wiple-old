@@ -13,6 +13,7 @@ import { ChartModule } from 'angular2-highcharts';
 import { EditExpensePhaseOneComponent } from './edit-expense-phase-one/edit-expense-phase-one';
 import { EditExpensePhaseTwoComponent } from './edit-expense-phase-two/edit-expense-phase-two';
 import { EditExpensePhaseThreeComponent } from './edit-expense-phase-three/edit-expense-phase-three';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
 	declarations: [
@@ -32,6 +33,7 @@ import { EditExpensePhaseThreeComponent } from './edit-expense-phase-three/edit-
 	imports: [
         IonicPageModule.forChild(InappNavbarComponent),
         ChartModule,
+        NgDatepickerModule
 	],
 	exports: [
 		InappNavbarComponent,

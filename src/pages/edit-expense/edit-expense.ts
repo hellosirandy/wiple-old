@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { AmountType, ExpenseCategory } from '../../models/models';
+import { AmountType, Expense, ExpenseCategory } from '../../models/models';
 import { CoupleProvider, UserProvider } from '../../providers/providers';
 
 @Component({
@@ -9,14 +9,10 @@ import { CoupleProvider, UserProvider } from '../../providers/providers';
 })
 export class EditExpensePage {
   private mobile: boolean=false;
-  private phase: 1|2|3=3;
-
-  private expenseCategory: ExpenseCategory='else';
-  private description: string='';
+  private phase: 1|2|3=1;
+  private currentExpense: Expense= new Expense(true, 'else', '', 0, 0, 'allpay', Date.now());
 
   private amountType: AmountType=null;
-  private firstExpense: number=0;
-  private secondExpense: number=0;
 
   private coupleSub;
   private coupleKey: string;
@@ -52,20 +48,31 @@ export class EditExpensePage {
   }
 
   desSubmit(event) {
-    this.expenseCategory = event.expenseCategory;
-    this.description = event.description;
+    this.saveFirstPhase(event);
     this.phase ++;
   }
 
   amountSubmit(event) {
-    this.amountType = event.amountType;
-    this.firstExpense = event.firstExpense;
-    this.secondExpense = event.secondExpense;
+    this.saveSecondPhase(event);
     this.phase ++;
   }
 
   goBack() {
     this.phase --;
+  }
+
+  saveFirstPhase(event) {
+    this.currentExpense.category = event.expenseCategory;
+    this.currentExpense.description = event.description;
+    this.currentExpense.dateTime = event.dateTime;
+    console.log(event.dateTime);
+    
+  }
+
+  saveSecondPhase(event) {
+    this.amountType = event.amountType;
+    this.currentExpense.firstExpense = event.firstExpense;
+    this.currentExpense.secondExpense = event.secondExpense;
   }
 
 }

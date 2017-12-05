@@ -1,6 +1,6 @@
 edit-expense-phase-two {
   div.phase-2 {
-    transition: opacity 1s ease;
+    transition: opacity 0.5s linear;
     ion-col {
       position: relative;
       img {
@@ -14,6 +14,13 @@ edit-expense-phase-two {
         transform: translate(-50%,-50%);
         margin-bottom: 0;
       }
+    }
+    div.exit-buttons {
+      margin-top: 30px;
+    }
+    div.phase-2-sections {
+      transition: max-height 0.5s ease;
+      overflow: hidden;
     }
   }
 }

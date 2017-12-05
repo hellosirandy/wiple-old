@@ -40,7 +40,10 @@ export class EditExpensePhaseTwoComponent implements OnInit {
   }
 
   handleBackClick() {
-    this.goBack.emit();
+    this.opacity = 0;
+    setTimeout(() => {
+      this.goBack.emit();
+    }, 500);
   }
 
   onSubmit() {

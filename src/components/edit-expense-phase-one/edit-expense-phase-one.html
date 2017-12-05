@@ -1,5 +1,5 @@
 <div class="phase-1" [ngStyle]="{'opacity': opacity}">
-    <p class="day-time">{{day}}</p>
+    <ng-datepicker [(ngModel)]="dateTime" [options]="datepickerOptions"></ng-datepicker>
     <div class="categories">
       <category-icon *ngFor="let et of expenseTypes"
         [button]="true" [category]="et"
