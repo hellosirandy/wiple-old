@@ -8,7 +8,7 @@
         >
       </category-icon>
     </div>
-    <h3 class="category">category: <span>{{expenseCategory}}</span></h3>
+    <h3 class="category">category: <span>{{expCat}}</span></h3>
     <form [formGroup]="desForm" (ngSubmit)="onSubmit()">
       <span class="form-errors"
         *ngIf="desForm.get('description').invalid && submitTried">

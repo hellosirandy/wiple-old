@@ -14,6 +14,7 @@ import { EditExpensePhaseOneComponent } from './edit-expense-phase-one/edit-expe
 import { EditExpensePhaseTwoComponent } from './edit-expense-phase-two/edit-expense-phase-two';
 import { EditExpensePhaseThreeComponent } from './edit-expense-phase-three/edit-expense-phase-three';
 import { NgDatepickerModule } from 'ng2-datepicker';
+import { WhoFirstComponent } from './who-first/who-first';
 
 @NgModule({
 	declarations: [
@@ -29,6 +30,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';
     EditExpensePhaseOneComponent,
     EditExpensePhaseTwoComponent,
     EditExpensePhaseThreeComponent,
+    WhoFirstComponent,
 	],
 	imports: [
         IonicPageModule.forChild(InappNavbarComponent),
@@ -48,6 +50,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';
     EditExpensePhaseOneComponent,
     EditExpensePhaseTwoComponent,
     EditExpensePhaseThreeComponent,
+    WhoFirstComponent,
 	]
 })
 export class ComponentsModule {}

@@ -25,6 +25,8 @@
         (goBack)="goBack()">
       </edit-expense-phase-two>
       <edit-expense-phase-three *ngIf="phase === 3"
+        [firstUser]="firstUser"
+        [secondUser]="secondUser"
         (goBack)="goBack()">
       </edit-expense-phase-three>
     </div>

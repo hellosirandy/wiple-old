@@ -3,7 +3,7 @@
     <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='same'" type="button" full>
       Same Amount Each
     </button>
-    <div [ngStyle]="{'maxHeight': amountType==='same' ? '100px' : '0px'}" formGroupName="same" class="phase-2-sections">
+    <div [ngStyle]="{'maxHeight': amountType==='same' ? '200px' : '0px'}" formGroupName="same" class="phase-2-sections">
       <span class="form-errors"
         *ngIf="amountForm.get('same.amount').invalid && submitTried">
         * This field is required
@@ -13,7 +13,7 @@
     <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='diff'" type="button">
       Different Amount
     </button>
-    <div formGroupName="diff" class="phase-2-sections" [ngStyle]="{'maxHeight': amountType==='diff' ? '200px' : '0px'}">
+    <div formGroupName="diff" class="phase-2-sections" [ngStyle]="{'maxHeight': amountType==='diff' ? '400px' : '0px'}">
       <span class="form-errors"
         *ngIf="amountForm.get('diff.amount-first').invalid && SubmitTried">
         * This field is required

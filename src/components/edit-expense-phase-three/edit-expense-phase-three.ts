@@ -1,10 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'edit-expense-phase-three',
   templateUrl: 'edit-expense-phase-three.html'
 })
 export class EditExpensePhaseThreeComponent implements OnInit {
+  @Input() firstUser;
+  @Input() secondUser;
   @Output() goBack = new EventEmitter<void>();
 
   private opacity: 0|1=0;

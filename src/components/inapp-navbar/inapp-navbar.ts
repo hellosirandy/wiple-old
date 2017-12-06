@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavController, Platform, PopoverController } from 'ionic-angular';
 import { UserPopoverPage } from '../../pages/user-popover/user-popover';
-import { NewExpensePage } from '../../pages/new-expense/new-expense';
+// import { NewExpensePage } from '../../pages/new-expense/new-expense';
 import { EditExpensePage } from '../../pages/edit-expense/edit-expense';
 
 @Component({

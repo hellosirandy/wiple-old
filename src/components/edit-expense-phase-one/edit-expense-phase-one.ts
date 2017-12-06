@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExpenseCategory } from '../../models/models';
-import { NgDatepickerModule } from 'ng2-datepicker';
 import { DatepickerOptions } from 'ng2-datepicker';
-import * as frLocale from 'date-fns/locale/fr';
 
 @Component({
   selector: 'edit-expense-phase-one',
@@ -24,7 +22,7 @@ export class EditExpensePhaseOneComponent implements OnInit {
   private submitTried: boolean=false;
   private expCat: ExpenseCategory;
 
-  private datepickerOptions: DatepickerOptions = {
+  public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
     maxYear: 2030,
     displayFormat: 'YYYY/MM/DD',

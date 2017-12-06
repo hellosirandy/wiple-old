@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { AmountType, Expense, ExpenseCategory } from '../../models/models';
+import { AmountType, Expense } from '../../models/models';
 import { CoupleProvider, UserProvider } from '../../providers/providers';
 
 @Component({
@@ -10,7 +10,7 @@ import { CoupleProvider, UserProvider } from '../../providers/providers';
 export class EditExpensePage {
   private mobile: boolean=false;
   private phase: 1|2|3=1;
-  private currentExpense: Expense= new Expense(true, 'else', '', 0, 0, 'allpay', Date.now());
+  private currentExpense: Expense= new Expense(true, 'else', '', 0, 0, 0, 0, 'allpay', Date.now());
 
   private amountType: AmountType=null;
 
@@ -65,8 +65,6 @@ export class EditExpensePage {
     this.currentExpense.category = event.expenseCategory;
     this.currentExpense.description = event.description;
     this.currentExpense.dateTime = event.dateTime;
-    console.log(event.dateTime);
-    
   }
 
   saveSecondPhase(event) {

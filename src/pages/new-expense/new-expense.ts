@@ -128,6 +128,8 @@ export class NewExpensePage implements OnInit {
       this.description, 
       this.firstExpense, 
       this.secondExpense,
+      0,
+      0,
       this.payType,
       (new Date).getTime()
     );
