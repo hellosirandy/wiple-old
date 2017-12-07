@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
 import { AmountType, Expense } from '../../models/models';
-import { CoupleProvider, UserProvider } from '../../providers/providers';
+import { CoupleProvider, ExpenseProvider, UserProvider } from '../../providers/providers';
 
 @Component({
   selector: 'page-edit-expense',
@@ -20,9 +20,12 @@ export class EditExpensePage {
   private secondUser;
   private firstProfilePic: string;
   private secondProfilePic: string;
+  private totalAmount: number=0;
 
   constructor(
     public couple: CoupleProvider,
+    public expense: ExpenseProvider,
+    public loadingCtrl: LoadingController,
     public navCtrl: NavController, 
     public navParams: NavParams,
     plt: Platform,
@@ -71,6 +74,23 @@ export class EditExpensePage {
     this.amountType = event.amountType;
     this.currentExpense.firstExpense = event.firstExpense;
     this.currentExpense.secondExpense = event.secondExpense;
+    this.totalAmount = event.firstExpense+event.secondExpense;
+  }
+
+  expenseSubmit(event) {
+    this.currentExpense.payType = event.payType;
+    this.currentExpense.firstPaid = event.firstPaid;
+    this.currentExpense.secondPaid = event.secondPaid;
+    const loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Saving expense...'
+    });
+    loading.present();
+    this.expense.newExpense(this.coupleKey, this.currentExpense).then(_ => {
+      loading.dismiss();
+      this.navCtrl.pop();
+    });
+    
   }
 
 }

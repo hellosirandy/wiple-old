@@ -127,8 +127,6 @@ export class ApiProvider {
   }
 
   newExpense(coupleKey: string, expense: Expense) {
-    console.log(typeof expense.firstExpense);
-    
     return this.database.list(`/expenses/${coupleKey}`).push(expense);
   }
 

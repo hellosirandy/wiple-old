@@ -3,7 +3,7 @@
     <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='same'" type="button" full>
       Same Amount Each
     </button>
-    <div [ngStyle]="{'maxHeight': amountType==='same' ? '200px' : '0px'}" formGroupName="same" class="phase-2-sections">
+    <div [ngClass]="{'selected': amountType==='same'}"  formGroupName="same" class="phase-2-sections same">
       <span class="form-errors"
         *ngIf="amountForm.get('same.amount').invalid && submitTried">
         * This field is required
@@ -13,9 +13,9 @@
     <button class="round-btn" ion-button color="wiple-light-pink" full (click)="amountType='diff'" type="button">
       Different Amount
     </button>
-    <div formGroupName="diff" class="phase-2-sections" [ngStyle]="{'maxHeight': amountType==='diff' ? '400px' : '0px'}">
+    <div formGroupName="diff" class="phase-2-sections diff" [ngClass]="{'selected': amountType==='diff'}">
       <span class="form-errors"
-        *ngIf="amountForm.get('diff.amount-first').invalid && SubmitTried">
+        *ngIf="amountForm.get('diff.amount-first').invalid && submitTried">
         * This field is required
       </span>
       <ion-row>
@@ -27,7 +27,7 @@
         </ion-col>
       </ion-row>
       <span class="form-errors"
-        *ngIf="amountForm.get('diff.amount-second').invalid && SubmitTried">
+        *ngIf="amountForm.get('diff.amount-second').invalid && submitTried">
         * This field is required
       </span>
       <ion-row>

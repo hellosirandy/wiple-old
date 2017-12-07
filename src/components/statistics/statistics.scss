@@ -17,6 +17,7 @@ statistics {
         display: flex;
         button {
           color: map-get($colors, stats-text);
+          background-color: white;
           padding: 0;
           width: 34%;
           height: 30px;

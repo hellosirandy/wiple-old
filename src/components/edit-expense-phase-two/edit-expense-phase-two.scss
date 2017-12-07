@@ -19,8 +19,17 @@ edit-expense-phase-two {
       margin-top: 30px;
     }
     div.phase-2-sections {
-      transition: max-height 1s ease;
       overflow: hidden;
+      max-height: 0px;
+      &.selected {
+        transition: max-height 1s ease;
+        &.same {
+          max-height: 200px;
+        }
+        &.diff {
+          max-height: 400px;
+        }
+      }
     }
   }
 }

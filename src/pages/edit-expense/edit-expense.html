@@ -27,7 +27,10 @@
       <edit-expense-phase-three *ngIf="phase === 3"
         [firstUser]="firstUser"
         [secondUser]="secondUser"
-        (goBack)="goBack()">
+        (goBack)="goBack()"
+        [firstExpense]="currentExpense.firstExpense"
+        [secondExpense]="currentExpense.secondExpense"
+        (expenseSubmit)="expenseSubmit($event)">
       </edit-expense-phase-three>
     </div>
     

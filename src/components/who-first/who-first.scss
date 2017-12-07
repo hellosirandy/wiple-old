@@ -2,6 +2,14 @@ who-first {
 	div.img-div {
 		width: 50%;
 		margin: auto;
+		max-width: 100px;
+		img {
+			cursor: pointer;
+			// box-sizing: content-box;
+			&.selected {
+				border: solid 4px map-get($colors, wiple-pink);
+			}
+		}
 	}
 	h3.user-name {
 		text-align: center;

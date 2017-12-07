@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { UserProvider } from '../../providers/providers';
 
 @Component({
@@ -8,6 +8,8 @@ import { UserProvider } from '../../providers/providers';
 export class WhoFirstComponent implements OnChanges {
   @Input() firstUser;
   @Input() secondUser;
+  @Input() selected: string;
+  @Output() switch = new EventEmitter<void>();
 
   private firstProfilePic: string='';
   private secondProfilePic: string='';
@@ -19,10 +21,19 @@ export class WhoFirstComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.firstUser && changes.firstUser.currentValue !== changes.firstUser.previousValue) {
-      this.firstProfilePic = this.user.getProfilePic(this.firstUser);
+      this.firstProfilePic = this.user.getProfilePic(this.firstUser, 'large');
     }
     if (changes.secondUser && changes.secondUser.currentValue !== changes.secondUser.previousValue) {
-      this.secondProfilePic = this.user.getProfilePic(this.secondUser);
+      this.secondProfilePic = this.user.getProfilePic(this.secondUser, 'large');
+    }
+    if (changes.selected && changes.selected.currentValue !== changes.selected.previousValue) {
+      
+    }
+  }
+  
+  handleImgClick(witch: 'first'|'second') {
+    if (witch !== this.selected) {
+      this.switch.emit();
     }
   }
 
