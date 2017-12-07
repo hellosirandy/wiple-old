@@ -1,0 +1,72 @@
+<div class="phase-3" [ngStyle]="{'opacity': opacity}">
+  <div class="stats">
+    <h3>Total $: <span class="amount">{{totalAmount}}</span></h3>
+    <h4>{{firstUser ? firstUser.displayName : ''}} paid $: <span class="amount">{{firstPaid}}</span></h4>
+    <h4>{{secondUser ? secondUser.displayName : ''}} paid $: <span class="amount">{{secondPaid}}</span></h4>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <button class="round-btn" ion-button [color]="selectedPayType==='allpay' ? 'wiple-pink' : 'wiple-light-pink'" full type="button" full (click)="updatePayType('allpay')">
+      All paid
+    </button>
+    <button class="round-btn" ion-button [color]="selectedPayType==='treat' ? 'wiple-pink' : 'wiple-light-pink'" full type="button" full (click)="updatePayType('treat')">
+      Treat
+    </button>
+    <div class="phase-3-sections" [ngClass]="{'selected': selectedPayType==='treat'}" >
+      <who-first
+        [firstUser]="firstUser"
+        [secondUser]="secondUser"
+        [selected]="form.get('treat.which').value"
+        (switch)="switch('treat')">
+      </who-first>
+    </div>
+    
+    <button class="round-btn" ion-button [color]="selectedPayType==='payfirst' ? 'wiple-pink' : 'wiple-light-pink'" full  type="button" full (click)="updatePayType('payfirst')">
+      Paid first
+    </button>
+    <div class="phase-3-sections" [ngClass]="{'selected': selectedPayType==='payfirst'}">
+      <who-first
+        [firstUser]="firstUser"
+        [secondUser]="secondUser"
+        [selected]="form.get('payfirst.which').value"
+        (switch)="switch('payfirst')">
+      </who-first>
+    </div>
+    <button class="round-btn" ion-button [color]="selectedPayType==='custom' ? 'wiple-pink' : 'wiple-light-pink'" full type="button" full (click)="updatePayType('custom')">
+      Custom payment
+    </button>
+    <div class="phase-3-sections" [ngClass]="{'selected': selectedPayType==='custom'}" formGroupName="custom">
+      <span class="form-errors"
+        *ngIf="form.get('custom.first').invalid && SubmitTried">
+        * This field is required
+      </span>
+      <ion-row>
+        <ion-col col-3>
+          <img [src]="firstProfilePic||''" alt="" class="photo">
+        </ion-col>
+        <ion-col col-9 offset>
+          <ion-input placeholder="Amount" formControlName="first" type="number" (change)="customOnchange($event.target.value, 'first')"></ion-input>
+        </ion-col>
+      </ion-row>
+      <span class="form-errors"
+        *ngIf="form.get('custom.second').invalid && SubmitTried">
+        * This field is required
+      </span>
+      <ion-row>
+        <ion-col col-3>
+          <img [src]="secondProfilePic||''" alt="" class="photo">
+        </ion-col>
+        <ion-col col-9 offset>
+          <ion-input placeholder="Amount" formControlName="second" type="number" (change)="customOnchange($event.target.value, 'second')"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="exit-buttons">
+      <button class="round-btn" ion-button color="light" type="button" (click)="handleBackClick()" full>
+        Back
+      </button>
+      <button class="round-btn" ion-button color="wiple-blue" type="submit" full>
+        Confirm
+      </button>
+    </div>
+  </form>
+</div>

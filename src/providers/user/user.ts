@@ -79,9 +79,11 @@ export class UserProvider {
       if (user.photoURL) {
         if (size === 'large') {
           if (user.providerData && user.providerData.providerId === 'facebook.com') {
-            return "https://graph.facebook.com/" + user.providerData.uid + "/picture?type=large";
+            return `https://graph.facebook.com/${user.providerData.uid}/picture?type=large`;
           }
-        } 
+        } else if (typeof size === 'number') {
+          return `https://graph.facebook.com/${user.providerData.uid}/picture?width=${size}`;
+        }
         return user.photoURL;
       } else if (user.gender && user.gender === 'female') {
         return '/assets/imgs/girl.svg';

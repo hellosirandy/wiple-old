@@ -1,0 +1,23 @@
+page-edit-expense {
+  div.content {
+    color: map-get($colors, stats-text);
+    width: 70%;
+    @media (max-width: $sm-screen) {
+      width: 100%;
+    }
+    max-width: 600px;
+    margin: auto;
+    padding-top: 40px;
+    h3.title {
+      text-align: center;
+    }
+    hr {
+      border-color: map-get($colors, stats-text);
+      background-color: map-get($colors, stats-text);
+    }
+    div.phases {
+      padding-top: 30px;
+    }
+  }
+  
+}

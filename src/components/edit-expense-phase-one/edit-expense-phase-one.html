@@ -1,0 +1,22 @@
+<div class="phase-1" [ngStyle]="{'opacity': opacity}">
+    <ng-datepicker [(ngModel)]="dateTime" [options]="datepickerOptions"></ng-datepicker>
+    <div class="categories">
+      <category-icon *ngFor="let et of expenseTypes"
+        [button]="true" [category]="et"
+        [selected]="expCat === et"
+        (click)="expCat = et"
+        >
+      </category-icon>
+    </div>
+    <h3 class="category">category: <span>{{expCat}}</span></h3>
+    <form [formGroup]="desForm" (ngSubmit)="onSubmit()">
+      <span class="form-errors"
+        *ngIf="desForm.get('description').invalid && submitTried">
+        * Description is required
+      </span>
+      <ion-input placeholder="Description" formControlName="description"></ion-input>
+      <button class="round-btn" ion-button color="wiple-blue" full>
+        Continue
+      </button>
+    </form>
+</div>

@@ -10,6 +10,11 @@ import { MobileSwitchBarComponent } from './mobile-switch-bar/mobile-switch-bar'
 import { ExpenseItemComponent } from './expense-item/expense-item';
 import { MobileIntegrateStatsComponent } from './mobile-integrate-stats/mobile-integrate-stats';
 import { ChartModule } from 'angular2-highcharts';
+import { EditExpensePhaseOneComponent } from './edit-expense-phase-one/edit-expense-phase-one';
+import { EditExpensePhaseTwoComponent } from './edit-expense-phase-two/edit-expense-phase-two';
+import { EditExpensePhaseThreeComponent } from './edit-expense-phase-three/edit-expense-phase-three';
+import { NgDatepickerModule } from 'ng2-datepicker';
+import { WhoFirstComponent } from './who-first/who-first';
 
 @NgModule({
 	declarations: [
@@ -22,10 +27,15 @@ import { ChartModule } from 'angular2-highcharts';
         MobileSwitchBarComponent,
         ExpenseItemComponent,
         MobileIntegrateStatsComponent,
+    EditExpensePhaseOneComponent,
+    EditExpensePhaseTwoComponent,
+    EditExpensePhaseThreeComponent,
+    WhoFirstComponent,
 	],
 	imports: [
         IonicPageModule.forChild(InappNavbarComponent),
         ChartModule,
+        NgDatepickerModule
 	],
 	exports: [
 		InappNavbarComponent,
@@ -37,6 +47,10 @@ import { ChartModule } from 'angular2-highcharts';
         MobileSwitchBarComponent,
         ExpenseItemComponent,
         MobileIntegrateStatsComponent,
+    EditExpensePhaseOneComponent,
+    EditExpensePhaseTwoComponent,
+    EditExpensePhaseThreeComponent,
+    WhoFirstComponent,
 	]
 })
 export class ComponentsModule {}

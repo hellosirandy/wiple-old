@@ -9,19 +9,22 @@ import { MainAppPage } from './main-app/main-app';
 import { UserPopoverPage } from './user-popover/user-popover';
 import { DebtsPage } from './debts/debts';
 import { NewExpensePage } from './new-expense/new-expense';
+import { EditExpensePage } from './edit-expense/edit-expense';
+
 import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
 	declarations: [
     HomePage,
-		SigninPage,
-		SignupPage,
-		ConnectPage,
+    SigninPage,
+    SignupPage,
+    ConnectPage,
     ProfilePage,
     MainAppPage,
     UserPopoverPage,
     DebtsPage,
-    NewExpensePage
+    NewExpensePage,
+    EditExpensePage
 	],
 	imports: [
 		IonicPageModule.forChild(HomePage),
@@ -33,6 +36,7 @@ import { ComponentsModule } from '../components/components.module';
     IonicPageModule.forChild(UserPopoverPage),
     IonicPageModule.forChild(DebtsPage),
     IonicPageModule.forChild(NewExpensePage),
+    IonicPageModule.forChild(EditExpensePage),
     ComponentsModule,
 	],
 	exports: [
@@ -44,7 +48,8 @@ import { ComponentsModule } from '../components/components.module';
     MainAppPage,
     UserPopoverPage,
     DebtsPage,
-    NewExpensePage
+    NewExpensePage,
+    EditExpensePage
 	],
 	providers: [
 		

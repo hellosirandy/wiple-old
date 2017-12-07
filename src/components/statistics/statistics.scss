@@ -1,8 +1,6 @@
 statistics {
   color: map-get($colors, stats-text);
   div.content {
-    // overflow-y: scroll;
-    // max-height: calc(100vh - 65px);
     h3.title {
       text-align: center;
     }
@@ -19,11 +17,13 @@ statistics {
         display: flex;
         button {
           color: map-get($colors, stats-text);
+          background-color: white;
           padding: 0;
           width: 34%;
           height: 30px;
           font-size: 1.5rem;
           transition: background-color 0.2s ease;
+          border-radius: 0;
           &.selected {
             background-color: map-get($colors, button-select);
           }

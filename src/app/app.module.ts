@@ -8,6 +8,8 @@ import { IonicStorageModule } from '@ionic/Storage';
 import { ChartModule } from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 
+import { NgDatepickerModule } from 'ng2-datepicker';
+
 import { MyApp } from './app.component';
 import { InitialPage } from '../pages/initial/initial';
 import { PagesModule } from '../pages/pages.module';
@@ -59,6 +61,7 @@ export function highchartsFactory() {
     IonicStorageModule.forRoot(),
     ComponentsModule,
     PagesModule,
+    NgDatepickerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
