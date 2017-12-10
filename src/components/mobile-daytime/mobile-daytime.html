@@ -8,7 +8,7 @@
       </ion-select>
     </ion-col>
     <ion-col col-8>
-      <h3 class="display-time">{{time.getCurrentTime(timeInterval)}}</h3>
+      <ng-datepicker [(ngModel)]="dateTime" [options]="datepickerOptions" position="bottom-left" (ngModelChange)="switchType()"></ng-datepicker>
     </ion-col>
   </ion-row>
   

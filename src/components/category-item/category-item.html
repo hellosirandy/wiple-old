@@ -1,0 +1,10 @@
+<div class="category-item">
+  <category-icon
+    [button]="false"
+    [selected]="false"
+    [category]="category"
+    >
+  </category-icon>
+  <span class="description" [ngClass]="{'mobile': mobile}">{{category}}</span>
+  <span class="amount" [ngClass]="{'mobile': mobile}">$ {{amount}}</span>
+</div>

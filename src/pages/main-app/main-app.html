@@ -10,11 +10,11 @@
         <user-column [user]="currentUser"></user-column>
       </ion-col>
       <ion-col col-5>
-        <statistics 
-        [timeInterval]="timeInterval" 
-        (switchTimeInterval)="switchTimeInterval($event)"
-        [expenses]="expenses">
-      </statistics>
+        <pc-stats 
+          [timeInterval]="timeInterval" 
+          (switchTimeInterval)="switchTimeInterval($event)"
+          [expenses]="expenses">
+        </pc-stats>
       </ion-col>
       <ion-col col-2>
         <user-column [user]="partner"></user-column>

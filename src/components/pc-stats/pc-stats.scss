@@ -1,11 +1,17 @@
-statistics {
-  color: map-get($colors, stats-text);
-  div.content {
+pc-stats {
+  div.pc-stats {
+    color: map-get($colors, stats-text);
     h3.title {
       text-align: center;
     }
     p.subtitle {
       text-align: center;
+    }
+    input[_ngcontent-c0] {
+      display: block;
+      margin: 0 auto 20px;
+      text-align: center;
+      border: none !important;
     }
     div.segment {
       width: 100%;

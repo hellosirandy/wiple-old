@@ -1,6 +1,6 @@
-<div class="content" #content>
+<div class="pc-stats" #content>
   <h3 class="title">Expense</h3>
-  <p class="subtitle">{{time.getCurrentTime(timeInterval)}}</p>
+  <ng-datepicker [(ngModel)]="dateTime" [options]="datepickerOptions" (ngModelChange)="switchType()"></ng-datepicker>
   <div class="segment">
     <div class="buttons">
       <button (click)="switchType('year')" [ngClass]="{'selected': timeInterval === 'year'}">Year</button>
@@ -11,8 +11,14 @@
   <h3 class="total">Total: <span class="animation" [ngStyle]="{'opacity': amountCaculated}">$ {{totalAmount}}</span></h3>
   <hr>
   <div class="expenses" #expensesArea [ngStyle]="{'maxHeight': expensesAreaHeight+'px'}">
-    <expense-item *ngFor="let e of expenses"
-      [expense]="e">
-    </expense-item>
+    <div *ngIf="timeInterval==='day'">
+      <expense-item *ngFor="let e of expenses"
+        [expense]="e">
+      </expense-item>
+    </div>
+    <div *ngIf="timeInterval!=='day'">
+      <stats-content [parentDiv]="parentDiv" [expenses]="expenses"></stats-content>
+    </div>
   </div>
 </div>
+  

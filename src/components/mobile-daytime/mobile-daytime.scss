@@ -14,5 +14,11 @@ mobile-daytime {
       margin: 5px 0;
       font-size: inherit;
     }
+    input[_ngcontent-c0] {
+      margin: 0;
+      width: 100% !important;
+      text-align: center;
+      border: none !important;
+    }
   }
 }

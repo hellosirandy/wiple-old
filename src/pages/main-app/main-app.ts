@@ -23,8 +23,6 @@ export class MainAppPage {
   private expenses: Expense[]=[];
   private expenseSub;
 
-  private chartOption: any;
-  
   constructor(
     public couple: CoupleProvider,
     public expense: ExpenseProvider,
@@ -34,29 +32,6 @@ export class MainAppPage {
     public user: UserProvider,
   ) {
     this.mobile = plt.is('mobile');
-    this.chartOption = {
-      chart: {
-          type: 'bar'
-      },
-      title: {
-          text: 'Fruit Consumption'
-      },
-      xAxis: {
-          categories: ['Apples', 'Bananas', 'Oranges']
-      },
-      yAxis: {
-          title: {
-              text: 'Fruit eaten'
-          }
-      },
-      series: [{
-          name: 'Jane',
-          data: [1, 0, 4]
-      }, {
-          name: 'John',
-          data: [5, 7, 3]
-      }]
-    };
   }
 
   ionViewDidLoad() {
@@ -71,7 +46,10 @@ export class MainAppPage {
               this.partner = partner;
               sub.unsubscribe();
             });
-            this.switchTimeInterval(this.timeInterval);
+            this.switchTimeInterval({
+              timeInterval: this.timeInterval,
+              selectedTime: new Date().getTime()
+            });
           });
           
         } else {
@@ -87,12 +65,12 @@ export class MainAppPage {
     this.currentUserSub.unsubscribe();
   }
 
-  switchTimeInterval(timeInterval: TimeInterval) {
+  switchTimeInterval(event) {
     if (this.expenseSub) {
       this.expenseSub.unsubscribe();
     }
-    this.timeInterval = timeInterval;
-    this.expenseSub = this.expense.getExpense(this.currentUser.couple, timeInterval).subscribe((expenses: any) => {
+    this.timeInterval = event.timeInterval;
+    this.expenseSub = this.expense.getExpense(this.currentUser.couple, event.timeInterval, event.selectedTime).subscribe((expenses: any) => {
       this.expenses = expenses;
     });
   }

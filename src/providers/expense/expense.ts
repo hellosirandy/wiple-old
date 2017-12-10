@@ -15,9 +15,9 @@ export class ExpenseProvider {
     return this.api.newExpense(coupleKey, expense);
   }
 
-  getExpense(coupleKey: string, timeInterval: 'year'|'month'|'day') {
-    const start = moment().startOf(timeInterval).valueOf();
-    const end = moment().endOf(timeInterval).valueOf();
+  getExpense(coupleKey: string, timeInterval: 'year'|'month'|'day', selectedTime: number) {
+    const start = moment(selectedTime).startOf(timeInterval).valueOf();
+    const end = moment(selectedTime).endOf(timeInterval).valueOf();
     return this.api.getExpense(coupleKey, start, end);    
   }
 
@@ -36,6 +36,7 @@ export class ExpenseProvider {
 
   compileStats(expenses: Expense[]) {
     let categories:any={};
+    let expensePile: any={};
     for (let exp of expenses) {
       const amount = this.getAmount(exp);
       if (categories[exp.category]) {
@@ -43,8 +44,15 @@ export class ExpenseProvider {
       } else {
         categories[exp.category] = new Pie(exp.category, amount, ExpenseCategoryColos[exp.category]);
       }
+      if (expensePile[exp.category]) {
+        expensePile[exp.category].push(exp);
+      } else {
+        expensePile[exp.category] = [exp];
+      }
     }
-    return Object.keys(categories).map(key => categories[key]);
+    const pie = Object.keys(categories).map(key => categories[key]);
+    const pile = expensePile;
+    return { pie, pile };
   }
 
 }

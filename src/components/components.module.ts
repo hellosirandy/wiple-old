@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { InappNavbarComponent } from './inapp-navbar/inapp-navbar';
 import { IonicPageModule } from 'ionic-angular';
 import { UserColumnComponent } from './user-column/user-column';
-import { StatisticsComponent } from './statistics/statistics';
 import { RadioButtonComponent } from './radio-button/radio-button';
 import { CategoryIconComponent } from './category-icon/category-icon';
 import { MobileDaytimeComponent } from './mobile-daytime/mobile-daytime';
@@ -15,12 +14,14 @@ import { EditExpensePhaseTwoComponent } from './edit-expense-phase-two/edit-expe
 import { EditExpensePhaseThreeComponent } from './edit-expense-phase-three/edit-expense-phase-three';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { WhoFirstComponent } from './who-first/who-first';
+import { PcStatsComponent } from './pc-stats/pc-stats';
+import { StatsContentComponent } from './stats-content/stats-content';
+import { CategoryItemComponent } from './category-item/category-item';
 
 @NgModule({
 	declarations: [
 		InappNavbarComponent,
         UserColumnComponent,
-        StatisticsComponent,
         RadioButtonComponent,
         CategoryIconComponent,
         MobileDaytimeComponent,
@@ -31,6 +32,9 @@ import { WhoFirstComponent } from './who-first/who-first';
     EditExpensePhaseTwoComponent,
     EditExpensePhaseThreeComponent,
     WhoFirstComponent,
+    PcStatsComponent,
+    StatsContentComponent,
+    CategoryItemComponent,
 	],
 	imports: [
         IonicPageModule.forChild(InappNavbarComponent),
@@ -40,7 +44,6 @@ import { WhoFirstComponent } from './who-first/who-first';
 	exports: [
 		InappNavbarComponent,
         UserColumnComponent,
-        StatisticsComponent,
         RadioButtonComponent,
         CategoryIconComponent,
         MobileDaytimeComponent,
@@ -51,6 +54,9 @@ import { WhoFirstComponent } from './who-first/who-first';
     EditExpensePhaseTwoComponent,
     EditExpensePhaseThreeComponent,
     WhoFirstComponent,
+    PcStatsComponent,
+    StatsContentComponent,
+    CategoryItemComponent,
 	]
 })
 export class ComponentsModule {}

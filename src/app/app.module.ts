@@ -28,6 +28,7 @@ import { CoupleProvider } from '../providers/couple/couple';
 import { ExpenseProvider } from '../providers/expense/expense';
 
 import { FirebaseConfig } from '../environments/enrironment';
+import { ChartProvider } from '../providers/chart/chart';
 
 declare var require: any;
 
@@ -74,7 +75,8 @@ export function highchartsFactory() {
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
-    }
+    },
+    ChartProvider
   ]
 })
 export class AppModule {}
