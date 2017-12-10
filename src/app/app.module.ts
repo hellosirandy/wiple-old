@@ -27,14 +27,7 @@ import { TimeProvider } from '../providers/time/time';
 import { CoupleProvider } from '../providers/couple/couple';
 import { ExpenseProvider } from '../providers/expense/expense';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAZKpuq_JyzecKn1tEP8EnwoqRSX02R-fA",
-  authDomain: "wiple-33ca8.firebaseapp.com",
-  databaseURL: "https://wiple-33ca8.firebaseio.com",
-  projectId: "wiple-33ca8",
-  storageBucket: "wiple-33ca8.appspot.com",
-  messagingSenderId: "539587021284"
-}
+import { FirebaseConfig } from '../environments/enrironment';
 
 declare var require: any;
 
@@ -55,7 +48,7 @@ export function highchartsFactory() {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ChartModule,
-    AngularFireModule.initializeApp(firebaseConfig, 'wiple'),
+    AngularFireModule.initializeApp(FirebaseConfig, 'wiple'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     IonicStorageModule.forRoot(),

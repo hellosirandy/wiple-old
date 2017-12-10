@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { PayType } from '../../models/models';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/providers';
 
