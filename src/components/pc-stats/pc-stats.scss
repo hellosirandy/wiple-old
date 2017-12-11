@@ -13,6 +13,10 @@ pc-stats {
       text-align: center;
       border: none !important;
     }
+    div.ngx-datepicker-calendar-container {
+      left: 50%;
+      transform: translate(-50%);
+    }
     div.segment {
       width: 100%;
       border-top: solid 1px #c4c4c4;

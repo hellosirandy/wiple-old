@@ -1,0 +1,39 @@
+<ion-header>
+
+  <inapp-navbar></inapp-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="content">
+    <h3 class="title">Debts</h3>
+    <form [formGroup]="wiplePayForm" (ngSubmit)="onSubmit()">
+      <ng-datepicker formControlName="date" [options]="datepickerOptions"></ng-datepicker>
+      <ion-input placeholder="Description(Optional)" formControlName="description"></ion-input>
+      <br>
+      <ion-row>
+        <ion-col col-4>
+          <img [src]="firstProfilePic" alt="" class="photo">
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button icon-only round type="button" (click)="handleTransitionClick()">
+            <ion-icon *ngIf="wiplePayForm.get('pay').value==='first'" name="arrow-round-forward"></ion-icon>
+            <ion-icon *ngIf="wiplePayForm.get('pay').value==='second'" name="arrow-round-back"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-4>
+          <img [src]="secondProfilePic" alt="" class="photo">
+        </ion-col>
+      </ion-row>
+      <br>
+      <span class="form-errors"
+        *ngIf="wiplePayForm.get('amount').invalid && submitTried">
+        * Amount is required
+      </span>
+      <ion-input placeholder="Amount" formControlName="amount" type="number"></ion-input>
+      <button class="round-btn" ion-button full type="submit" color="wiple-blue">Confirm</button>
+    </form>
+    
+  </div>
+</ion-content>

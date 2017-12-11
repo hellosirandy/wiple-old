@@ -111,7 +111,7 @@ export class EditExpensePhaseThreeComponent implements OnChanges, OnInit {
       if (second.value > this.totalAmount) {
         second.setValue(this.totalAmount);
       }
-      first.setValue(this.totalAmount - first.value);
+      first.setValue(this.totalAmount - second.value);
     }
     this.updateAmount();
   }

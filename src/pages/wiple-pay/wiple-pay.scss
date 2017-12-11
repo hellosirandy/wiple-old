@@ -1,0 +1,33 @@
+page-wiple-pay {
+  div.content {
+    color: map-get($colors, stats-text) !important;
+    max-width: 600px;
+    margin: auto;
+    h3.title {
+      text-align: center;
+      margin: 0;
+      padding: 15px;
+      border-bottom: solid 1px map-get($colors, stats-text);
+      margin-bottom: 20px;
+    }
+    form {
+      padding: 15px;
+      button[type="button"] {
+        color: map-get($colors, wiple-text);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        ion-icon {
+          font-size: 2.5em;
+        }
+      }
+      button[type="submit"] {
+        position: fixed;
+        bottom: 10px;
+        width: calc(100% - 30px);
+        max-width: 570px;
+      }
+    }
+  }
+  
+}

@@ -1,3 +1,60 @@
 page-debts {
-
+  ion-content {
+    div.scroll-content {
+      // overflow: hidden;
+    }
+    div.content {
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+      color: map-get($colors, stats-text) !important;
+      h3.title {
+        text-align: center;
+        margin: 0;
+        padding: 15px;
+      }
+      ion-row {
+        &.table-header {
+          border-top: solid 1px map-get($colors, stats-text);
+          border-bottom: solid 1px map-get($colors, stats-text);
+          ion-col {
+            font-size: 1.8rem;
+          }
+          margin-bottom: 10px;
+        }
+        ion-col {
+          text-align: center;
+          font-size: 1.6rem;
+        }
+        
+        &.table-footer {
+          // z-index: 100;
+          background: white;
+          border-top: solid 1px map-get($colors, stats-text);
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          max-width: 600px;
+          span.footer-title, span.footer-amount {
+            line-height: 2.1em;
+          }
+        }
+      }
+      div.table-body {
+        overflow-y: scroll;
+        // -webkit-overflow-scrolling: touch;
+        // padding-bottom: 2.1em;
+      }
+    }
+  }
+  .wiple {
+    color: map-get($colors, wiple-text);
+    font-weight: bold;
+  }
+  .negative {
+    color: map-get($colors, danger);
+  }
+  .positive {
+    color: map-get($colors, wiple-blue);
+  }
 }

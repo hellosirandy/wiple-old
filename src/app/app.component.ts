@@ -7,14 +7,13 @@ import { InitialPage } from '../pages/initial/initial';
 import { ProfilePage } from '../pages/profile/profile';
 import { DebtsPage } from '../pages/debts/debts';
 import { UserProvider } from '../providers/user/user';
-import { User } from '../models/user';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = InitialPage;
-  private currentUser: User;
+  private currentUser;
   private coupleKey: string;
 
   constructor(
@@ -48,7 +47,7 @@ export class MyApp implements OnInit {
   }
 
   handleDebtsClick() {
-    this.nav.push(DebtsPage);
+    this.nav.push(DebtsPage, { coupleKey: this.coupleKey });
   }
 
   handleSignoutClick() {

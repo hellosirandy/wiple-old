@@ -18,7 +18,7 @@ export class PcStatsComponent implements OnChanges {
   private expensesAreaHeight: number=window.innerHeight;
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
-    maxYear: 2030,
+    maxYear: new Date().getFullYear()+1,
     displayFormat: 'YYYY',
     barTitleFormat: 'MMMM YYYY',
     firstCalendarDay: 0,
@@ -52,7 +52,7 @@ export class PcStatsComponent implements OnChanges {
       if (type === 'year') {
         this.datepickerOptions = {
           minYear: 1970,
-          maxYear: 2030,
+          maxYear: new Date().getFullYear()+1,
           displayFormat: 'YYYY',
           barTitleFormat: 'MMMM YYYY',
           firstCalendarDay: 0
@@ -60,7 +60,7 @@ export class PcStatsComponent implements OnChanges {
       } else if (type === 'month') {
         this.datepickerOptions = {
           minYear: 1970,
-          maxYear: 2030,
+          maxYear: new Date().getFullYear()+1,
           displayFormat: 'YYYY/MM',
           barTitleFormat: 'MMMM YYYY',
           firstCalendarDay: 0
@@ -68,7 +68,7 @@ export class PcStatsComponent implements OnChanges {
       } else {
         this.datepickerOptions = {
           minYear: 1970,
-          maxYear: 2030,
+          maxYear: new Date().getFullYear()+1,
           displayFormat: 'YYYY/MM/DD',
           barTitleFormat: 'MMMM YYYY',
           firstCalendarDay: 0

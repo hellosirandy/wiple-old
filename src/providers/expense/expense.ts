@@ -15,10 +15,10 @@ export class ExpenseProvider {
     return this.api.newExpense(coupleKey, expense);
   }
 
-  getExpense(coupleKey: string, timeInterval: 'year'|'month'|'day', selectedTime: number) {
+  getExpense(coupleKey: string, timeInterval: 'year'|'month'|'day'|null=null, selectedTime: number|null=null) {
     const start = moment(selectedTime).startOf(timeInterval).valueOf();
     const end = moment(selectedTime).endOf(timeInterval).valueOf();
-    return this.api.getExpense(coupleKey, start, end);    
+    return this.api.getExpense(coupleKey, start, end);
   }
 
   getTotalAmount(expenses: Expense[]) {
@@ -53,6 +53,11 @@ export class ExpenseProvider {
     const pie = Object.keys(categories).map(key => categories[key]);
     const pile = expensePile;
     return { pie, pile };
+  }
+
+  calculateDebt(expense: Expense, position: 'first'|'second') {
+    const debt = expense.payType === 'treat' ? 0 : expense.firstPaid - expense.firstExpense;
+    return position === 'first' ? debt : -debt;
   }
 
 }

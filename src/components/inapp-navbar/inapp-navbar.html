@@ -5,7 +5,7 @@
   <ion-title>Wiple</ion-title>
   <ion-buttons *ngIf="!mobile" end>
     <span *ngIf="couple">
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="handleDebtsClick()">
         <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
       </button>
       <button ion-button icon-only (click)="handleNewExpenseClick()">

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NavController, Platform, PopoverController } from 'ionic-angular';
 import { UserPopoverPage } from '../../pages/user-popover/user-popover';
-// import { NewExpensePage } from '../../pages/new-expense/new-expense';
 import { EditExpensePage } from '../../pages/edit-expense/edit-expense';
+import { DebtsPage } from '../../pages/debts/debts';
 
 @Component({
   selector: 'inapp-navbar',
@@ -20,6 +20,10 @@ export class InappNavbarComponent {
     this.mobile = platform.is('mobile');
   }
 
+  handleDebtsClick() {
+    this.navCtrl.push(DebtsPage, { coupleKey: this.couple });
+  }
+
   handleProfileClick(event) {
     const popover = this.popoverCtrl.create(UserPopoverPage);
     popover.present({
@@ -28,7 +32,6 @@ export class InappNavbarComponent {
   }
 
   handleNewExpenseClick() {
-    // this.navCtrl.push(NewExpensePage, {coupleKey: this.couple});
     this.navCtrl.push(EditExpensePage, {coupleKey: this.couple});
   }
 

@@ -18,4 +18,8 @@ export class TimeProvider {
     }
   }
 
+  getFormatTime(time: number) {
+    return moment(time).format('YYYY/MM/DD');
+  }
+
 }

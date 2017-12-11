@@ -18,7 +18,7 @@ export class MainAppPage {
   private mobile: boolean;
   public mobileSelect: MobileStatsDisplay='integrate';
 
-  public timeInterval: TimeInterval='year';
+  public timeInterval: TimeInterval='day';
   
   private expenses: Expense[]=[];
   private expenseSub;

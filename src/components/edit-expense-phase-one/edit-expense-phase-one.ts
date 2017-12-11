@@ -24,10 +24,10 @@ export class EditExpensePhaseOneComponent implements OnInit {
 
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
-    maxYear: 2030,
+    maxYear: new Date().getFullYear()+1,
     displayFormat: 'YYYY/MM/DD',
     barTitleFormat: 'MMMM YYYY',
-    firstCalendarDay: 0, // 0 - Sunday, 1 - Monday
+    firstCalendarDay: 0,
   };
 
   constructor(

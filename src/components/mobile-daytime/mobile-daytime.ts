@@ -13,8 +13,8 @@ export class MobileDaytimeComponent {
 
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
-    maxYear: 2018,
-    displayFormat: 'YYYY',
+    maxYear: new Date().getFullYear()+1,
+    displayFormat: 'YYYY/MM/DD',
     barTitleFormat: 'MMMM YYYY',
     firstCalendarDay: 0,
   };
@@ -32,7 +32,7 @@ export class MobileDaytimeComponent {
       if (type === 'year') {
         this.datepickerOptions = {
           minYear: 1970,
-          maxYear: 2018,
+          maxYear: new Date().getFullYear()+1,
           displayFormat: 'YYYY',
           barTitleFormat: 'MMMM YYYY',
           firstCalendarDay: 0
@@ -40,7 +40,7 @@ export class MobileDaytimeComponent {
       } else if (type === 'month') {
         this.datepickerOptions = {
           minYear: 1970,
-          maxYear: 2018,
+          maxYear: new Date().getFullYear()+1,
           displayFormat: 'YYYY/MM',
           barTitleFormat: 'MMMM YYYY',
           firstCalendarDay: 0
@@ -48,7 +48,7 @@ export class MobileDaytimeComponent {
       } else {
         this.datepickerOptions = {
           minYear: 1970,
-          maxYear: 2018,
+          maxYear: new Date().getFullYear()+1,
           displayFormat: 'YYYY/MM/DD',
           barTitleFormat: 'MMMM YYYY',
           firstCalendarDay: 0

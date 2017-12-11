@@ -8,10 +8,12 @@ import { ProfilePage } from './profile/profile';
 import { MainAppPage } from './main-app/main-app';
 import { UserPopoverPage } from './user-popover/user-popover';
 import { DebtsPage } from './debts/debts';
-import { NewExpensePage } from './new-expense/new-expense';
 import { EditExpensePage } from './edit-expense/edit-expense';
+import { DisplayExpensePage } from './display-expense/display-expense';
+import { WiplePayPage } from './wiple-pay/wiple-pay';
 
 import { ComponentsModule } from '../components/components.module';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
 	declarations: [
@@ -23,8 +25,9 @@ import { ComponentsModule } from '../components/components.module';
     MainAppPage,
     UserPopoverPage,
     DebtsPage,
-    NewExpensePage,
-    EditExpensePage
+		EditExpensePage,
+    DisplayExpensePage,
+    WiplePayPage
 	],
 	imports: [
 		IonicPageModule.forChild(HomePage),
@@ -35,9 +38,11 @@ import { ComponentsModule } from '../components/components.module';
     IonicPageModule.forChild(MainAppPage),
     IonicPageModule.forChild(UserPopoverPage),
     IonicPageModule.forChild(DebtsPage),
-    IonicPageModule.forChild(NewExpensePage),
     IonicPageModule.forChild(EditExpensePage),
+    IonicPageModule.forChild(DisplayExpensePage),
+    IonicPageModule.forChild(WiplePayPage),
     ComponentsModule,
+    NgDatepickerModule,
 	],
 	exports: [
     HomePage,
@@ -48,8 +53,9 @@ import { ComponentsModule } from '../components/components.module';
     MainAppPage,
     UserPopoverPage,
     DebtsPage,
-    NewExpensePage,
-    EditExpensePage
+		EditExpensePage,
+    DisplayExpensePage,
+    WiplePayPage
 	],
 	providers: [
 		

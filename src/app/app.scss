@@ -19,21 +19,23 @@ ion-app {
   font-family: 'Lato', sans-serif !important;
 }
 
-.toolbar-background {
-  background-color: map-get($colors, primary);
-}
-.toolbar button {
-  color: map-get($colors, wiple-text) !important;
-}
-:lang(en) ion-title .toolbar-title {
-  font-family: 'Caveat Brush', cursive;
-  color: map-get($colors, wiple-text) !important;
-}
-.toolbar-title-ios {
-  font-size: 2.6rem;
-}
-.toolbar-title-md {
-  font-size: 3.2rem;
+ion-header {
+  .toolbar-background {
+    background-color: map-get($colors, primary);
+  }
+  .toolbar button {
+    color: map-get($colors, wiple-text) !important;
+  }
+  :lang(en) ion-title .toolbar-title {
+    font-family: 'Caveat Brush', cursive;
+    color: map-get($colors, wiple-text) !important;
+  }
+  .toolbar-title-ios {
+    font-size: 2.6rem;
+  }
+  .toolbar-title-md {
+    font-size: 3.2rem;
+  }
 }
 ion-content {
   h3.page-title {

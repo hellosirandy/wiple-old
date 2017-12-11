@@ -1,18 +1,41 @@
-<!--
-  Generated template for the DebtsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>debts</ion-title>
-  </ion-navbar>
+  <inapp-navbar></inapp-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <div class="content">
+    <h3 class="title">Debts</h3>
+    <ion-row class="table-header">
+      <ion-col col-4>Date</ion-col>
+      <ion-col col-4>Description</ion-col>
+      <ion-col col-4>Amount</ion-col>
+    </ion-row>
+    <div class="table-body" [style.paddingBottom]="(!ios && footer) ? footer.offsetHeight+5+'px' : '0px'">
+      <ion-row *ngFor="let de of desplayExpenses">
+        <ion-col col-4>{{de.time}}</ion-col>
+        <ion-col col-4 [ngClass]="{'wiple': de.isWiple}">{{de.description}}</ion-col>
+        <ion-col col-4 [ngClass]="{'negative': de.amount < 0, 'positive': de.amount > 0}">{{de.amount}}</ion-col>
+      </ion-row>
+    </div>
+    
+    <ion-row *ngIf="!ios" class="table-footer" #footer>
+      <ion-col col-3><button ion-button color="wiple-blue" small (click)="handleWipleClick()">Wiple</button></ion-col>
+      <ion-col col-6><span class="footer-title">{{footerTitle}}</span></ion-col>
+      <ion-col col-3><span class="footer-amount" [ngClass]="{'negative': total < 0, 'positive': total > 0}">{{total}}</span></ion-col>
+    </ion-row>
+  </div>
 </ion-content>
+
+<ion-footer *ngIf="ios">
+  <ion-toolbar>
+    <button ion-button small color="wiple-blue" (click)="handleWipleClick()">Wiple</button>
+    <ion-title>{{footerTitle}}</ion-title>
+    <ion-buttons end>
+      <span class="footer-amount" [ngClass]="{'negative': total < 0, 'positive': total > 0}">{{total}}</span>
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-footer>

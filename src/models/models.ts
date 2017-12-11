@@ -7,7 +7,7 @@ import { User } from './user';
 type TimeInterval = 'year'|'month'|'day';
 type MobileStatsDisplay = 'first'|'second'|'integrate';
 type ExpenseCategory = 'else'|'love'|'life'|'transit'|'entertainment'|'shopping'|'food'|'coffee'|'rent'|'gift'
-type PayType = 'allpay'|'treat'|'payfirst'|'custom';
+type PayType = 'allpay'|'treat'|'payfirst'|'custom'|'wiple';
 type AmountType = 'same'|'diff'|null;
 
 const ExpenseCategoryColos={

@@ -43,7 +43,9 @@ export class StatsContentComponent implements OnChanges {
       }
       this.pileAmounts[k] = total;
     }
-    
+    this.pileKeys.sort((a, b) => {
+      return this.pileAmounts[b] - this.pileAmounts[a];
+    });
   }
 
 }

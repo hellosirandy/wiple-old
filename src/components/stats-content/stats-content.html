@@ -1,7 +1,13 @@
 <div class="stats-content">
-  <chart [options]="chartOption" type="chart"></chart>
-  <category-item *ngFor="let pk of pileKeys"
-    [category]="pk"
-    [amount]="pileAmounts[pk]">
-  </category-item>
+  <div *ngIf="expenses.length > 0">
+    <chart [options]="chartOption" type="chart"></chart>
+    <category-item *ngFor="let pk of pileKeys"
+      [category]="pk"
+      [amount]="pileAmounts[pk]">
+    </category-item>
+  </div>
+  <div *ngIf="expenses.length === 0">
+    <h3 class="no-data-text">No data in this time interval</h3>
+  </div>
+  
 </div>
