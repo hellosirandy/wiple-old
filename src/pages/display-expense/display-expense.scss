@@ -1,3 +1,27 @@
 page-display-expense {
-
+  h3.title {
+    text-align: center;
+    margin: 0;
+    padding: 15px;
+    font-size: 2.2rem;
+  }
+  h4.subtitle {
+    text-align: center;
+    font-size: 1.8rem;
+    color: map-get($colors, wiple-pink);
+    margin: 0;
+  }
+  p.date {
+    font-size: 1.6rem;
+    color: map-get($colors, stats-text);
+  }
+  ion-row {
+    padding: 10px;
+    border-bottom: solid 1px  map-get($colors, button-hover);
+    ion-col {
+      color: map-get($colors, stats-text);
+      font-size: 1.6rem;
+    }
+  }
+  
 }

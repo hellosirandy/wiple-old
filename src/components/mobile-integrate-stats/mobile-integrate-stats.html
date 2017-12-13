@@ -1,8 +1,7 @@
 <div class="mobile-integrate-stats" #parent>
   <div *ngIf="timeInterval === 'day'">
     <expense-item *ngFor="let e of expenses"
-      [expense]="e"
-      (click)="handleExpenseClick(e)">
+      [expense]="e">
     </expense-item>
   </div>
   <div *ngIf="timeInterval !== 'day'">

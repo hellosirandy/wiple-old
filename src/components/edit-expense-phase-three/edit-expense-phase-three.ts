@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/providers';
+import { PayType } from '../../models/models';
 
 @Component({
   selector: 'edit-expense-phase-three',
@@ -11,20 +12,18 @@ export class EditExpensePhaseThreeComponent implements OnChanges, OnInit {
   @Input() secondUser;
   @Input() firstExpense: number=0;
   @Input() secondExpense: number=0;
+  @Input() firstPaid: number=0;
+  @Input() secondPaid: number=0;
+  @Input() selectedPayType: PayType='allpay';
   @Output() goBack = new EventEmitter<void>();
   @Output() expenseSubmit = new EventEmitter<any>();
 
   private firstProfilePic: string;
   private secondProfilePic: string;
 
-  private selectedPayType: 'allpay'|'treat'|'payfirst'|'custom'='allpay';
-
   private opacity: 0|1=0;
   private form: FormGroup;
   private totalAmount: number=0;
-
-  private firstPaid: number=0;
-  private secondPaid: number=0;
 
   constructor(
     public user: UserProvider
@@ -37,8 +36,10 @@ export class EditExpensePhaseThreeComponent implements OnChanges, OnInit {
       this.opacity = 1;
     }, 100);
     this.totalAmount = this.firstExpense + this.secondExpense;
-    this.firstPaid = this.firstExpense;
-    this.secondPaid = this.secondExpense;
+    if (this.selectedPayType === 'allpay') {
+      this.firstPaid = this.firstExpense;
+      this.secondPaid = this.secondExpense;
+    }
     this.form = new FormGroup({
       'treat': new FormGroup({
         'which': new FormControl('first', Validators.required)

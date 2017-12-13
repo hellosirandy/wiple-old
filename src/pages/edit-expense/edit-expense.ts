@@ -10,7 +10,7 @@ import { CoupleProvider, ExpenseProvider, UserProvider } from '../../providers/p
 export class EditExpensePage {
   private mobile: boolean=false;
   private phase: 1|2|3=1;
-  private currentExpense: Expense= new Expense(true, 'else', '', 0, 0, 0, 0, 'allpay', Date.now());
+  private currentExpense: Expense;
 
   private amountType: AmountType=null;
 
@@ -33,6 +33,17 @@ export class EditExpensePage {
   ) {
     this.mobile = plt.is('mobile');
     this.coupleKey = navParams.get('coupleKey');
+    const exp = navParams.get('expense');
+    if (exp) {      
+      this.currentExpense = exp;
+      if (exp.firstExpense !== exp.secondExpense) {
+        this.amountType = 'diff';
+      } else {
+        this.amountType = 'same';
+      }
+    } else {
+      this.currentExpense = new Expense(true, 'else', '', 0, 0, 0, 0, 'allpay', Date.now());
+    }
   }
 
   ionViewDidLoad() {
@@ -86,7 +97,13 @@ export class EditExpensePage {
       content: 'Saving expense...'
     });
     loading.present();
-    this.expense.newExpense(this.coupleKey, this.currentExpense).then(_ => {
+    let promise;
+    if (this.navParams.get('expense')) {
+      promise = this.expense.updateExpense(this.coupleKey, this.currentExpense);
+    } else {
+      promise = this.expense.newExpense(this.coupleKey, this.currentExpense);
+    }
+    promise.then(_ => {
       loading.dismiss();
       this.navCtrl.pop();
     });

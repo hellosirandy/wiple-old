@@ -30,6 +30,9 @@
         (goBack)="goBack()"
         [firstExpense]="currentExpense.firstExpense"
         [secondExpense]="currentExpense.secondExpense"
+        [firstPaid]="currentExpense.firstPaid"
+        [secondPaid]="currentExpense.secondPaid"
+        [selectedPayType]="currentExpense.payType"
         (expenseSubmit)="expenseSubmit($event)">
       </edit-expense-phase-three>
     </div>

@@ -72,13 +72,13 @@ export class WiplePayPage implements OnInit {
   }
 
   onSubmit() {
-    const loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: 'Wipling...'
-    });
-    loading.present();
     this.submitTried = true;
     if (this.wiplePayForm.valid) {
+      const loading = this.loadingCtrl.create({
+        spinner: 'bubbles',
+        content: 'Wipling...'
+      });
+      loading.present();
       let description = this.wiplePayForm.get('description').value;
       const amount = Number(this.wiplePayForm.get('amount').value);
       const dateTime = new Date(this.wiplePayForm.get('date').value).getTime();
@@ -88,15 +88,13 @@ export class WiplePayPage implements OnInit {
         firstPaid = amount;
         secondExpense = amount;
         secondPaid = 0;
-        description = `${this.firstUser.displayName} gives ${this.secondUser.displayName}`;
       } else {
         firstExpense = amount;
         firstPaid = 0;
         secondExpense = 0;
         secondPaid = amount;
-        description = `${this.secondUser.displayName} gives ${this.firstUser.displayName}`;
       }
-      description = this.wiplePayForm.get('description').value ? this.wiplePayForm.get('description').value : description;
+      description = this.wiplePayForm.get('description').value ? this.wiplePayForm.get('description').value : 'Wiple Pay';
       const wiple = new Expense(true, "else", description, firstExpense, secondExpense, firstPaid, secondPaid, 'wiple', dateTime);
       this.expense.newExpense(this.coupleKey, wiple).then(_ => {
         loading.dismiss();

@@ -1,4 +1,4 @@
-<div class="expense-item" [ngStyle]="{'opacity': opacity}">
+<div class="expense-item" [ngStyle]="{'opacity': opacity}" (click)="handleExpenseClick()">
   <category-icon
     [button]="false"
     [selected]="false"

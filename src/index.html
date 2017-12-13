@@ -37,7 +37,20 @@
 
   <!-- Replace this -->
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <!-- <script src="node_modules/chart.js/src/chart.js"></script> -->
+  <script>
+    function visibilityHandler() {
+      var hash = '#bg';
+      if (document.hidden && !window.location.hash) {
+        window.history.replaceState(null, null, window.location + hash);
+      } else if (!document.hidden && window.location.hash == hash) {
+        var l = '' + window.location;
+        window.history.replaceState(null, null, l.substr(0, l.length - hash.length));
+      }
+    };
+    document.addEventListener('visibilitychange', visibilityHandler, false);
+    visibilityHandler();
+  </script>
+
 </head>
 <body>
 

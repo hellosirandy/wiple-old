@@ -130,16 +130,28 @@ export class ApiProvider {
     return this.database.list(`/expenses/${coupleKey}`).push(expense);
   }
 
+  updateExpense(coupleKey: string, expense: any) {
+    const expenseKey = expense.key;
+    delete expense.key;
+    return this.database.object(`/expenses/${coupleKey}/${expenseKey}`).set(expense);
+  }
+
+  removeExpense(coupleKey: string, expenseKey: string) {
+    return this.database.object(`/expenses/${coupleKey}/${expenseKey}`).remove();
+  }
+
   getExpense(coupleKey: string, start: number|null, end: number|null) {
     if (start && end) {
       return this.database.list(
         `/expenses/${coupleKey}`, 
         ref=>ref.orderByChild('dateTime').startAt(start).endAt(end)
-      ).valueChanges().map(changes => {
-        return changes.filter((e: Expense) => e.payType !== 'wiple');
+      ).snapshotChanges().map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() })).filter((e: Expense) => e.payType !== 'wiple');
       });
     } else {
-      return this.database.list(`/expenses/${coupleKey}`, ref=>ref.orderByChild('dateTime')).valueChanges();
+      return this.database.list(`/expenses/${coupleKey}`, ref=>ref.orderByChild('dateTime')).snapshotChanges().map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      });
     }
     
   }

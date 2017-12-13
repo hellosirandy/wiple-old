@@ -13,8 +13,8 @@
       <ion-col col-4>Description</ion-col>
       <ion-col col-4>Amount</ion-col>
     </ion-row>
-    <div class="table-body" [style.paddingBottom]="(!ios && footer) ? footer.offsetHeight+5+'px' : '0px'">
-      <ion-row *ngFor="let de of desplayExpenses">
+    <div class="table-body" [style.paddingBottom]="ios ? '0px' : footerHeight + 'px'">
+      <ion-row *ngFor="let de of desplayExpenses; let i = index" (click)="handleExpenseClick(i)">
         <ion-col col-4>{{de.time}}</ion-col>
         <ion-col col-4 [ngClass]="{'wiple': de.isWiple}">{{de.description}}</ion-col>
         <ion-col col-4 [ngClass]="{'negative': de.amount < 0, 'positive': de.amount > 0}">{{de.amount}}</ion-col>

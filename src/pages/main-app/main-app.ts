@@ -39,19 +39,20 @@ export class MainAppPage {
       this.currentUserSub = obs.subscribe(cu => {
         this.currentUser = cu;
         if (cu.couple) {
-          this.coupleSub  = this.couple.getCouple(cu.couple).subscribe((cp: any) => {
-            this.cp = cp;
-            const partnerKey = cp.first === cu.key ? cp.second : cp.first;
-            const sub = this.user.getPartner(partnerKey).subscribe((partner: User) => {
-              this.partner = partner;
-              sub.unsubscribe();
+          this.couple.setCouple(cu.couple).then(_ => {
+            this.coupleSub  = this.couple.getCouple(cu.couple).subscribe((cp: any) => {
+              this.cp = cp;
+              const partnerKey = cp.first === cu.key ? cp.second : cp.first;
+              const sub = this.user.getPartner(partnerKey).subscribe((partner: User) => {
+                this.partner = partner;
+                sub.unsubscribe();
+              });
+              this.switchTimeInterval({
+                timeInterval: this.timeInterval,
+                selectedTime: new Date().getTime()
+              });
             });
-            this.switchTimeInterval({
-              timeInterval: this.timeInterval,
-              selectedTime: new Date().getTime()
-            });
-          });
-          
+          })
         } else {
           this.navCtrl.setRoot(InitialPage, {}, {animate: true});
         }

@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ModalController, NavController, NavParams, Platform } from 'ionic-angular';
 import { CoupleProvider, ExpenseProvider, TimeProvider, UserProvider } from '../../providers/providers';
 import { Couple, Expense, User } from '../../models/models';
-import { WiplePayPage } from '../../pages/wiple-pay/wiple-pay';
+import { WiplePayPage } from '../wiple-pay/wiple-pay';
+import { DisplayExpensePage } from '../display-expense/display-expense';
 
 @Component({
   selector: 'page-debts',
   templateUrl: 'debts.html',
 })
 export class DebtsPage {
+  @ViewChild('footer') footer: ElementRef;
   private coupleKey: string;
   private desplayExpenses: { time: string, description: string, amount: number, isWiple: boolean }[]=[];
   private expenseSub;
@@ -16,10 +18,13 @@ export class DebtsPage {
   private footerTitle: string='';
   private total: number=0;
   private ios: boolean=false;
+  private footerHeight: number=0;
+  private expenses;
 
   constructor(
     public couple: CoupleProvider,
     public expense: ExpenseProvider,
+    public modalCtrl: ModalController,
     public navCtrl: NavController, 
     public navParams: NavParams,
     public plt: Platform,
@@ -47,12 +52,15 @@ export class DebtsPage {
           partnerSub.unsubscribe();
           this.partner = partner;
           this.expenseSub = this.expense.getExpense(this.coupleKey).subscribe((expenses: any) => {
+            this.expenses = expenses;
             this.processExpense(expenses, position);
           });
         });
       });
     });
-    // this.footerHeight = this.footer.nativeElement.offsetHeight;
+    if (this.footer) {
+      this.footerHeight = this.footer.nativeElement.offsetHeight;
+    }
   }
 
   ionViewWillUnload() {
@@ -80,6 +88,11 @@ export class DebtsPage {
 
   handleWipleClick() {
     this.navCtrl.push(WiplePayPage, { coupleKey: this.coupleKey });
+  }
+
+  handleExpenseClick(index: number) {
+    const modal = this.modalCtrl.create(DisplayExpensePage, { expense: this.expenses[index] });
+    modal.present();
   }
 
 }

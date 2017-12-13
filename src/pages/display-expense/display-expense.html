@@ -1,10 +1,51 @@
 <ion-header>
 
-  <inapp-navbar></inapp-navbar>
+  <ion-navbar>
+    <ion-title>Expense</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="remove()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="edit()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="dismiss()" *ngIf="!ios">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons start *ngIf="ios">
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <h3 class="title">{{exp.description}}</h3>
+  <h4 class="subtitle" *ngIf="whoTreat || wiplePay">{{whoTreat || wiplePay}}</h4>
+  <p class="date">{{date}}</p>
+  <category-item
+    [category]="exp.category">
+  </category-item>
+  <ion-row>
+    <ion-col col-10><span class="label">Total</span></ion-col>
+    <ion-col col-2>{{exp.firstExpense + exp.secondExpense}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-10><span class="label">{{firstDisplayName}}'s Expense</span></ion-col>
+    <ion-col col-2>{{exp.firstExpense}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-10><span class="label">{{secondDisplayName}}'s Expense</span></ion-col>
+    <ion-col col-2>{{exp.secondExpense}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-10><span class="label">{{firstDisplayName}}'s Paid</span></ion-col>
+    <ion-col col-2>{{exp.firstPaid}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-10><span class="label">{{secondDisplayName}}'s Paid</span></ion-col>
+    <ion-col col-2>{{exp.secondPaid}}</ion-col>
+  </ion-row>
 </ion-content>

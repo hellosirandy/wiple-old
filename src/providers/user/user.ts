@@ -94,4 +94,13 @@ export class UserProvider {
       return '/assets/imgs/boy.svg';
     }
   }
+
+  getUserDisplayName(userKey: string) {
+    return new Promise((resolve, reject) => {
+      const firstSub = this.getPartner(userKey).subscribe((user: User) => {
+        firstSub.unsubscribe();
+        resolve(user.displayName);
+      });
+    });
+  }
 }

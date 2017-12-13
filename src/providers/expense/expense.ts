@@ -15,6 +15,14 @@ export class ExpenseProvider {
     return this.api.newExpense(coupleKey, expense);
   }
 
+  updateExpense(coupleKey: string, expense: Expense) {
+    return this.api.updateExpense(coupleKey, expense);
+  }
+
+  removeExpense(coupleKey: string, expenseKey: string) {
+    return this.api.removeExpense(coupleKey, expenseKey);
+  }
+
   getExpense(coupleKey: string, timeInterval: 'year'|'month'|'day'|null=null, selectedTime: number|null=null) {
     const start = moment(selectedTime).startOf(timeInterval).valueOf();
     const end = moment(selectedTime).endOf(timeInterval).valueOf();

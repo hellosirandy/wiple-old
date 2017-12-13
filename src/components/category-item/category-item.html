@@ -6,5 +6,5 @@
     >
   </category-icon>
   <span class="description" [ngClass]="{'mobile': mobile}">{{category}}</span>
-  <span class="amount" [ngClass]="{'mobile': mobile}">$ {{amount}}</span>
+  <span *ngIf="amount" class="amount" [ngClass]="{'mobile': mobile}">$ {{amount}}</span>
 </div>
