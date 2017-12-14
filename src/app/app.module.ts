@@ -27,7 +27,7 @@ import { TimeProvider } from '../providers/time/time';
 import { CoupleProvider } from '../providers/couple/couple';
 import { ExpenseProvider } from '../providers/expense/expense';
 
-import { FirebaseConfig } from '../environments/enrironment';
+import { FirebaseConfig } from '../environments/environment';
 import { ChartProvider } from '../providers/chart/chart';
 
 declare var require: any;
