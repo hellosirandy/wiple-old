@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, Platform, ViewController } from 'ionic-angular';
 import { EditExpensePage } from '../edit-expense/edit-expense';
+import { WiplePayPage } from '../wiple-pay/wiple-pay';
 import { CoupleProvider, ExpenseProvider, TimeProvider, UserProvider } from '../../providers/providers';
 import { Couple } from '../../models/models';
 
@@ -60,7 +61,11 @@ export class DisplayExpensePage {
   }
 
   edit() {
-    this.navCtrl.push(EditExpensePage, { coupleKey: this.coupleKey, expense: this.exp });
+    if (this.exp.payType === 'wiple') {
+      this.navCtrl.push(WiplePayPage, { coupleKey: this.coupleKey, expense: this.exp });
+    } else {
+      this.navCtrl.push(EditExpensePage, { coupleKey: this.coupleKey, expense: this.exp });
+    }
   }
 
   dismiss() {

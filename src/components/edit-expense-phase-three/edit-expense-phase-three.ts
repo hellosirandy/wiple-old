@@ -40,12 +40,14 @@ export class EditExpensePhaseThreeComponent implements OnChanges, OnInit {
       this.firstPaid = this.firstExpense;
       this.secondPaid = this.secondExpense;
     }
+    const whoTreat = (this.selectedPayType === 'treat' && this.secondPaid > 0) ? 'second' : 'first';
+    const whoPaidFirst = (this.selectedPayType === 'payfirst' && this.secondPaid > 0) ? 'second' : 'first';
     this.form = new FormGroup({
       'treat': new FormGroup({
-        'which': new FormControl('first', Validators.required)
+        'which': new FormControl(whoTreat, Validators.required)
       }),
       'payfirst': new FormGroup({
-        'which': new FormControl('first', Validators.required)
+        'which': new FormControl(whoPaidFirst, Validators.required)
       }),
       'custom': new FormGroup({
         'first': new FormControl(this.firstExpense, Validators.required),

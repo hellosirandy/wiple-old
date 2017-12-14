@@ -17,6 +17,7 @@ export class WiplePayPage implements OnInit {
   private coupleKey: string;
   private wiplePayForm: FormGroup;
   private submitTried: boolean=false;
+  private wiple: Expense;
 
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
@@ -35,6 +36,12 @@ export class WiplePayPage implements OnInit {
     public user: UserProvider,
   ) {
     this.coupleKey = navParams.get('coupleKey');
+    const exp = navParams.get('expense');
+    if (exp) {
+      this.wiple = exp
+    } else {
+      this.wiple = new Expense(true, "else", '', 0, 0, 0, 0, 'wiple', Date.now());
+    }
   }
 
   ionViewDidLoad() {
@@ -54,11 +61,13 @@ export class WiplePayPage implements OnInit {
   }
 
   ngOnInit() {
+    const amount = this.wiple.firstPaid + this.wiple.secondPaid;
+    const pay = this.wiple.secondPaid > 0 ? 'second' : 'first';
     this.wiplePayForm = new FormGroup({
-      'description': new FormControl(null, null),
-      'date': new FormControl(new Date(), Validators.required),
-      'amount': new FormControl(null, Validators.required),
-      'pay': new FormControl('first', Validators.required)
+      'description': new FormControl(this.wiple.description, null),
+      'date': new FormControl(this.wiple.dateTime, Validators.required),
+      'amount': new FormControl(amount !== 0 ? amount : null, Validators.required),
+      'pay': new FormControl(pay, Validators.required)
     });
   }
 
@@ -81,7 +90,6 @@ export class WiplePayPage implements OnInit {
       loading.present();
       let description = this.wiplePayForm.get('description').value;
       const amount = Number(this.wiplePayForm.get('amount').value);
-      const dateTime = new Date(this.wiplePayForm.get('date').value).getTime();
       let firstExpense, firstPaid, secondExpense, secondPaid;
       if (this.wiplePayForm.get('pay').value === 'first') {
         firstExpense = 0;
@@ -95,8 +103,18 @@ export class WiplePayPage implements OnInit {
         secondPaid = amount;
       }
       description = this.wiplePayForm.get('description').value ? this.wiplePayForm.get('description').value : 'Wiple Pay';
-      const wiple = new Expense(true, "else", description, firstExpense, secondExpense, firstPaid, secondPaid, 'wiple', dateTime);
-      this.expense.newExpense(this.coupleKey, wiple).then(_ => {
+      this.wiple.description = description;
+      this.wiple.firstExpense = firstExpense;
+      this.wiple.secondExpense = secondExpense;
+      this.wiple.firstPaid = firstPaid;
+      this.wiple.secondPaid = secondPaid;
+      let promise;
+      if (this.navParams.get('expense')) {
+        promise = this.expense.updateExpense(this.coupleKey, this.wiple);
+      } else {
+        promise = this.expense.newExpense(this.coupleKey, this.wiple);
+      }
+      promise.then(_ => {
         loading.dismiss();
         this.navCtrl.pop();
       });

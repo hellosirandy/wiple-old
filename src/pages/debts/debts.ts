@@ -76,10 +76,8 @@ export class DebtsPage {
       total += amount;
       return { time: this.time.getFormatTime(e.dateTime), description: e.description, amount, isWiple };
     });
-    if (total > 0) {
-      this.footerTitle = `${this.partner.displayName} owes you`;
-    } else if (total < 0) {
-      this.footerTitle = `You owe ${this.partner.displayName}`;
+    if (total !== 0) {
+      this.footerTitle = 'Total';
     } else {
       this.footerTitle = 'You are a Wise Couple';
     }
