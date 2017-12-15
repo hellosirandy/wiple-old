@@ -1,4 +1,4 @@
-export class Pie {
+export class Piece {
   constructor(
     public name: string,
     public y: number,

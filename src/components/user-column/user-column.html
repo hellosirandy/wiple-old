@@ -1,4 +1,10 @@
 <div class="content">
-  <img [src]="profilePic" alt="" class="photo">
+  <div class="img-div">
+    <img [src]="profilePic" alt="" class="photo">
+  </div>
   <h3 class="display-name">{{columnUser ? columnUser.displayName : ''}}</h3>
+  <user-column-content
+   [expenses]="expenses"
+   [position]="position">
+  </user-column-content>
 </div>

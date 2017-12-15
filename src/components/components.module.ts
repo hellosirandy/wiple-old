@@ -17,6 +17,7 @@ import { WhoFirstComponent } from './who-first/who-first';
 import { PcStatsComponent } from './pc-stats/pc-stats';
 import { StatsContentComponent } from './stats-content/stats-content';
 import { CategoryItemComponent } from './category-item/category-item';
+import { UserColumnContentComponent } from './user-column-content/user-column-content';
 
 @NgModule({
 	declarations: [
@@ -35,6 +36,7 @@ import { CategoryItemComponent } from './category-item/category-item';
     PcStatsComponent,
     StatsContentComponent,
     CategoryItemComponent,
+    UserColumnContentComponent,
 	],
 	imports: [
         IonicPageModule.forChild(InappNavbarComponent),
@@ -57,6 +59,7 @@ import { CategoryItemComponent } from './category-item/category-item';
     PcStatsComponent,
     StatsContentComponent,
     CategoryItemComponent,
+    UserColumnContentComponent,
 	]
 })
 export class ComponentsModule {}

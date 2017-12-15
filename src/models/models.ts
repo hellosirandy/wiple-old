@@ -1,7 +1,8 @@
 import { Couple } from './couple';
 import { Expense } from './expense/expense';
 import { Invitation } from './invitation';
-import { Pie } from './pie/pie';
+import { Particle } from './particle/particle';
+import { Piece } from './piece/piece';
 import { User } from './user';
 
 type TimeInterval = 'year'|'month'|'day';
@@ -31,8 +32,9 @@ export {
   ExpenseCategoryColos,
   Invitation,
   MobileStatsDisplay,
+  Particle,
   PayType,
-  Pie,
+  Piece,
   TimeInterval,
   User
 }

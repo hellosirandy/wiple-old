@@ -1,10 +1,22 @@
 <div class="stats-content">
   <div *ngIf="expenses.length > 0">
     <chart [options]="chartOption" type="chart"></chart>
-    <category-item *ngFor="let pk of pileKeys"
-      [category]="pk"
-      [amount]="pileAmounts[pk]">
-    </category-item>
+    <div *ngFor="let p of pile">
+      <category-item
+        [category]="p.category"
+        [amount]="p.total"
+        (click)="handleCategoryClick(p.category)">
+      </category-item>
+      <ul class="detail-list" 
+        [ngClass]="{'mobile': mobile}"
+        [ngStyle]="{'maxHeight': getMaxHeight(p.category, p.expenses.length)}">
+        <li *ngFor="let exp of p.expenses" (click)="handleExpenseClick(exp)">
+          <span class="description">{{exp.description}}</span>
+          <span class="amount">$ {{exp.firstExpense+exp.secondExpense}}</span>
+        </li>
+      </ul>
+    </div>
+    
   </div>
   <div *ngIf="expenses.length === 0">
     <h3 class="no-data-text">No data in this time interval</h3>

@@ -1,5 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { Pie } from '../../models/models';
+import { Piece } from '../../models/models';
 
 @Injectable()
 export class ChartProvider {
@@ -7,7 +7,7 @@ export class ChartProvider {
   constructor() {
   }
 
-  renderPieChart(stats: Pie[], parentDiv: ElementRef) {
+  renderPieChart(stats: Piece[], parentDiv: ElementRef) {
     const width = parentDiv.nativeElement.getBoundingClientRect().width*0.75;
     const height = width;
     return {
@@ -49,4 +49,55 @@ export class ChartProvider {
     };
   }
 
+  renderUserChart(stats: Piece[], parentDiv: ElementRef) {
+    const width = parentDiv.nativeElement.getBoundingClientRect().width;
+    return {
+      chart: {
+        type: 'bar',
+				width: width,
+			},
+			title: {
+				text: ''
+			},
+			xAxis: {
+				labels: {
+					enabled: false
+				}
+			},
+			yAxis: {
+				title: {
+					text: ''
+				},
+				labels: {
+					enabled: false
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			plotOptions: {
+				series: {
+					borderWidth: 0,
+					dataLabels: {
+						enabled: true,
+						format: '{point.y}'
+					},
+					pointPadding: 0,
+					pointWidth: 30
+				}
+			},
+
+			tooltip: {
+				headerFormat: '<span style="font-size:15px;font-weight:bold">{point.name}</span><br>',
+				pointFormat: '<span style="color:{point.color};text-transform: capitalize;">{point.name}</span>'
+			},
+			series: [{
+				colorByPoint: true,
+				data: stats
+			}],
+			credits: {
+				enabled: false
+			}
+		}
+  }
 }

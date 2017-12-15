@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ChartProvider, ExpenseProvider, TimeProvider } from '../../providers/providers';
 import { Expense, TimeInterval } from '../../models/models';
 import { DatepickerOptions } from 'ng2-datepicker';
@@ -7,7 +7,7 @@ import { DatepickerOptions } from 'ng2-datepicker';
   selector: 'pc-stats',
   templateUrl: 'pc-stats.html'
 })
-export class PcStatsComponent implements OnChanges {
+export class PcStatsComponent implements OnChanges, OnInit {
   @ViewChild('expensesArea') parentDiv: ElementRef;
   @ViewChild('content') content: ElementRef;
   @Input() timeInterval: string='year';
@@ -15,7 +15,7 @@ export class PcStatsComponent implements OnChanges {
   @Output() switchTimeInterval = new EventEmitter<any>();
   private totalAmount: number=0;
   public amountCaculated: 0|1=1;
-  private expensesAreaHeight: number=window.innerHeight;
+  private contentHeight: number=0;
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
     maxYear: new Date().getFullYear()+1,
@@ -33,6 +33,10 @@ export class PcStatsComponent implements OnChanges {
     
   }
 
+  ngOnInit() {
+    
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.expenses && changes.expenses.currentValue !== changes.expenses.previousValue) {
       this.amountCaculated = 0;
@@ -42,7 +46,7 @@ export class PcStatsComponent implements OnChanges {
           this.amountCaculated = 1;
         }, 100);
       }
-      this.expensesAreaHeight = window.innerHeight - this.parentDiv.nativeElement.getBoundingClientRect().top-5;
+      this.contentHeight = window.innerHeight - this.content.nativeElement.getBoundingClientRect().top-5;
     }
   }
 

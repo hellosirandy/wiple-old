@@ -1,4 +1,4 @@
-<div class="pc-stats" #content>
+<div class="pc-stats" #content [ngStyle]="{'maxHeight': contentHeight+'px'}">
   <h3 class="title">Expense</h3>
   <ng-datepicker [(ngModel)]="dateTime" [options]="datepickerOptions" (ngModelChange)="switchType()"></ng-datepicker>
   <div class="segment">
@@ -10,7 +10,7 @@
   </div>
   <h3 class="total">Total: <span class="animation" [ngStyle]="{'opacity': amountCaculated}">$ {{totalAmount}}</span></h3>
   <hr>
-  <div class="expenses" #expensesArea [ngStyle]="{'maxHeight': expensesAreaHeight+'px'}">
+  <div class="expenses" #expensesArea>
     <div *ngIf="timeInterval==='day'">
       <expense-item *ngFor="let e of expenses"
         [expense]="e">

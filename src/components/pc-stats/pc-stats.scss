@@ -1,6 +1,7 @@
 pc-stats {
   div.pc-stats {
     color: map-get($colors, stats-text);
+    overflow: scroll;
     h3.title {
       text-align: center;
     }
@@ -48,6 +49,9 @@ pc-stats {
       span.animation {
         transition: opacity 0.5s ease;
       }
+    }
+    hr {
+      margin-bottom: 0;
     }
     div.expenses {
       overflow-y: scroll;

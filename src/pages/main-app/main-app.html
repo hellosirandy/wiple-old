@@ -6,8 +6,8 @@
 <ion-content>
   <div *ngIf="!mobile">
     <ion-row justify-content-around>
-      <ion-col col-2>
-        <user-column [user]="currentUser"></user-column>
+      <ion-col col-3>
+        <user-column [user]="currentUser" [expenses]="expenses" [position]="'first'"></user-column>
       </ion-col>
       <ion-col col-5>
         <pc-stats 
@@ -16,8 +16,8 @@
           [expenses]="expenses">
         </pc-stats>
       </ion-col>
-      <ion-col col-2>
-        <user-column [user]="partner"></user-column>
+      <ion-col col-3>
+        <user-column [user]="partner" [expenses]="expenses" [position]="'second'"></user-column>
       </ion-col>
     </ion-row>
   </div>
@@ -35,6 +35,10 @@
         [expenses]="expenses"
         [timeInterval]="timeInterval">
       </mobile-integrate-stats>
+      <user-column-content *ngIf="mobileSelect!=='integrate'"
+        [expenses]="expenses"
+        [position]="mobileSelect">
+      </user-column-content>
     </div>
   </div>
   

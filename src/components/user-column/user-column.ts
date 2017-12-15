@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { UserProvider } from '../../providers/user/user';
+import { Expense } from '../../models/models';
 
 @Component({
   selector: 'user-column',
@@ -7,6 +8,8 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class UserColumnComponent implements OnChanges {
   @Input('user') columnUser;
+  @Input() expenses: Expense[]=[];
+  @Input() position: 'first'|'second';
 
   private profilePic: string='';
   constructor(

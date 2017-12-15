@@ -1,5 +1,6 @@
 category-item {
   div.category-item {
+    cursor: pointer;
     margin: 10px 0;
     transition: opacity 1s ease;
     span {
@@ -7,7 +8,7 @@ category-item {
       font-size: 2rem;
       &.mobile {
         line-height: 40px;
-        font-size: 1.5rem;
+        font-size: 1.7rem;
       }
       &.description {
         margin-left: 10px;

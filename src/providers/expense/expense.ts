@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Expense, ExpenseCategoryColos, Pie } from '../../models/models';
+import { Expense, ExpenseCategoryColos, Particle, Piece } from '../../models/models';
 import { ApiProvider } from '../api/api';
 import * as moment from 'moment';
 
@@ -38,29 +38,34 @@ export class ExpenseProvider {
     }, 0);
   }
 
-  getAmount(expense: Expense) {
-    return expense.firstExpense + expense.secondExpense;
+  getAmount(expense: Expense, position: 'first'|'second'|null=null) {
+    if (position) {
+      return position === 'first' ? expense.firstExpense : expense.secondExpense;
+    } else {
+      return expense.firstExpense + expense.secondExpense;
+    }
   }
 
-  compileStats(expenses: Expense[]) {
-    let categories:any={};
-    let expensePile: any={};
+  generateStats(expenses: Expense[], position: 'first'|'second'|null=null) {
+    let pile: any={};
     for (let exp of expenses) {
-      const amount = this.getAmount(exp);
-      if (categories[exp.category]) {
-        categories[exp.category].y += amount;
-      } else {
-        categories[exp.category] = new Pie(exp.category, amount, ExpenseCategoryColos[exp.category]);
-      }
-      if (expensePile[exp.category]) {
-        expensePile[exp.category].push(exp);
-      } else {
-        expensePile[exp.category] = [exp];
+      const amount = this.getAmount(exp, position);
+      if (amount > 0) {
+        if (pile[exp.category]) {
+          pile[exp.category].total += amount;
+          pile[exp.category].expenses.push(exp);
+        } else {
+          pile[exp.category] = new Particle(exp.category, amount, [exp]);
+        }
       }
     }
-    const pie = Object.keys(categories).map(key => categories[key]);
-    const pile = expensePile;
+    pile = Object.keys(pile).map(key => pile[key]).sort((a, b) => b.total - a.total);
+    const pie: Piece[] = this.generatePie(pile);
     return { pie, pile };
+  }
+
+  generatePie(pile: Particle[]) {
+    return pile.map(p => new Piece(p.category, p.total, ExpenseCategoryColos[p.category]));
   }
 
   calculateDebt(expense: Expense, position: 'first'|'second') {

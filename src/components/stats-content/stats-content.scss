@@ -2,4 +2,30 @@ stats-content {
   h3.no-data-text {
     text-align: center;
   }
+  ul.detail-list {
+    margin: 0px 0px 0px 40px;
+    overflow-y: hidden;
+    transition: max-height 0.4s linear;
+    li {
+      font-size: 20px;
+      line-height: 2;
+      span.amount {
+        float: right;
+      }
+      span.description {
+        display: inline-block;
+        width: 75%;
+        white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
+        vertical-align: top;
+      }
+    }
+    &.mobile {
+      margin-left: 30px;
+      li {
+        font-size: 16px;
+      }
+    }
+  }
 }
