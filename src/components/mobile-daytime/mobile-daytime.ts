@@ -14,7 +14,7 @@ export class MobileDaytimeComponent {
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
     maxYear: new Date().getFullYear()+1,
-    displayFormat: 'YYYY/MM/DD',
+    displayFormat: 'YYYY/MM',
     barTitleFormat: 'MMMM YYYY',
     firstCalendarDay: 0,
   };

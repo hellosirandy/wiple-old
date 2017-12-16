@@ -20,9 +20,6 @@ ion-app {
 }
 
 ion-header {
-  .toolbar-background {
-    background-color: map-get($colors, primary);
-  }
   .toolbar button {
     color: map-get($colors, wiple-text) !important;
   }

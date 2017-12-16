@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Expense, ExpenseCategoryColos, Particle, Piece } from '../../models/models';
+import { Expense, ExpenseCategoryColos, MobileStatsDisplay, Particle, Piece } from '../../models/models';
 import { ApiProvider } from '../api/api';
 import * as moment from 'moment';
 
@@ -29,9 +29,15 @@ export class ExpenseProvider {
     return this.api.getExpense(coupleKey, start, end);
   }
 
-  getTotalAmount(expenses: Expense[]) {
+  getTotalAmount(expenses: Expense[], position: MobileStatsDisplay) {
     const amounts = expenses.map(e => {
-      return e.firstExpense + e.secondExpense;
+      if (position === 'integrate') {
+        return e.firstExpense + e.secondExpense;
+      } else if (position === 'first') {
+        return e.firstExpense;
+      } else {
+        return e.secondExpense;
+      }
     });
     return amounts.reduce((a, b) => {
       return a + b;

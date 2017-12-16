@@ -19,7 +19,7 @@ export class PcStatsComponent implements OnChanges, OnInit {
   public datepickerOptions: DatepickerOptions = {
     minYear: 1970,
     maxYear: new Date().getFullYear()+1,
-    displayFormat: 'YYYY',
+    displayFormat: 'YYYY/MM',
     barTitleFormat: 'MMMM YYYY',
     firstCalendarDay: 0,
   };
@@ -40,7 +40,7 @@ export class PcStatsComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.expenses && changes.expenses.currentValue !== changes.expenses.previousValue) {
       this.amountCaculated = 0;
-      this.totalAmount = this.expense.getTotalAmount(changes.expenses.currentValue);
+      this.totalAmount = this.expense.getTotalAmount(changes.expenses.currentValue, 'integrate');
       if (!changes.expenses.firstChange) {
         setTimeout(() => {
           this.amountCaculated = 1;

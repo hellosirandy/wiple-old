@@ -12,7 +12,7 @@ import { UserProvider } from '../providers/user/user';
 })
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = InitialPage;
+  rootPage: any = InitialPage;
   private currentUser;
   private coupleKey: string;
 

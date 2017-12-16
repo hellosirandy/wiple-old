@@ -34,7 +34,7 @@
             *ngIf="searchForm.get('email').invalid && submitTried">
             * Invalid email
           </span>
-          <input type="text" id="email" formControlName="email">
+          <ion-input formControlName="email"></ion-input>
           <button ion-button icon-start class="round-btn" full type="submit" color="wiple-blue">
             <ion-icon name="search"></ion-icon>
             Search
@@ -58,6 +58,12 @@
         </div>
         <div *ngIf="display === displayType.notfound" class="submitted-div">
           <h3>User not found.</h3>
+          <button ion-button class="round-btn" full color="light" (click)="handleTryOtherClick()">
+            Try other
+          </button>
+        </div>
+        <div *ngIf="display === displayType.unavailable" class="submitted-div">
+          <h3>{{foundUser.displayName}} is currently unavailable</h3>
           <button ion-button class="round-btn" full color="light" (click)="handleTryOtherClick()">
             Try other
           </button>

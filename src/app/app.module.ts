@@ -76,7 +76,8 @@ export function highchartsFactory() {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
     },
-    ChartProvider
+    ChartProvider,
+    UserProvider
   ]
 })
 export class AppModule {}

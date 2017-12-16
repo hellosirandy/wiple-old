@@ -26,14 +26,15 @@ export class MobileSwitchBarComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.expenses && changes.expenses.currentValue !== changes.expenses.previousValue) {
+    if ((changes.expenses && changes.expenses.currentValue !== changes.expenses.previousValue) || 
+    changes.select && changes.select.currentValue !== changes.select.previousValue) {
       this.amountCaculated = 0;
-      this.totalAmount = this.expense.getTotalAmount(changes.expenses.currentValue);
-      if (!changes.expenses.firstChange) {
-        setTimeout(() => {
-          this.amountCaculated = 1;
-        }, 100);
-      }
+      const expenses = changes.expenses ? changes.expenses.currentValue : this.expenses;
+      const select = changes.select ? changes.select.currentValue : this.select;
+      this.totalAmount = this.expense.getTotalAmount(expenses, select);
+      setTimeout(() => {
+        this.amountCaculated = 1;
+      }, 100);
     }
     if (changes.firstUser && changes.firstUser.currentValue !== changes.firstUser.previousValue) {
       this.firstProfilePic = this.user.getProfilePic(changes.firstUser.currentValue);

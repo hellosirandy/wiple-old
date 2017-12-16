@@ -11,7 +11,7 @@ import { InitialPage } from '../initial/initial';
   templateUrl: 'connect.html',
 })
 export class ConnectPage implements OnInit {
-  private displayType = {search: 'search', found: 'found', notfound: 'notfound', sent: 'sent', received: 'received'}
+  private displayType = {search: 'search', found: 'found', notfound: 'notfound', sent: 'sent', received: 'received', unavailable: 'unavailable'}
   private display: string=this.displayType.search;
 
   private searchForm: FormGroup;
@@ -99,12 +99,15 @@ export class ConnectPage implements OnInit {
 
   searchUser(type: 'key' | 'email', value: string, display: string) {
     const sub = this.user.searchUser(type, value).subscribe((user: any) => {
-      if (user) {
+      if (!user) {
+        this.display = this.displayType.notfound;
+      } else if (user.payload.val().couple) {
+        this.display = this.displayType.unavailable;
+        this.foundUser = user.payload.val();
+      } else {
         this.display = display;
         this.foundUser = user.payload.val();
         this.foundUserKey = user.key;
-      } else {
-        this.display = this.displayType.notfound;
       }
       
       sub.unsubscribe();
